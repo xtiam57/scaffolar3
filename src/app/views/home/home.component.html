@@ -10,6 +10,10 @@
       </div>
       <hr />
       <pre>{{ model | json }}</pre>
+      <pre>{{ 2.5 | fraction }}</pre>
+      <pre>{{ false | conditional }}</pre>
+      <pre>{{ true | conditional }}</pre>
+      <pre>{{ 'hello!' | conditional: 'Yeap':'Nah':'hello' }}</pre>
     </div>
     <div class="col-6">
       <ngb-tabset>
