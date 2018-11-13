@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RESTfulService } from '../../services/restful.service';
 import { NumberUtilService } from 'src/app/services/number-util.service';
+import { LocalStorage } from 'ngx-store';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { NumberUtilService } from 'src/app/services/number-util.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'scaffolar';
+  @LocalStorage() title = 'scaffolar';
 
   model = {
     left: true,

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { DecimalPipe } from '@angular/common';
+import { WebStorageModule } from 'ngx-store';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -20,7 +21,7 @@ import { ConditionalPipe } from './pipes/conditional.pipe';
 
 @NgModule({
   declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe],
-  imports: [BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule, FontAwesomeModule],
+  imports: [BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule, FontAwesomeModule, WebStorageModule],
   providers: [DecimalPipe, FractionPipe, AvailablePipe],
   bootstrap: [AppComponent]
 })

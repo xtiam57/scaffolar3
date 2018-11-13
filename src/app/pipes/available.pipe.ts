@@ -5,11 +5,10 @@ import * as _ from 'underscore';
   name: 'available'
 })
 export class AvailablePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
-    args = args || args === '' ? args : 'N/A';
+  transform(value: any, result: any = 'N/A'): any {
     if (_.isString(value)) {
       value = value.trim();
     }
-    return _.isNull(value) || value === '' || _.isUndefined(value) || _.isNaN(value) || value === 'NaN' ? args : value;
+    return _.isNull(value) || value === '' || _.isUndefined(value) || _.isNaN(value) || value === 'NaN' ? result : value;
   }
 }
