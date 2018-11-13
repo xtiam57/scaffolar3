@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -11,10 +12,11 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 library.add(fas, far, fab);
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, NgbModule, FontAwesomeModule, FormsModule],
+  declarations: [AppComponent, routingComponents],
+  imports: [BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent]
 })
