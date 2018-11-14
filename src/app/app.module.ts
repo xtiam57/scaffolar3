@@ -5,6 +5,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { DecimalPipe } from '@angular/common';
 import { WebStorageModule } from 'ngx-store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -21,7 +23,24 @@ import { ConditionalPipe } from './pipes/conditional.pipe';
 
 @NgModule({
   declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe],
-  imports: [BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule, FontAwesomeModule, WebStorageModule],
+  imports: [
+    BrowserModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    WebStorageModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      extendedTimeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      enableHtml: true,
+      progressBar: true
+    })
+  ],
   providers: [DecimalPipe, FractionPipe, AvailablePipe],
   bootstrap: [AppComponent]
 })

@@ -15,7 +15,7 @@ export class TimeUtilService {
    * @param date2 Usally the smallest date
    * @param period Unit of measurement: days, hours, minutes, seconds, weeks, months, years
    */
-  getDuration(date1: any, date2: any, period: any = 'milliseconds'): number {
+  getDuration(date1: any, date2: any, period: any = 'hours'): number {
     return Math.round(moment(date1).diff(moment(date2), period, true) * 100000) / 100000;
   }
 
@@ -55,7 +55,7 @@ export class TimeUtilService {
    * @param duration Amount to be added (negative values are allowed)
    * @param period Unit of measurement: days, hours, minutes, seconds, weeks, months, years
    */
-  addDuration(date: any, duration: number = 0, period: any = 'milliseconds'): any {
+  addDuration(date: any, duration: number = 0, period: any = 'hours'): any {
     return moment(date)
       .add(duration, period)
       .toDate();

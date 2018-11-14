@@ -10,7 +10,7 @@ export class StringUtilService {
   /**
    * Get a random GUID
    */
-  getGUID() {
+  getGUID(): string {
     let d = new Date().getTime();
 
     if (window.performance && typeof window.performance.now === 'function') {

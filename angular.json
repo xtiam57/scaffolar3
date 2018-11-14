@@ -1,5 +1,5 @@
 {
-  "$schema": "././/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -29,7 +29,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/assets/styles/main.scss"
+              "src/assets/styles/main.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

@@ -97,9 +97,9 @@
     "@angular-devkit/core" "0.8.3"
     rxjs "~6.2.0"
 
-"@angular/animations@^6.1.0":
-  version "6.1.8"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-6.1.8.tgz#a1861c7f63aca5bd18ba48e0c736ee7b1f2dac36"
+"@angular/animations@^7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-7.0.3.tgz#04bf1881e82b5b2eaf378728085ec12e83d67c72"
   dependencies:
     tslib "^1.9.0"
 
@@ -4086,6 +4086,12 @@ ngx-store@^2.0.0:
     lodash.merge "^4.6.1"
     lodash.set "^4.3.2"
     ts-debug "^1.1.2"
+    tslib "^1.9.0"
+
+ngx-toastr@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-9.1.1.tgz#c7ec0284d13951422ccf47439a387372ddccc768"
+  dependencies:
     tslib "^1.9.0"
 
 nice-try@^1.0.4:
