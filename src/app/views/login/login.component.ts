@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSettings } from '../../app.settings';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  appSettings: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.appSettings = AppSettings.getInfo();
   }
-
 }

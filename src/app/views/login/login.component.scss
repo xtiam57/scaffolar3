@@ -1,0 +1,27 @@
+.main-container {
+  height: 100vh;
+  .row {
+    height: 100vh;
+    .login-cover {
+      background-image: url(../../../assets/images/pizzas.jpg);
+      background-position: 50% 50%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      .cover-container {
+        padding: 5%;
+        width: 100%;
+        h1, p {
+          color: #fff;
+          text-align: right;
+        }
+      }
+    }
+    .login-form {
+      .form-container {
+        padding: 15%;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
