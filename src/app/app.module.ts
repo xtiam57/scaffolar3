@@ -21,7 +21,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { FractionPipe } from './pipes/fraction.pipe';
 import { AvailablePipe } from './pipes/available.pipe';
 import { ConditionalPipe } from './pipes/conditional.pipe';
-
+import * as _ from 'underscore';
 @NgModule({
 
   declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe],
