@@ -10,7 +10,6 @@ export class AuthGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('AuthGuard#canActivate called');
     const url: string = state.url;
     return this.checkLogin(url);
   }
@@ -21,8 +20,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    console.log(this.authService.isLoggedIn);
-
+    // TODO: check with the server
     if (this.authService.isLoggedIn) {
       return true;
     }

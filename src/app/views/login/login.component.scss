@@ -3,7 +3,7 @@
   .row {
     height: 100vh;
     .login-cover {
-      background-image: url(/assets/images/pizzas.jpg);
+      background-image: url(/assets/images/cover.jpg);
       background-position: 50% 50%;
       background-size: cover;
       background-repeat: no-repeat;
@@ -17,6 +17,11 @@
       }
     }
     .login-form {
+      .logo {
+        width: 90px;
+        height: auto;
+        margin-bottom: 20px;
+      }
       .form-container {
         padding: 15%;
         width: 100%;
