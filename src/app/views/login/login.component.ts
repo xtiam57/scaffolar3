@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { AppSettings } from '../../app.settings';
 
 @Component({
@@ -8,10 +9,20 @@ import { AppSettings } from '../../app.settings';
 })
 export class LoginComponent implements OnInit {
   appSettings: any;
+  credentials: any = {
+    username: null,
+    password: null
+  };
 
-  constructor() {}
+  constructor(private authService: AuthService) {
+    this.appSettings = AppSettings;
+  }
 
   ngOnInit() {
-    this.appSettings = AppSettings.getInfo();
+    this.authService.logout();
+  }
+
+  login() {
+    this.authService.login(this.credentials);
   }
 }
