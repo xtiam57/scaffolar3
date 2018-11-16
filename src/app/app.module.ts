@@ -11,6 +11,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { GridStackModule } from 'ng4-gridstack';
+import { ChartModule } from 'angular-highcharts';
 
 
 
@@ -25,7 +26,7 @@ import * as _ from 'underscore';
 @NgModule({
 
   declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe],
-  imports: [BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule, FontAwesomeModule, GridStackModule],
+  imports: [BrowserModule, NgbModule, FormsModule, HttpClientModule, AppRoutingModule, FontAwesomeModule, GridStackModule, ChartModule ],
   providers: [DecimalPipe, FractionPipe, AvailablePipe],
 
   bootstrap: [AppComponent]

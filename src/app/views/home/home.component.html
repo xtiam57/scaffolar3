@@ -56,12 +56,21 @@
   <h5>GridStack</h5>
       <!-- You can now use your library component in app.component.html -->
       <grid-stack class="grid-stack" [options]="options">
-          <grid-stack-item [option]="widget1" class="grid-stack-item w1"    >
-            estoy por aqui en 1
+          <grid-stack-item [option]="widget1" (onresize)="itemReize()"  class="grid-stack-item w1">
+              <div [chart]="chart" class='graph'></div>
           </grid-stack-item>
           <grid-stack-item [option]="widget2"   class="grid-stack-item w2 "  >
             estoy por aqui en 2
           </grid-stack-item>
         </grid-stack>
+
+
+
+
+
+
+        <!-- <h5>Charts</h5>
+        <button (click)="add()">Add Point!</button>
+    <div [chart]="chart"></div> -->
 
 </div>
