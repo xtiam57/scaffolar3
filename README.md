@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/xtiam57/scaffolar3/master/src/assets/images/logo.png)
+![logo](https://raw.githubusercontent.com/xtiam57/scaffolar3/master/src/assets/images/logo.png)
 
 # Scaffolar3
 
