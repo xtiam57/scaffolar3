@@ -10,48 +10,40 @@
       <div class="form-container">
         <img src="/assets/images/logo.svg" class="logo" alt="logo" />
         <p class="lead text-left">Please enter your username and password to login.</p>
+
         <form #loginForm="ngForm" (ngSubmit)="login()">
           <div class="input-group input-group-lg mb-2">
             <div class="input-group-prepend">
-              <div class="input-group-text" id="username"><fa-icon [icon]="['fa', 'user']" [fixedWidth]="true"></fa-icon></div>
+              <div class="input-group-text" id="username">
+                <fa-icon [icon]="['fa', 'user']" [fixedWidth]="true"></fa-icon>
+              </div>
             </div>
-            <input
-              type="text"
-              [(ngModel)]="credentials.username"
-              #username="ngModel"
-              class="form-control"
-              [class.is-invalid]="username.invalid && username.touched"
-              [class.is-valid]="username.valid && username.touched"
-              id="username"
-              name="username"
-              placeholder="Username"
-              minlength="2"
-              required
-              autofocus
-            />
+            <input type="text" [(ngModel)]="credentials.username" #username="ngModel" class="form-control"
+                   [class.is-invalid]="username.invalid && username.touched" [class.is-valid]="username.valid && username.touched"
+                   id="username" name="username" placeholder="Username" minlength="2" required autofocus />
           </div>
+
           <div class="input-group input-group-lg mb-3">
             <div class="input-group-prepend">
-              <div class="input-group-text" id="password"><fa-icon [icon]="['fa', 'key']" [fixedWidth]="true"></fa-icon></div>
+              <div class="input-group-text" id="password">
+                <fa-icon [icon]="['fa', 'key']" [fixedWidth]="true"></fa-icon>
+              </div>
             </div>
-            <input
-              type="password"
-              [(ngModel)]="credentials.password"
-              #password="ngModel"
-              class="form-control"
-              [class.is-invalid]="password.invalid && password.touched"
-              [class.is-valid]="password.valid && password.touched"
-              id="password"
-              name="password"
-              placeholder="Password"
-              minlength="4"
-              required
-            />
+            <input type="password" [(ngModel)]="credentials.password" #password="ngModel" class="form-control"
+                   [class.is-invalid]="password.invalid && password.touched" [class.is-valid]="password.valid && password.touched"
+                   id="password" name="password" placeholder="Password" minlength="4" required />
           </div>
-          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block mb-3">Sign in</button>
+
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block mb-3">
+            Sign in
+          </button>
         </form>
+
         <a href="#" class="forgot-password">Forgot the password?</a>
-        <div class="update small text-muted mt-2">Last update: {{ appSettings.lastUpdate | date: 'dd/MMM/yyyy' }} ({{ appSettings.version }})</div>
+
+        <div class="update small text-muted mt-2">
+          Last update: {{ appSettings.lastUpdate | date: 'dd/MMM/yyyy' }} ({{ appSettings.version }})
+        </div>
       </div>
     </div>
   </div>

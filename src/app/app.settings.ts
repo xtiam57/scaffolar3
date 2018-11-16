@@ -16,7 +16,7 @@ export const AppSettings = {
   month: 11,
   year: 2018,
   /**
-   * Environments
+   * APIs
    * NOTE: DO NOT TOUCH THIS IN RUN TIME
    */
   apis: {
@@ -42,7 +42,6 @@ export const AppSettings = {
    */
   get api() {
     let { protocol, host, port, prefix, version } = this.apis[this.environment];
-
     // Defaults
     protocol = `${protocol ? protocol : 'http'}://`;
     host = host ? host : 'api.plos.org';

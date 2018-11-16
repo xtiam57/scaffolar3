@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DecimalPipe } from '@angular/common';
 import { WebStorageModule } from 'ngx-store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +20,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { FractionPipe } from './pipes/fraction.pipe';
 import { AvailablePipe } from './pipes/available.pipe';
 import { ConditionalPipe } from './pipes/conditional.pipe';
+import { AppHttpInterceptor } from './app-http.interceptor';
 
 @NgModule({
   declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe],
@@ -41,7 +42,16 @@ import { ConditionalPipe } from './pipes/conditional.pipe';
       progressBar: true
     })
   ],
-  providers: [DecimalPipe, FractionPipe, AvailablePipe],
+  providers: [
+    DecimalPipe,
+    FractionPipe,
+    AvailablePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

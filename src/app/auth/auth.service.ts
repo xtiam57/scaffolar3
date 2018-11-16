@@ -13,15 +13,16 @@ export class AuthService {
   @SessionStorage() user: any = null;
   redirectUrl = '/home';
 
-  constructor(private restfulService: RESTfulService, private messageService: MessagesService, private router: Router) {}
+  constructor(private restful: RESTfulService, private messageService: MessagesService, private router: Router) {}
 
   private cleanSession() {
-    this.isLoggedIn = false;
+    this.isLoggedIn = null;
     this.token = null;
     this.user = null;
   }
 
   login({ username, password }) {
+    // TODO: use API service
     if (username === 'admin' && password === '12345') {
       this.router.navigateByUrl(this.redirectUrl);
       this.isLoggedIn = true;
