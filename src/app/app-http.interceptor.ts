@@ -1,7 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
@@ -27,8 +26,12 @@ export class AppHttpInterceptor implements HttpInterceptor {
     }
     // Continues request execution
     return next.handle(request).pipe(catchError((error, caught) => {
-      this.handleError(error);
-      return of(error);
+      // Let the user to catch the error and do what he wants to
+      return this.handleError(error);
+      // If you've caught / handled the error, you don't want to rethrow it unless
+      // you also want downstream consumers to have to handle it as well.
+      // import { of } from 'rxjs/internal/observable/of';
+      // return of(error);
     }) as any);
   }
 
@@ -48,27 +51,26 @@ export class AppHttpInterceptor implements HttpInterceptor {
         } else {
           this.messagesService.show('Wrong username/password combination.', null, 'warning');
         }
-        // If you've caught / handled the error, you don't want to rethrow it unless
-        // you also want downstream consumers to have to handle it as well.
-        return of(error.message);
+        break;
       case 403:
         this.messagesService.show('Your permissions are not sufficient to access this feature.', null, 'error');
-        return of(error.message);
+        break;
       case 404:
         this.messagesService.show('Sorry but the service you are looking for has not been found.', null, 'error');
-        return of(error.message);
+        break;
       case 400:
       case 500:
         this.messagesService.show(error.message, null, 'error');
-        return of(error.message);
+        break;
       case -1:
         this.messagesService.show('There is not Internet connection.', null, 'error');
-        return of(error.message);
+        break;
       case 0:
         this.messagesService.show('No "Access-Control-Allow-Origin" (CORS) header is present on the requested resource.', null, 'error');
-        return of(error.message);
+        break;
       default:
-        return throwError(error.message);
+        break;
     }
+    return throwError(error.message);
   }
 }
