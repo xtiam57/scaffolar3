@@ -7,6 +7,8 @@ import { DecimalPipe } from '@angular/common';
 import { WebStorageModule } from 'ngx-store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { NgBusyModule, BusyConfig } from 'ng-busy';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -21,9 +23,10 @@ import { FractionPipe } from './pipes/fraction.pipe';
 import { AvailablePipe } from './pipes/available.pipe';
 import { ConditionalPipe } from './pipes/conditional.pipe';
 import { AppHttpInterceptor } from './app-http.interceptor';
+import { CustomBusyComponent } from './templates/customBusy.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe],
+  declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe, CustomBusyComponent],
   imports: [
     BrowserModule,
     NgbModule,
@@ -40,7 +43,15 @@ import { AppHttpInterceptor } from './app-http.interceptor';
       preventDuplicates: true,
       enableHtml: true,
       progressBar: true
-    })
+    }),
+    LoadingBarHttpClientModule,
+    NgBusyModule.forRoot(
+      new BusyConfig({
+        message: 'Loading',
+        minDuration: 1000,
+        template: CustomBusyComponent
+      })
+    )
   ],
   providers: [
     DecimalPipe,
@@ -52,6 +63,7 @@ import { AppHttpInterceptor } from './app-http.interceptor';
       multi: true
     }
   ],
+  entryComponents: [CustomBusyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

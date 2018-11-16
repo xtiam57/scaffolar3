@@ -4059,6 +4059,12 @@ neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
 
+ng-busy@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/ng-busy/-/ng-busy-6.2.0.tgz#e6647171a427d1c8290b0b7799085c66c068ea29"
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-store@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ngx-store/-/ngx-store-2.0.0.tgz#29b7b4ae3a926191c25cf4ade930b192be5af2f5"

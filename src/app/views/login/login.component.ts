@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppSettings } from '../../app.settings';
+import { RESTfulService } from 'src/app/services/restful.service';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,14 @@ import { AppSettings } from '../../app.settings';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  busy: any;
   appSettings: any;
   credentials: any = {
     username: null,
     password: null
   };
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private restful: RESTfulService) {
     this.appSettings = AppSettings;
   }
 
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.busy = this.restful.get('users/xtiam57/repos').subscribe();
     this.authService.login(this.credentials);
   }
 }

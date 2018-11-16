@@ -29,7 +29,8 @@
             "styles": [
               "src/styles.scss",
               "src/assets/styles/main.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/ng-busy/src/style/busy.css"
             ],
             "scripts": []
           },
