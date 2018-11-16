@@ -21,8 +21,8 @@ export const AppSettings = {
    */
   apis: {
     test: {
-      protocol: 'http',
-      host: 'api.plos.org',
+      protocol: 'https',
+      host: 'api.github.com',
       port: null,
       prefix: null,
       version: null

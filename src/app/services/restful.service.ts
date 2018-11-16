@@ -60,7 +60,7 @@ export class RESTfulService {
       config = {};
     }
     // Convert method to string
-    // To avoid lint
+    // NOTE: To avoid lint error
     const httpMethod: string = method;
     // GET and DELETE methods
     if (_.isNull(payload) || _.isUndefined(payload)) {
@@ -74,7 +74,7 @@ export class RESTfulService {
 
   /**
    * GET
-   * RESTful.get('endpointString', { qs: 'querystring' })
+   * RESTful.get('users/xtiam57/repos', { qs: 'querystring' })
    *  .subscribe((response) => console.log(response));
    * @return a Observable
    */
@@ -83,7 +83,7 @@ export class RESTfulService {
   }
   /**
    * POST
-   * RESTful.post('endpointString', payloadObject)
+   * RESTful.post('users/xtiam57/repos', payloadObject)
    *  .subscribe((response) => console.log(response));
    * @return a Observable
    */
@@ -92,7 +92,7 @@ export class RESTfulService {
   }
   /**
    * PUT
-   * RESTful.put('endpointString', payloadObject)
+   * RESTful.put('users/xtiam57/repos', payloadObject)
    *  .subscribe((response) => console.log(response));
    * @return a Observable
    */
@@ -101,7 +101,7 @@ export class RESTfulService {
   }
   /**
    * PATCH
-   * RESTful.patch('endpointString', payloadObject)
+   * RESTful.patch('users/xtiam57/repos', payloadObject)
    *  .subscribe((response) => console.log(response));
    * @return a Observable
    */
@@ -110,7 +110,7 @@ export class RESTfulService {
   }
   /**
    * DELETE
-   * RESTful.delete('endpointString', { qs: 'querystring' })
+   * RESTful.delete('users/xtiam57/repos', { qs: 'querystring' })
    *  .subscribe((response) => console.log(response));
    * @return a Observable
    */
