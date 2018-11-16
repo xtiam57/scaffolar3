@@ -1,3 +1,5 @@
+![alt text](https://raw.githubusercontent.com/xtiam57/scaffolar3/master/src/assets/images/logo.png)
+
 # Scaffolar3
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
