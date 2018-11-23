@@ -5,14 +5,6 @@ import { map } from 'rxjs/operators';
 import * as _ from 'underscore';
 import { AppSettings } from '../app.settings';
 
-enum HttpMethod {
-  Get = 'get',
-  Post = 'post',
-  Put = 'put',
-  Patch = 'patch',
-  Delete = 'delete'
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -54,21 +46,24 @@ export class RESTfulService {
    * @param queryStrings Query string object
    * @param config Settings object
    */
-  private internalCall(method: HttpMethod = HttpMethod.Get, endpoint: string, payload?: any, queryStrings?: any, config?: any): Observable<any> {
+  private internalCall(
+    method: string | 'post' | 'put' | 'delete' | 'patch' | 'get',
+    endpoint: string,
+    payload?: any,
+    queryStrings?: any,
+    config?: any
+  ): Observable<any> {
     // Config can't be null
     if (_.isNull(config) || _.isUndefined(config)) {
       config = {};
     }
-    // Convert method to string
-    // NOTE: To avoid lint error
-    const httpMethod: string = method;
     // GET and DELETE methods
     if (_.isNull(payload) || _.isUndefined(payload)) {
-      return this.http[httpMethod](this.createUrl(endpoint, queryStrings), config)
+      return this.http[method](this.createUrl(endpoint, queryStrings), config)
         .pipe(map((response) => this.processResponse(response)));
     }
     // POST, PUT, PATCH methods
-    return this.http[httpMethod](this.createUrl(endpoint, queryStrings), payload, config)
+    return this.http[method](this.createUrl(endpoint, queryStrings), payload, config)
       .pipe(map((response) => this.processResponse(response)));
   }
 
@@ -79,7 +74,7 @@ export class RESTfulService {
    * @return a Observable
    */
   get(endpoint: string, queryStrings?: any, config?: any): Observable<any> {
-    return this.internalCall(HttpMethod.Get, endpoint, null, queryStrings, config);
+    return this.internalCall('get', endpoint, null, queryStrings, config);
   }
   /**
    * POST
@@ -88,7 +83,7 @@ export class RESTfulService {
    * @return a Observable
    */
   post(endpoint: string, payload: any, queryStrings?: any, config?: any): Observable<any> {
-    return this.internalCall(HttpMethod.Post, endpoint, payload, queryStrings, config);
+    return this.internalCall('post', endpoint, payload, queryStrings, config);
   }
   /**
    * PUT
@@ -97,7 +92,7 @@ export class RESTfulService {
    * @return a Observable
    */
   put(endpoint: string, payload: any, queryStrings?: any, config?: any): Observable<any> {
-    return this.internalCall(HttpMethod.Put, endpoint, payload, queryStrings, config);
+    return this.internalCall('put', endpoint, payload, queryStrings, config);
   }
   /**
    * PATCH
@@ -106,7 +101,7 @@ export class RESTfulService {
    * @return a Observable
    */
   patch(endpoint: string, payload: any, queryStrings?: any, config?: any): Observable<any> {
-    return this.internalCall(HttpMethod.Patch, endpoint, payload, queryStrings, config);
+    return this.internalCall('patch', endpoint, payload, queryStrings, config);
   }
   /**
    * DELETE
@@ -115,6 +110,6 @@ export class RESTfulService {
    * @return a Observable
    */
   delete(endpoint: string, queryStrings?: any, config?: any): Observable<any> {
-    return this.internalCall(HttpMethod.Delete, endpoint, null, queryStrings, config);
+    return this.internalCall('delete', endpoint, null, queryStrings, config);
   }
 }

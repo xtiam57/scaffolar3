@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgBusyModule, BusyConfig } from 'ng-busy';
+import { ChartModule } from 'angular-highcharts';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -24,9 +26,22 @@ import { AvailablePipe } from './pipes/available.pipe';
 import { ConditionalPipe } from './pipes/conditional.pipe';
 import { AppHttpInterceptor } from './app-http.interceptor';
 import { CustomBusyComponent } from './templates/customBusy.component';
+import { TabContainerComponent } from './services/tabManager/tab-container.component';
+import { ExampleComponent } from './views/example/example.component';
+import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, FractionPipe, AvailablePipe, ConditionalPipe, CustomBusyComponent],
+  declarations: [
+    AppComponent,
+    routingComponents,
+    FractionPipe,
+    AvailablePipe,
+    ConditionalPipe,
+    CustomBusyComponent,
+    TabContainerComponent,
+    ExampleComponent,
+    TABSET_DIRECTIVES
+  ],
   imports: [
     BrowserModule,
     NgbModule,
@@ -51,7 +66,9 @@ import { CustomBusyComponent } from './templates/customBusy.component';
         minDuration: 1000,
         template: CustomBusyComponent
       })
-    )
+    ),
+    ChartModule,
+    AgGridModule.withComponents([])
   ],
   providers: [
     DecimalPipe,
@@ -63,7 +80,7 @@ import { CustomBusyComponent } from './templates/customBusy.component';
       multi: true
     }
   ],
-  entryComponents: [CustomBusyComponent],
+  entryComponents: [CustomBusyComponent, ExampleComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
