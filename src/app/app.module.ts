@@ -28,7 +28,7 @@ import { AppHttpInterceptor } from './app-http.interceptor';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { TabContainerComponent } from './services/tabManager/tab-container.component';
 import { ExampleComponent } from './views/example/example.component';
-import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
+import { TABSET_DIRECTIVES, AppTabsetComponent } from './services/tabManager/tabset';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,7 @@ import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
-    }
+    },
   ],
   entryComponents: [CustomBusyComponent, ExampleComponent],
   bootstrap: [AppComponent]

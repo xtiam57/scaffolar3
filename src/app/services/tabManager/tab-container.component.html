@@ -1,7 +1,7 @@
-<app-tabset [justify]="'center'">
+<app-tabset [justify]="'left'" #tabsetComponent>
   <div appTab id="{{tab.id}}" *ngFor="let tab of tabManager.tabs" [disabled]="tab.disabled">
     <ng-template appTabTitle>
-      <span>{{ tab.title }}</span>
+      <span [innerHTML]="tab.title"></span> <span aria-hidden="true" (click)="tabManager.close(tab, $event)">&times;</span>
     </ng-template>
     <ng-template appTabContent>
       <div id="{{tab.id}}" #componentContent></div>

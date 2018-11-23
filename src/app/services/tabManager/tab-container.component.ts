@@ -1,12 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ViewContainerRef,
-  ViewChildren,
-  QueryList,
-  AfterViewInit
-} from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChildren, QueryList, AfterViewInit, ViewChild } from '@angular/core';
 import { TabManagerService } from './tab-manager.service';
+import { AppTabsetComponent } from './tabset';
 
 @Component({
   selector: 'app-tab-container',
@@ -14,7 +8,11 @@ import { TabManagerService } from './tab-manager.service';
   styleUrls: ['./tab-container.component.scss']
 })
 export class TabContainerComponent implements OnInit, AfterViewInit {
-  @ViewChildren('componentContent', { read: ViewContainerRef }) public targets: QueryList<ViewContainerRef>;
+  @ViewChildren('componentContent', { read: ViewContainerRef })
+  public targets: QueryList<ViewContainerRef>;
+
+  @ViewChild('tabsetComponent')
+  private tabsetComponent: AppTabsetComponent;
 
   constructor(public tabManager: TabManagerService) {}
 
@@ -22,5 +20,6 @@ export class TabContainerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.tabManager.setViewRefs(this.targets);
+    this.tabManager.setTabsetComponent(this.tabsetComponent);
   }
 }

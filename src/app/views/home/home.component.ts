@@ -45,14 +45,22 @@ export class HomeComponent implements OnInit {
     { make: 'Porsche', model: 'Boxter', price: 72000 }
   ];
 
+  next = 0;
+
   constructor(private message: MessagesService, public tabManager: TabManagerService) {}
 
   ngOnInit() {
-    this.tabManager.add('A', ExampleComponent);
+    this.tabManager.open('A', ExampleComponent);
   }
 
   addTab() {
-    this.tabManager.add('B', ExampleComponent, { message: 'hello world!' });
+    this.tabManager.open('B<code>@</code>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
+      (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
+    });
+  }
+
+  closeAll() {
+    this.tabManager.reset();
   }
 
   showSuccess() {
