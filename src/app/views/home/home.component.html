@@ -53,15 +53,17 @@
       </ngb-tabset>
     </div>
   </div>
+
   <h5>GridStack</h5>
       <!-- You can now use your library component in app.component.html -->
-      <grid-stack class="grid-stack" [options]="options">
-          <grid-stack-item [option]="widget1" (onresize)="itemReize()"  class="grid-stack-item w1">
-              <div [chart]="chart" class='graph'></div>
+      <grid-stack class="grid-stack" [options]="options" >
+          <grid-stack-item [option]="widget1"  (mouseup)="itemReize($event)" (ondragend)='DargS()' class="grid-stack-item w1 chartContainer">
+            <span [chart]="chart"></span>
+              <!-- <div [chart]="chart" ></div> -->
           </grid-stack-item>
-          <grid-stack-item [option]="widget2"   class="grid-stack-item w2 "  >
+          <!-- <grid-stack-item [option]="widget2"   class="grid-stack-item w2 "  >
             estoy por aqui en 2
-          </grid-stack-item>
+          </grid-stack-item> -->
         </grid-stack>
 
 

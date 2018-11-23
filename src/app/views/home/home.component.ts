@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RESTfulService } from '../../services/restful.service';
 import { NumberUtilService } from 'src/app/services/number-util.service';
 import { Chart } from 'angular-highcharts';
+import * as $ from 'jquery';
 
 import { GridStackItem, GridStackOptions, GridStackItemComponent, GridStackComponent} from 'ng4-gridstack';
 
@@ -21,12 +22,13 @@ export class HomeComponent implements OnInit {
   };
     public options: GridStackOptions = new GridStackOptions();
     public widget1: GridStackItem = new GridStackItem();
-    public widget2: GridStackItem = new GridStackItem();
+   // public widget2: GridStackItem = new GridStackItem();
 
     chart = new Chart({
       chart: {
-        type: 'pie'
-      },
+        type: 'pie',
+        height: 400
+       },
       title: {
         text: 'Prueba'
       },
@@ -41,7 +43,7 @@ export class HomeComponent implements OnInit {
     plotOptions: {
       pie: {
           shadow: false,
-          // center: ['50%', '50%']
+           center: ['50%', '50%']
       }
   },
       series: [
@@ -64,33 +66,31 @@ export class HomeComponent implements OnInit {
               name: 'Yellow'
           }
           ],
-         // size: '90%',
+        // size: '90%',
         //  innerSize: '55%',
         }
       ] ,
     responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 400
-
-            },
-            chartOptions: {
-                series: [{
-                    id: 'versions',                }]
-            }
-        }]
+      rules: [{
+        condition: {
+          maxWidth: 400
+        },
+        chartOptions: {
+          series: [{
+              id: 'versions',
+            }]
+          }
+       }]
     }
     });
 
     add() {
       this.chart.addPoint(Math.floor(Math.random() * 10));
     }
-    itemReize() {
-      console.log('holaaaa');
-    }
-constructor(private restful: RESTfulService, private numberUtilService: NumberUtilService) {}
+  constructor(private restful: RESTfulService, private numberUtilService: NumberUtilService) {}
 
   ngOnInit() {
+
     console.log(this.numberUtilService.round(2.53469, 4));
     console.log(this.numberUtilService.acum(5.5, 4));
     console.log(this.numberUtilService.fromFraction('2 1/4'));
@@ -103,18 +103,21 @@ constructor(private restful: RESTfulService, private numberUtilService: NumberUt
 
     console.log(this.options);
 
+    this.options.alwaysShowResizeHandle = true;
+
     this.widget1.x = 0;
     this.widget1.y = 0;
-    this.widget1.width = 4;
-    this.widget1.height = 4;
-    this.widget1.minWidth = 4;
-    this.widget1.minHeight = 4;
+    this.widget1.width = 6;
+    this.widget1.height = 6;
+    this.widget1.minWidth = 6;
+    this.widget1.minHeight = 6;
 
 
-    this.widget2.x = 1;
-    this.widget2.y = 0;
-    this.widget2.width = 4;
-    this.widget2.height = 4;
+    // this.widget2.x = 1;
+    // this.widget2.y = 0;
+    // this.widget2.width = 4;
+    // this.widget2.height = 4;
+
 
     // this.restful
     //   .get('search', {
@@ -127,4 +130,17 @@ constructor(private restful: RESTfulService, private numberUtilService: NumberUt
 
 
   }
+  itemReize(item) {
+    console.log('este es el item:' , item);
+     const w = $('.chartContainer').width();
+     const h =  $('.chartContainer').height();
+     console.log(this.chart);
+   // this.chart.options.chart.height = h;
+  // this.chart.reflow();
+      this.chart.ref.setSize(w, h * (3 / 4), false);
+  }
+
+  DargS() {
+    console.log('dragg');
+    }
 }
