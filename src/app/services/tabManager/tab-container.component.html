@@ -1,8 +1,12 @@
 <app-tabset id="tab-manager" [justify]="'left'" #tabsetComponent>
   <div appTab id="{{tab.id}}" *ngFor="let tab of tabManager.tabs" [disabled]="tab.disabled">
     <ng-template appTabTitle>
-      <div class="row justify-content-between no-gutters" [title]="tab.title | striphtml">
-        <div class="tab-title col-11">
+      <div [class.is-pinned]="tab.isPinned" class="row tab-row justify-content-between no-gutters" [title]="tab.title | striphtml"
+           [contextMenu]="tabContextMenu" [contextMenuSubject]="tab">
+        <div *ngIf="tab.isPinned" class="col-1">
+          <fa-icon [icon]="['fas', 'thumbtack']" [fixedWidth]="false" size="xs"></fa-icon>
+        </div>
+        <div class="tab-title" [class.col-11]="!tab.isPinned" [class.col-10]="tab.isPinned">
           <span [innerHTML]="tab.title"></span>
         </div>
         <div class="tab-actions col-1">
@@ -15,3 +19,33 @@
     </ng-template>
   </div>
 </app-tabset>
+
+<context-menu>
+  <ng-template contextMenuItem (execute)="tabManager.pin($event.item, true, $event.event)" [visible]="isPinned">
+    Pin tab
+  </ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.pin($event.item, false, $event.event)" [visible]="isUnpinned">
+    Unpin tab
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.close($event.item, $event.event)">
+    Close tab
+  </ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.closeOthers($event.item, $event.event)">
+    Close other tabs
+  </ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.closeAllToRight($event.item, $event.event)">
+    Close tabs to the right
+  </ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.reset()">
+    Close all tabs
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.move($event.item, -1, $event.event)">
+    Move tab to the left
+  </ng-template>
+  <ng-template contextMenuItem (execute)="tabManager.move($event.item, 1, $event.event)">
+    Move tab to the right
+  </ng-template>
+  <!-- [elements[0], elements[3]] = [elements[3], elements[0]]; -->
+</context-menu>

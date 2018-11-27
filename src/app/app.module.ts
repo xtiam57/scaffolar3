@@ -11,6 +11,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgBusyModule, BusyConfig } from 'ng-busy';
 import { ChartModule } from 'angular-highcharts';
 import { AgGridModule } from 'ag-grid-angular';
+import { ContextMenuModule } from 'ngx-contextmenu';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -28,7 +29,7 @@ import { AppHttpInterceptor } from './app-http.interceptor';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { TabContainerComponent } from './services/tabManager/tab-container.component';
 import { ExampleComponent } from './views/example/example.component';
-import { TABSET_DIRECTIVES, AppTabsetComponent } from './services/tabManager/tabset';
+import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
 
 @NgModule({
@@ -70,7 +71,10 @@ import { StriphtmlPipe } from './pipes/striphtml.pipe';
       })
     ),
     ChartModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    ContextMenuModule.forRoot({
+      useBootstrap4: true
+    })
   ],
   providers: [
     DecimalPipe,
@@ -80,7 +84,7 @@ import { StriphtmlPipe } from './pipes/striphtml.pipe';
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
-    },
+    }
   ],
   entryComponents: [CustomBusyComponent, ExampleComponent],
   bootstrap: [AppComponent]

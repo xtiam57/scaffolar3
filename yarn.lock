@@ -103,6 +103,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/cdk@^6.1.0":
+  version "6.4.7"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-6.4.7.tgz#1549b304dd412e82bd854cc55a7d5c6772ee0411"
+  integrity sha512-18x0U66fLD5kGQWZ9n3nb75xQouXlWs7kUDaTd8HTrHpT1s2QIAqlLd1KxfrYiVhsEC2jPQaoiae7VnBlcvkBg==
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/cli@~6.2.3":
   version "6.2.7"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-6.2.7.tgz#1a23e1cf85eaf8bc835869d515c4b8aa68b530dc"
@@ -4092,6 +4099,13 @@ neo-async@^2.5.0:
 ng-busy@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/ng-busy/-/ng-busy-6.2.0.tgz#e6647171a427d1c8290b0b7799085c66c068ea29"
+  dependencies:
+    tslib "^1.9.0"
+
+ngx-contextmenu@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/ngx-contextmenu/-/ngx-contextmenu-5.1.1.tgz#c21c1b702df0d0327ddf297d1ff8d2abee32ee9f"
+  integrity sha512-PORVcTo9txGonSaQx8y1ZyG526Na0LY/I4NSPIquMhwziqal/WGijHtOPSJ/AjGxLooMcWsh8DyGNEzOijWrOw==
   dependencies:
     tslib "^1.9.0"
 

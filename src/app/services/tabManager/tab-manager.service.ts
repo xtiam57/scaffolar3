@@ -165,9 +165,7 @@ export class TabManagerService {
   exists(tab: TabInstance): boolean {
     const found = _.find(this.tabs, (value) => {
       return (
-        this.stringUtil.isEqual(value.title, tab.title) &&
-        this.stringUtil.isEqual(value.component.name, tab.component.name) &&
-        _.isMatch(value.data, tab.data)
+        this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.data, tab.data)
       );
     });
     if (found) {
@@ -215,7 +213,7 @@ export class TabManagerService {
     // Get the tab index
     const index = _.indexOf(this.tabs, tab);
     // Check if the tab is active
-    const isActive = this.tabsetComponent.activeId === tab.id;
+    const isActive = this.stringUtil.isEqual(this.tabsetComponent.activeId, tab.id);
     // Close the tab
     this.tabs.splice(index, 1);
     // Select previous (left) tab
@@ -225,9 +223,81 @@ export class TabManagerService {
   }
 
   /**
+   * Close all tab but the given one
+   * @param tab Tab to keep.
+   * @param event Mouse event to avoid to refresh the page.
+   */
+  closeOthers(tab: TabInstance, event: MouseEvent): void {
+    if (!_.isEmpty(event)) {
+      // Prevent logout
+      event.preventDefault();
+    }
+    this.tabs = this.tabs.filter((item) => {
+      return this.stringUtil.isEqual(item.id, tab.id);
+    });
+  }
+
+  /**
+   * Close all the tabs to the right of the given one.
+   * @param tab Tab
+   * @param event Mouse event to avoid to refresh the page.
+   */
+  closeAllToRight(tab: TabInstance, event: MouseEvent): void {
+    if (!_.isEmpty(event)) {
+      // Prevent logout
+      event.preventDefault();
+    }
+    // Get the tab index
+    const index = _.indexOf(this.tabs, tab);
+    // If it isnt the last tab
+    if (index < this.getCount() - 1) {
+      // get the total of tab to the right
+      const total = this.getCount() - (index + 1);
+      // Close the tabs
+      this.tabs.splice(index + 1, total);
+    }
+  }
+
+  /**
+   * Pin/Unpin a given tab
+   * @param tab Tab to pin/unpin
+   * @param value true to pin the tab
+   * @param event Mouse event to avoid to refresh the page.
+   */
+  pin(tab: TabInstance, value: boolean, event: MouseEvent): void {
+    if (!_.isEmpty(event)) {
+      // Prevent logout
+      event.preventDefault();
+    }
+    tab.isPinned = value;
+    this.tabs = _.sortBy(this.tabs, (item) => !item.isPinned);
+  }
+
+  /**
+   * Move a tab to the left/right
+   * @param tab Tab to be moved.
+   * @param direction 1 or -1 to move to left or right.
+   * @param event Mouse event to avoid to refresh the page.
+   */
+  move(tab: TabInstance, direction: number, event: MouseEvent): void {
+    if (!_.isEmpty(event)) {
+      // Prevent logout
+      event.preventDefault();
+    }
+    // Get the tab index
+    const index = _.indexOf(this.tabs, tab);
+    // Check if the tab can be moved
+    if (index + direction >= 0 && index + direction < this.getCount()) {
+      [this.tabs[index], this.tabs[index + direction]] = [this.tabs[index + direction], this.tabs[index]];
+    }
+    // Let the pinned tabs at the begining
+    this.tabs = _.sortBy(this.tabs, (item) => !item.isPinned);
+  }
+
+  /**
    * Close all tabs. Reset array.
    */
-  reset() {
+  reset(): void {
     this.tabs = [];
   }
 
