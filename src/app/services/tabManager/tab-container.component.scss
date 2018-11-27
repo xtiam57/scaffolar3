@@ -1,0 +1,47 @@
+@import "../../../assets/styles/variables";
+
+::ng-deep #tab-manager {
+  ul.nav-tabs {
+    li.nav-item {
+      width: 200px;
+      margin-bottom: 0;
+
+      .nav-link {
+        color: $body-color;
+        border-radius: 0;
+        border-color: transparent;
+        border-right: none;
+        border-left: none;
+
+        .tab-title {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .tab-actions {
+          text-align: right;
+          span.close-button {
+            font-weight: bold;
+            color: #adb5bd;
+            &:hover {
+              color: inherit;
+            }
+          }
+        }
+
+        &:hover {
+          background-color: theme-color("light");
+          border-bottom-color: theme-color("secondary");
+          border-bottom-width: 2px;
+        }
+
+        &.active {
+          color: theme-color("primary");
+          font-weight: bold;
+          border-bottom-color: theme-color("primary");
+          border-bottom-width: 2px;
+        }
+      }
+    }
+  }
+}

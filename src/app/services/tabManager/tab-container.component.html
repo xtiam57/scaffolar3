@@ -1,7 +1,14 @@
-<app-tabset [justify]="'left'" #tabsetComponent>
+<app-tabset id="tab-manager" [justify]="'left'" #tabsetComponent>
   <div appTab id="{{tab.id}}" *ngFor="let tab of tabManager.tabs" [disabled]="tab.disabled">
     <ng-template appTabTitle>
-      <span [innerHTML]="tab.title"></span> <span aria-hidden="true" (click)="tabManager.close(tab, $event)">&times;</span>
+      <div class="row justify-content-between no-gutters" [title]="tab.title | striphtml">
+        <div class="tab-title col-11">
+          <span [innerHTML]="tab.title"></span>
+        </div>
+        <div class="tab-actions col-1">
+          <span class="close-button" (click)="tabManager.close(tab, $event)">&times;</span>
+        </div>
+      </div>
     </ng-template>
     <ng-template appTabContent>
       <div id="{{tab.id}}" #componentContent></div>

@@ -29,6 +29,7 @@ import { CustomBusyComponent } from './templates/customBusy.component';
 import { TabContainerComponent } from './services/tabManager/tab-container.component';
 import { ExampleComponent } from './views/example/example.component';
 import { TABSET_DIRECTIVES, AppTabsetComponent } from './services/tabManager/tabset';
+import { StriphtmlPipe } from './pipes/striphtml.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TABSET_DIRECTIVES, AppTabsetComponent } from './services/tabManager/tab
     CustomBusyComponent,
     TabContainerComponent,
     ExampleComponent,
-    TABSET_DIRECTIVES
+    TABSET_DIRECTIVES,
+    StriphtmlPipe
   ],
   imports: [
     BrowserModule,

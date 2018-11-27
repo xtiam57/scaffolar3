@@ -32,6 +32,11 @@ class TabInstance {
   private observer: Subscriber<TabInstance> | null;
 
   /**
+   * If the tab is pinned.
+   */
+  isPinned = false;
+
+  /**
    * Creates a new tab.
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
@@ -45,7 +50,7 @@ class TabInstance {
   /**
    * Call subscribers once the tab has been rendered
    */
-  callSubscribers(): void {
+  notifySubscribers(): void {
     if (this.observer) {
       this.observer.next(this);
     }
@@ -53,7 +58,7 @@ class TabInstance {
 
   /**
    * Set the subscriber
-   * @param observer Subscriber to call once the has been rendered
+   * @param observer Subscriber to call once the tab has been rendered
    */
   setObserver(observer: Subscriber<TabInstance> | null): void {
     this.observer = observer;
@@ -112,8 +117,8 @@ export class TabManagerService {
         // Setting data to show in the view through "@Input() data"
         tab.componentInstance.data = tab.data;
         // Call subscribers (now the tab has the componentInstance)
-        tab.callSubscribers();
-        // Set active tab
+        tab.notifySubscribers();
+        // Select as an active tab
         this.tabsetComponent.select(tab.id);
       }
     });
@@ -145,7 +150,7 @@ export class TabManagerService {
   }
 
   /**
-   * Creates and open a new tab.
+   * Creates and opens a new tab.
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
    * @param data Extra data to pass to the Component or tab.
@@ -181,7 +186,7 @@ export class TabManagerService {
     const isActive = this.tabsetComponent.activeId === tab.id;
     // Close the tab
     this.tabs.splice(index, 1);
-    // Select previous tab
+    // Select previous (left) tab
     if (isActive && index > 0) {
       this.tabsetComponent.select(this.tabs[index - 1].id);
     }

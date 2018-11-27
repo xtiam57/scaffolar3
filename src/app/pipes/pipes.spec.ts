@@ -1,6 +1,7 @@
 import { AvailablePipe } from './available.pipe';
 import { ConditionalPipe } from './conditional.pipe';
 import { FractionPipe } from './fraction.pipe';
+import { StriphtmlPipe } from './striphtml.pipe';
 
 describe('AvailablePipe', () => {
   it('create an instance', () => {
@@ -68,5 +69,16 @@ describe('FractionPipe', () => {
   it('transform "true"', () => {
     const pipe = new FractionPipe();
     expect(pipe.transform(true)).toEqual('0');
+  });
+});
+
+describe('StriphtmlPipe', () => {
+  it('create an instance', () => {
+    const pipe = new StriphtmlPipe();
+    expect(pipe).toBeTruthy();
+  });
+  it('strip <code>hello</code>"', () => {
+    const pipe = new StriphtmlPipe();
+    expect(pipe.transform('<code>hello</code>')).toEqual('hello');
   });
 });

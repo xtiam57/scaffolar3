@@ -51,10 +51,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.tabManager.open('A', ExampleComponent);
+    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent);
   }
 
   addTab() {
-    this.tabManager.open('B<code>@</code>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
+    this.tabManager.open('Title<code>@</code>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
       (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
     });
   }
