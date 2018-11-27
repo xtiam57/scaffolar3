@@ -57,7 +57,7 @@
   <h5>GridStack</h5>
       <!-- You can now use your library component in app.component.html -->
       <grid-stack class="grid-stack" [options]="options" >
-          <grid-stack-item [option]="widget1"  (mouseup)="itemReize($event)" (ondragend)='DargS()' class="grid-stack-item w1 chartContainer">
+          <grid-stack-item [option]="widget1"  (mouseup)="itemReize($event)" (onresize)='DargS()' class="grid-stack-item w1 chartContainer">
             <span [chart]="chart"></span>
               <!-- <div [chart]="chart" ></div> -->
           </grid-stack-item>
