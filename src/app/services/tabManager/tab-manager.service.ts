@@ -84,7 +84,7 @@ export class TabManagerService {
    */
   private tabsetComponent: AppTabsetComponent;
 
-  constructor(private resolver: ComponentFactoryResolver) {}
+  constructor(private resolver: ComponentFactoryResolver, private stringUtil: StringUtilService) {}
 
   /**
    * Finds the view reference for the given tab id.
@@ -150,6 +150,35 @@ export class TabManagerService {
   }
 
   /**
+   *
+   * @param str1
+   * @param str2
+   */
+  isEqual(str1: string, str2: string): boolean {
+    return str1.trim().toLocaleLowerCase() === str2.trim().toLocaleLowerCase();
+  }
+
+  /**
+   * Checks if the tab already exists, if, the tab will be selected
+   * @param tab The tab to compare with
+   */
+  exists(tab: TabInstance): boolean {
+    const found = _.find(this.tabs, (value) => {
+      return (
+        this.stringUtil.isEqual(value.title, tab.title) &&
+        this.stringUtil.isEqual(value.component.name, tab.component.name) &&
+        _.isMatch(value.data, tab.data)
+      );
+    });
+    if (found) {
+      // Select as an active tab
+      this.tabsetComponent.select(found.id);
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Creates and opens a new tab.
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
@@ -157,8 +186,11 @@ export class TabManagerService {
    * @param id Unique ID for the tab.
    */
   open(title: string, component: any, data: any = {}, id?: string): Observable<TabInstance> {
-    // TODO: do not add the same tab
     const tab = new TabInstance(title, component, data, id);
+    // The tab already exists
+    if (this.exists(tab)) {
+      return new Observable<TabInstance>();
+    }
     // Set component factory
     tab.factory = this.resolver.resolveComponentFactory(component);
     this.tabs.push(tab);

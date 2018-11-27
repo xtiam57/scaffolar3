@@ -4,8 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StringUtilService {
-
-  constructor() { }
+  constructor() {}
 
   /**
    * Get a random GUID
@@ -23,5 +22,16 @@ export class StringUtilService {
       return (digit === 'x' ? r : (r & 0x3) | 0x8).toString(16);
     });
     return isTrimmed ? uuid.replace(/-/gi, '') : uuid;
+  }
+
+  /**
+   * Compares the equality of 2 strings
+   * @param str1 String 1
+   * @param str2 String 2
+   * @param isSensitive Sensitive or insensitive comparison
+   */
+  isEqual(str1: string, str2: string, isSensitive: boolean = false): boolean {
+    const regex = new RegExp(str2.trim(), 'g' + (isSensitive ? '' : 'i'));
+    return regex.test(str1);
   }
 }

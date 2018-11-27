@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   addTab() {
-    this.tabManager.open('Title<code>@</code>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
+    this.tabManager.open('Title<b>@</b>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
       (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
     });
   }

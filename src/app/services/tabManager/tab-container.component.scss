@@ -1,6 +1,8 @@
 @import "../../../assets/styles/variables";
 
 ::ng-deep #tab-manager {
+  $tab-manager-height: 35px;
+
   ul.nav-tabs {
     li.nav-item {
       width: 200px;
@@ -8,6 +10,7 @@
 
       .nav-link {
         color: $body-color;
+        line-height: $tab-manager-height;
         border-radius: 0;
         border-color: transparent;
         border-right: none;
