@@ -1,69 +1,9 @@
-import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Injectable, QueryList, ViewContainerRef } from '@angular/core';
+import { ComponentFactoryResolver, Injectable, QueryList, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Subscriber } from 'rxjs/internal/Subscriber';
 import * as _ from 'underscore';
 import { StringUtilService } from '../string-util.service';
 import { AppTabsetComponent } from './tabset';
-
-class TabInstance {
-  /**
-   * Unique tab id.
-   */
-  id: string;
-
-  /**
-   * Component factory.
-   */
-  factory: ComponentFactory<any> | null;
-
-  /**
-   * Component instance. With this the user can set @Input information of the component.
-   */
-  componentInstance: ComponentRef<any> | null | any;
-
-  /**
-   * Allows toggling disabled state of a given state. Disabled tabs can't be selected.
-   */
-  disabled = false;
-
-  /**
-   * Subscriber to call once the has been rendered
-   */
-  private observer: Subscriber<TabInstance> | null;
-
-  /**
-   * If the tab is pinned.
-   */
-  isPinned = false;
-
-  /**
-   * Creates a new tab.
-   * @param title Title of the tab. Can contain HTML text.
-   * @param component Component to load and add to the tab.
-   * @param data Extra data to pass to the Component or tab.
-   * @param id Unique ID for the tab.
-   */
-  constructor(public title: string, public component: any, public data: any, id?: string) {
-    this.id = id || new StringUtilService().getGUID(true);
-  }
-
-  /**
-   * Call subscribers once the tab has been rendered
-   */
-  notifySubscribers(): void {
-    if (this.observer) {
-      this.observer.next(this);
-    }
-  }
-
-  /**
-   * Set the subscriber
-   * @param observer Subscriber to call once the tab has been rendered
-   */
-  setObserver(observer: Subscriber<TabInstance> | null): void {
-    this.observer = observer;
-  }
-}
+import { Tab } from './tab';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +12,7 @@ export class TabManagerService {
   /**
    * List of tabs.
    */
-  tabs: Array<TabInstance> = [];
+  tabs: Array<Tab> = [];
 
   /**
    * List of tab view references.
@@ -162,7 +102,7 @@ export class TabManagerService {
    * Checks if the tab already exists, if, the tab will be selected
    * @param tab The tab to compare with
    */
-  exists(tab: TabInstance): boolean {
+  exists(tab: Tab): boolean {
     const found = _.find(this.tabs, (value) => {
       return (
         this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.data, tab.data)
@@ -180,20 +120,21 @@ export class TabManagerService {
    * Creates and opens a new tab.
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
+   * @param icon FontAwesome icon.
    * @param data Extra data to pass to the Component or tab.
    * @param id Unique ID for the tab.
    */
-  open(title: string, component: any, data: any = {}, id?: string): Observable<TabInstance> {
-    const tab = new TabInstance(title, component, data, id);
+  open(title: string, component: any, icon?: Array<string>, data: any = {}, id?: string): Observable<Tab> {
+    const tab = new Tab(title, component, icon, data, id);
     // The tab already exists
     if (this.exists(tab)) {
-      return new Observable<TabInstance>();
+      return new Observable<Tab>();
     }
     // Set component factory
     tab.factory = this.resolver.resolveComponentFactory(component);
     this.tabs.push(tab);
 
-    return new Observable<TabInstance>((observer) => {
+    return new Observable<Tab>((observer) => {
       // After the tab is added to the view, the subscribers will be notified
       // returning the tab with the ComponentInstance
       tab.setObserver(observer);
@@ -205,7 +146,7 @@ export class TabManagerService {
    * @param tab Tab to close.
    * @param event Mouse event to avoid to refresh the page.
    */
-  close(tab: TabInstance, event: MouseEvent): void {
+  close(tab: Tab, event: MouseEvent): void {
     if (!_.isEmpty(event)) {
       // Prevent logout
       event.preventDefault();
@@ -227,7 +168,7 @@ export class TabManagerService {
    * @param tab Tab to keep.
    * @param event Mouse event to avoid to refresh the page.
    */
-  closeOthers(tab: TabInstance, event: MouseEvent): void {
+  closeOthers(tab: Tab, event: MouseEvent): void {
     if (!_.isEmpty(event)) {
       // Prevent logout
       event.preventDefault();
@@ -242,7 +183,7 @@ export class TabManagerService {
    * @param tab Tab
    * @param event Mouse event to avoid to refresh the page.
    */
-  closeAllToRight(tab: TabInstance, event: MouseEvent): void {
+  closeAllToRight(tab: Tab, event: MouseEvent): void {
     if (!_.isEmpty(event)) {
       // Prevent logout
       event.preventDefault();
@@ -264,7 +205,7 @@ export class TabManagerService {
    * @param value true to pin the tab
    * @param event Mouse event to avoid to refresh the page.
    */
-  pin(tab: TabInstance, value: boolean, event: MouseEvent): void {
+  pin(tab: Tab, value: boolean, event: MouseEvent): void {
     if (!_.isEmpty(event)) {
       // Prevent logout
       event.preventDefault();
@@ -279,7 +220,7 @@ export class TabManagerService {
    * @param direction 1 or -1 to move to left or right.
    * @param event Mouse event to avoid to refresh the page.
    */
-  move(tab: TabInstance, direction: number, event: MouseEvent): void {
+  move(tab: Tab, direction: number, event: MouseEvent): void {
     if (!_.isEmpty(event)) {
       // Prevent logout
       event.preventDefault();
@@ -305,7 +246,7 @@ export class TabManagerService {
    * Returns a tab given its ID.
    * @param tabId Unique identifier
    */
-  getTab(tabId: string): TabInstance | null {
+  getTab(tabId: string): Tab | null {
     const tab = _.findWhere(this.tabs, { id: tabId });
     return tab || null;
   }

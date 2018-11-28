@@ -1,19 +1,24 @@
 <app-tabset id="tab-manager" [justify]="'left'" #tabsetComponent>
   <div appTab id="{{tab.id}}" *ngFor="let tab of tabManager.tabs" [disabled]="tab.disabled">
     <ng-template appTabTitle>
-      <div [class.is-pinned]="tab.isPinned" class="row tab-row justify-content-between no-gutters" [title]="tab.title | striphtml"
+      <div [class.is-pinned]="tab.isPinned" class="row tab-row no-gutters" [title]="tab.title | striphtml"
            [contextMenu]="tabContextMenu" [contextMenuSubject]="tab">
-        <div *ngIf="tab.isPinned" class="col-1">
-          <fa-icon [icon]="['fas', 'thumbtack']" [fixedWidth]="false" size="xs"></fa-icon>
+        <!-- Icon -->
+        <div *ngIf="tab.isPinned || tab.icon?.length" [class.col-1]="!tab.isPinned" [class.col-12]="tab.isPinned">
+          <fa-icon *ngIf="tab.icon?.length" [icon]="tab.icon" [fixedWidth]="false"></fa-icon>
+          <fa-icon *ngIf="tab.isPinned && !tab.icon?.length" [icon]="['fas', 'thumbtack']"></fa-icon>
         </div>
-        <div class="tab-title" [class.col-11]="!tab.isPinned" [class.col-10]="tab.isPinned">
-          <span [innerHTML]="tab.title"></span>
+        <!-- Title -->
+        <div *ngIf="!tab.isPinned" class="tab-title" [class.col-10]="tab.icon?.length" [class.col-11]="!tab.icon?.length">
+          <span [innerHTML]="tab.title" [class.ml-3]="tab.icon?.length"></span>
         </div>
-        <div class="tab-actions col-1">
+        <!-- Close button -->
+        <div *ngIf="!tab.isPinned" class="tab-actions col-1">
           <span class="close-button" (click)="tabManager.close(tab, $event)">&times;</span>
         </div>
       </div>
     </ng-template>
+    <!-- Tab content -->
     <ng-template appTabContent>
       <div id="{{tab.id}}" #componentContent></div>
     </ng-template>
@@ -47,5 +52,4 @@
   <ng-template contextMenuItem (execute)="tabManager.move($event.item, 1, $event.event)">
     Move tab to the right
   </ng-template>
-  <!-- [elements[0], elements[3]] = [elements[3], elements[0]]; -->
 </context-menu>

@@ -2,6 +2,8 @@
 
 ::ng-deep #tab-manager {
   $tab-manager-height: 35px;
+  $tab-default-width: 170px;
+  $tab-pinned-width: 25px;
 
   ul.nav-tabs {
     li.nav-item {
@@ -15,15 +17,17 @@
         border-bottom-width: 2px;
 
         .tab-row {
-          width: 180px;
+          width: $tab-default-width;
 
           &.is-pinned {
-
+            width: $tab-pinned-width;
+            text-align: center;
           }
 
           .tab-title {
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
           }
 
           .tab-actions {
