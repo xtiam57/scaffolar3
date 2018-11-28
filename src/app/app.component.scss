@@ -1,0 +1,9 @@
+@import "../assets/styles/variables";
+
+ng-sidebar-container {
+  height: 100vh;
+  ::ng-deep .main-sidebar {
+    background-color: theme-color("primary");
+
+  }
+}

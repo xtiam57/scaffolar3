@@ -12,6 +12,7 @@ import { NgBusyModule, BusyConfig } from 'ng-busy';
 import { ChartModule } from 'angular-highcharts';
 import { AgGridModule } from 'ag-grid-angular';
 import { ContextMenuModule } from 'ngx-contextmenu';
+import { SidebarModule } from 'ng-sidebar';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -74,7 +75,8 @@ import { StriphtmlPipe } from './pipes/striphtml.pipe';
     AgGridModule.withComponents([]),
     ContextMenuModule.forRoot({
       useBootstrap4: true
-    })
+    }),
+    SidebarModule.forRoot()
   ],
   providers: [
     DecimalPipe,

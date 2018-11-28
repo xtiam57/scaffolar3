@@ -38,6 +38,7 @@
     "lb-ratio": "^0.4.1",
     "moment": "^2.22.2",
     "ng-busy": "^6.2.0",
+    "ng-sidebar": "^8.0.0",
     "ngx-contextmenu": "^5.1.1",
     "ngx-store": "^2.0.0",
     "ngx-toastr": "^9.1.1",

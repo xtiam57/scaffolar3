@@ -1,2 +1,15 @@
 <ngx-loading-bar [color]="'#F4DB43'" [includeSpinner]="false" [height]="'3px'"></ngx-loading-bar>
-<router-outlet></router-outlet>
+
+<ng-sidebar-container>
+  <!-- A sidebar -->
+  <ng-sidebar [(opened)]="sidebarOpened" [mode]="'push'" [dock]="true" [dockedSize]="'60px'" [closeOnClickOutside]="true"
+              [sidebarClass]="'main-sidebar'">
+    <p>Sidebar contents</p>
+    <a closeSidebar>Closes the sidebar</a>
+    <button (click)="toggleSidebar()">Toggle sidebar</button>
+  </ng-sidebar>
+  <!-- Page content -->
+  <div ng-sidebar-content>
+    <router-outlet></router-outlet>
+  </div>
+</ng-sidebar-container>

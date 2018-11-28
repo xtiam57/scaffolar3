@@ -22,7 +22,7 @@ $teal:    #20c997;
 $cyan:    #17a2b8;
 
 $primary:       #5c3aa7; // #007bff
-$secondary:     $gray-600;
+$secondary:     #F4DB43;
 $success:       $green;
 $info:          $cyan;
 $warning:       $yellow;
@@ -75,7 +75,6 @@ $body-bg:    $white;
 $body-color: $gray-700;
 
 @import "node_modules/bootstrap/scss/_functions";
-
 
 $enable-caret:              true;
 $enable-rounded:            true;
