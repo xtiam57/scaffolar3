@@ -1,0 +1,21 @@
+@import "../../../assets/styles/variables";
+
+ng-sidebar-container {
+  height: 100vh;
+
+  ::ng-deep .main-sidebar {
+    $sidebar-opened-width: 250px;
+    $sidebar-closed-width: 60px;
+
+    width: $sidebar-opened-width;
+    background-color: theme-color("primary");
+
+    &.ng-sidebar--opened {
+
+    }
+
+    &.ng-sidebar--closed {
+      max-width: $sidebar-closed-width;
+    }
+  }
+}

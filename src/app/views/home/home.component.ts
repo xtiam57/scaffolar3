@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorage } from 'ngx-store';
-import { Chart } from 'angular-highcharts';
-import { MessagesService } from '../../services/messages.service';
 import { TabManagerService } from 'src/app/services/tabManager/tab-manager.service';
 import { ExampleComponent } from '../example/example.component';
 
@@ -11,43 +8,14 @@ import { ExampleComponent } from '../example/example.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @LocalStorage() title = 'scaffolar';
+  /**
+   * Sidebar is opened
+   */
+  public sidebarOpened = false;
 
-  model = {
-    left: true,
-    middle: false,
-    right: false
-  };
+  next = 1;
 
-  chart = new Chart({
-    chart: {
-      type: 'line'
-    },
-    title: {
-      text: 'Linechart'
-    },
-    credits: {
-      enabled: false
-    },
-    series: [
-      {
-        name: 'Line 1',
-        data: [1, 2, 3]
-      }
-    ]
-  });
-
-  cols = [{ headerName: 'Make', field: 'make' }, { headerName: 'Model', field: 'model' }, { headerName: 'Price', field: 'price' }];
-
-  rows = [
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxter', price: 72000 }
-  ];
-
-  next = 0;
-
-  constructor(private message: MessagesService, public tabManager: TabManagerService) {}
+  constructor(public tabManager: TabManagerService) {}
 
   ngOnInit() {
     this.tabManager.open('Aaron Wellbore X85eww', ExampleComponent, ['fas', 'home']);
@@ -60,11 +28,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  closeAll() {
-    this.tabManager.reset();
-  }
-
-  showSuccess() {
-    this.message.create('Hello world!', 'Title');
+  /**
+   * Open/close sidebar
+   */
+  toggleSidebar() {
+    this.sidebarOpened = !this.sidebarOpened;
   }
 }

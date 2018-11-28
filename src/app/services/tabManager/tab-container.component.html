@@ -5,8 +5,8 @@
            [contextMenu]="tabContextMenu" [contextMenuSubject]="tab">
         <!-- Icon -->
         <div *ngIf="tab.isPinned || tab.icon?.length" [class.col-1]="!tab.isPinned" [class.col-12]="tab.isPinned">
-          <fa-icon *ngIf="tab.icon?.length" [icon]="tab.icon" [fixedWidth]="false"></fa-icon>
-          <fa-icon *ngIf="tab.isPinned && !tab.icon?.length" [icon]="['fas', 'thumbtack']"></fa-icon>
+          <fa-icon *ngIf="tab.icon?.length" [icon]="tab.icon" [fixedWidth]="true"></fa-icon>
+          <fa-icon *ngIf="tab.isPinned && !tab.icon?.length" [icon]="['fas', 'thumbtack']" [fixedWidth]="true"></fa-icon>
         </div>
         <!-- Title -->
         <div *ngIf="!tab.isPinned" class="tab-title" [class.col-10]="tab.icon?.length" [class.col-11]="!tab.icon?.length">

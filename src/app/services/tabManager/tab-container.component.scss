@@ -56,4 +56,9 @@
 
     }
   }
+
+  > .tab-content > .tab-pane {
+    height: calc(100vh - 54px);
+    overflow-y: scroll;
+  }
 }
