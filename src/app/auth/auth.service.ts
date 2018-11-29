@@ -3,6 +3,7 @@ import { RESTfulService } from '../services/restful.service';
 import { SessionStorage } from 'ngx-store';
 import { MessagesService } from '../services/messages.service';
 import { Router } from '@angular/router';
+import { TabManagerService } from '../services/tabManager/tab-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   @SessionStorage() user: any = null;
   redirectUrl = '/home';
 
-  constructor(private restful: RESTfulService, private messageService: MessagesService, private router: Router) {}
+  constructor(private restful: RESTfulService, private messageService: MessagesService, private router: Router, private tabManager: TabManagerService) {}
 
   private cleanSession() {
     this.isLoggedIn = null;
@@ -40,5 +41,6 @@ export class AuthService {
   logout() {
     this.cleanSession();
     this.router.navigateByUrl('/login');
+    this.tabManager.reset();
   }
 }
