@@ -3,6 +3,10 @@
 ng-sidebar-container {
   height: 100vh;
 
+  ::ng-deep .ng-sidebar__content {
+    overflow-y: hidden;
+  }
+
   ::ng-deep .main-sidebar {
     $sidebar-opened-width: 250px;
     $sidebar-closed-width: 60px;

@@ -8,7 +8,11 @@ import {
   AfterContentChecked,
   Output,
   EventEmitter,
-  Injectable
+  Injectable,
+  ViewChild,
+  ViewChildren,
+  ViewContainerRef,
+  ElementRef
 } from '@angular/core';
 
 let nextId = 0;
@@ -102,7 +106,7 @@ export interface AppTabChangeEvent {
 @Component({
   selector: 'app-tabset',
   template: `
-    <ul [class]="'nav nav-' + type + (orientation == 'horizontal' ? ' ' + justifyClass : ' flex-column')" role="tablist">
+    <ul #ulElement [class]="'nav nav-' + type + (orientation == 'horizontal' ? ' ' + justifyClass : ' flex-column')" role="tablist">
       <li class="nav-item" *ngFor="let tab of tabs">
         <a
           [id]="tab.id"
@@ -120,9 +124,20 @@ export interface AppTabChangeEvent {
           {{ tab.title }}<ng-template [ngTemplateOutlet]="tab.titleTpl?.templateRef"></ng-template>
         </a>
       </li>
+      <li #leftScrollButton class="nav-item nav-item-left-arrow">
+        <a (click)="scroll(-1)" class="nav-link" [class.disabled]="leftScrollDisabled">
+          <fa-icon [icon]="['fas', 'chevron-left']" [fixedWidth]="false"></fa-icon>
+        </a>
+      </li>
+      <li #rightScrollButton class="nav-item nav-item-right-arrow">
+        <a (click)="scroll(1)" class="nav-link" [class.disabled]="rightScrollDisabled">
+          <fa-icon [icon]="['fas', 'chevron-right']" [fixedWidth]="false"></fa-icon>
+        </a>
+      </li>
     </ul>
     <div class="tab-content">
       <div
+        #tabPanes
         *ngFor="let tab of tabs"
         [hidden]="destroyOnHide && tab.id !== activeId"
         class="tab-pane {{tab.id === activeId ? 'active' : null}}"
@@ -139,7 +154,17 @@ export interface AppTabChangeEvent {
 export class AppTabsetComponent implements AfterContentChecked {
   justifyClass: string;
 
+  // To disable scroll buttons
+  leftScrollDisabled = true;
+  rightScrollDisabled = false;
+
   @ContentChildren(AppTabDirective) tabs: QueryList<AppTabDirective>;
+
+  // Elements for scrollable functionalities
+  @ViewChild('ulElement') private ulElementRef: ElementRef;
+  @ViewChildren('tabPanes') private tabPanesRef: QueryList<ElementRef>;
+  @ViewChild('rightScrollButton') private rightScrollButtonRef: ElementRef;
+  @ViewChild('leftScrollButton') private leftScrollButtonRef: ElementRef;
 
   /**
    * An identifier of an initially selected (active) tab. Use the "select" method to switch a tab programmatically.
@@ -211,15 +236,86 @@ export class AppTabsetComponent implements AfterContentChecked {
     }
   }
 
+  /**
+   * Horizontal scroll
+   * @param sign negative go left, positive right
+   * @param amountPixels Quantity of movement
+   * @param step Increment in step
+   */
+  scroll(sign: number = 1, amountPixels: number = 440, step: number = 4) {
+    let lastPosition = -1;
+    const ul = this.ulElementRef.nativeElement;
+
+    const interval = setInterval(() => {
+      lastPosition = ul.scrollLeft;
+      ul.scrollLeft += step * sign;
+      amountPixels -= step;
+
+      if (amountPixels <= 0 || lastPosition === ul.scrollLeft) {
+        clearInterval(interval);
+      }
+    });
+  }
+
   ngAfterContentChecked() {
     // auto-correct activeId that might have been set incorrectly as input
     const activeTab = this._getTabById(this.activeId);
     this.activeId = activeTab ? activeTab.id : this.tabs.length ? this.tabs.first.id : null;
+
+    // Insert scrollable class
+    if (this.ulElementRef && this.tabPanesRef) {
+      const ul = this.ulElementRef.nativeElement;
+      const ulWidth = ul.offsetWidth;
+      const children = ul.children;
+      const leftScrollButton = this.leftScrollButtonRef.nativeElement;
+      const rightScrollButton = this.rightScrollButtonRef.nativeElement;
+      let liWidths = 0;
+
+      leftScrollButton.classList.remove('d-none');
+      leftScrollButton.classList.remove('d-inline-block');
+      rightScrollButton.classList.remove('d-none');
+      rightScrollButton.classList.remove('d-inline-block');
+
+      for (let i = 0; i < children.length; i++) {
+        liWidths += children.item(i).offsetWidth;
+      }
+      // Remove scrollable buttons widths
+      liWidths -= leftScrollButton.offsetWidth + rightScrollButton.offsetWidth;
+      // Check if the width of all tabs is greater than the ul width
+      if (liWidths >= ulWidth) {
+        ul.classList.add('scrollable');
+        leftScrollButton.classList.add('d-inline-block');
+        rightScrollButton.classList.add('d-inline-block');
+      } else {
+        ul.classList.remove('scrollable');
+        leftScrollButton.classList.add('d-none');
+        rightScrollButton.classList.add('d-none');
+      }
+
+      this._updateScrollButtons();
+
+      // Add scrollable class in tabpanes
+      // this.tabPanesRef.toArray().forEach((element) => {
+      //   if (liWidths >= ulWidth) {
+      //     element.nativeElement.classList.add('scrollable');
+      //   } else {
+      //     element.nativeElement.classList.remove('scrollable');
+      //   }
+      // });
+    }
   }
 
   private _getTabById(id: string): AppTabDirective {
     const tabsWithId: AppTabDirective[] = this.tabs.filter((tab) => tab.id === id);
     return tabsWithId.length ? tabsWithId[0] : null;
+  }
+
+  private _updateScrollButtons() {
+    const ul = this.ulElementRef.nativeElement;
+    const maxScroll = ul.scrollWidth - ul.clientWidth;
+
+    this.leftScrollDisabled = ul.scrollLeft <= 0;
+    this.rightScrollDisabled = ul.scrollLeft >= maxScroll;
   }
 }
 

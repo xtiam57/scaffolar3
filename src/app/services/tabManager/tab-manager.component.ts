@@ -4,11 +4,11 @@ import { AppTabsetComponent } from './tabset';
 import { ContextMenuComponent } from 'ngx-contextmenu';
 
 @Component({
-  selector: 'app-tab-container',
-  templateUrl: './tab-container.component.html',
-  styleUrls: ['./tab-container.component.scss']
+  selector: 'app-tab-manager',
+  templateUrl: './tab-manager.component.html',
+  styleUrls: ['./tab-manager.component.scss']
 })
-export class TabContainerComponent implements OnInit, AfterViewInit {
+export class TabManagerComponent implements OnInit, AfterViewInit {
   @ViewChildren('componentContent', { read: ViewContainerRef })
   public targets: QueryList<ViewContainerRef>;
 
