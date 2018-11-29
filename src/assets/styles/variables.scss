@@ -1,3 +1,5 @@
+@import "node_modules/bootstrap/scss/_functions";
+
 $white:    #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
@@ -73,8 +75,6 @@ $colors: (
 // Override body colors
 $body-bg:    $white;
 $body-color: $gray-700;
-
-@import "node_modules/bootstrap/scss/_functions";
 
 $enable-caret:              true;
 $enable-rounded:            true;

@@ -2,8 +2,8 @@ import { ComponentFactoryResolver, Injectable, QueryList, ViewContainerRef } fro
 import { Observable } from 'rxjs/internal/Observable';
 import * as _ from 'underscore';
 import { StringUtilService } from '../string-util.service';
-import { AppTabsetComponent } from './tabset';
 import { Tab } from './tab';
+import { AppTabsetComponent } from './tabset';
 
 @Injectable({
   providedIn: 'root'
@@ -98,7 +98,9 @@ export class TabManagerService {
   exists(tab: Tab): boolean {
     const found = _.find(this.tabs, (value) => {
       return (
-        this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.data, tab.data)
+        this.stringUtil.isEqual(value.title, tab.title) &&
+        this.stringUtil.isEqual(value.component.name, tab.component.name) &&
+        _.isMatch(value.data, tab.data)
       );
     });
     if (found) {
