@@ -246,7 +246,6 @@ export class AppTabsetComponent implements AfterContentChecked {
             const tabLeftPosition = children.item(i).offsetLeft;
             const tabRightPosition = tabLeftPosition + tabWidth;
             const scrollPosition = ul.scrollLeft;
-            const maxScroll = ul.scrollWidth - ul.offsetWidth;
             const visibleAreaWidth = ul.offsetWidth;
             const visibleLeftArea = ul.offsetLeft;
             const visibleRightArea = visibleLeftArea + visibleAreaWidth;
@@ -254,8 +253,7 @@ export class AppTabsetComponent implements AfterContentChecked {
             let offset = 0;
 
             if (tabRightPosition - scrollPosition > visibleRightArea) {
-              // TODO: check this offset when click
-              offset = tabRightPosition - visibleRightArea;
+              offset = tabRightPosition - visibleRightArea - scrollPosition;
               this.scroll(1, offset, 10);
             } else if (tabLeftPosition - scrollPosition < visibleLeftArea) {
               offset = scrollPosition - tabLeftPosition + visibleLeftArea;
