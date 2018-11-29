@@ -1,0 +1,44 @@
+// @import "./variables";
+
+// // Gmail style scrollbar
+// ::-webkit-scrollbar {
+//   background: transparent;
+//   overflow: visible;
+//   width: $scrollbar-width;
+//   height: $scrollbar-width;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: rgba(0, 0, 0, 0.2);
+//   border: $scrollbar-border;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background: rgba(0, 0, 0, 0.8);
+// }
+
+// ::-webkit-scrollbar-thumb:horizontal {
+//   border-width: 3px 0px;
+//   min-width: 40px;
+// }
+
+// ::-webkit-scrollbar-thumb:vertical {
+//   border-width: 0px 3px;
+//   min-height: 40px;
+// }
+
+// ::-webkit-scrollbar-track-piece {
+//   background-color: $scrollbar-track-bg;
+// }
+
+// ::-webkit-scrollbar-corner {
+//   background: transparent;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: $scrollbar-thumb-bg;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color: $scrollbar-thumb-hover-bg;
+// }

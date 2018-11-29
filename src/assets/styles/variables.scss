@@ -83,3 +83,17 @@ $enable-gradients:          false;
 $enable-transitions:        true;
 $enable-grid-classes:       true;
 $enable-print-styles:       true;
+
+// Tab Manager
+$tab-default-width:         220px;
+$tab-pinned-width:          65px;
+$tab-padding-x:             16px;
+$tab-height:                60px;
+$tab-border-width:          4px;
+
+// Scrollbars
+$scrollbar-width:          17px;
+$scrollbar-border:         solid $gray-200;
+$scrollbar-track-bg:       $gray-200;
+$scrollbar-thumb-bg:       $gray-500;
+$scrollbar-thumb-hover-bg: $gray-600;

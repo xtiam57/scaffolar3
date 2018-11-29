@@ -1,0 +1,105 @@
+@import "../../../assets/styles/variables";
+
+::ng-deep #tab-manager {
+  > ul.nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+    &.scrollable {
+      margin-right: 70px;
+
+      li.nav-item-left-arrow,
+      li.nav-item-right-arrow {
+        z-index: 1;
+        position: absolute;
+        width: 35px;
+        background-color: $gray-200;
+
+        a.nav-link {
+          padding: 0;
+          text-align: center;
+          cursor: pointer;
+
+          &.disabled {
+            cursor: default;
+            pointer-events: none;
+            color: $gray-500;
+          }
+
+          &:hover {
+            background-color: $gray-300;
+            border-bottom-color: $gray-300;
+          }
+        }
+      }
+
+      li.nav-item-left-arrow {
+        right: 35px;
+      }
+
+      li.nav-item-right-arrow {
+        right: 0;
+      }
+    }
+
+    li.nav-item {
+      flex: 0 0 auto;
+
+      a.nav-link {
+        height: $tab-height;
+        color: $body-color;
+        line-height: $tab-height - $tab-border-width;
+        padding: 0 $tab-padding-x;
+        border-radius: 0;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-color: transparent;
+        border-bottom-width: $tab-border-width;
+
+        .tab-row {
+          width: $tab-default-width - ($tab-padding-x * 2);
+
+          &.is-pinned {
+            width: $tab-pinned-width - ($tab-padding-x * 2);
+            text-align: center;
+          }
+
+          .tab-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .tab-actions {
+            text-align: right;
+            span.close-button {
+              font-weight: bold;
+              color: #adb5bd;
+              &:hover {
+                color: inherit;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          background-color: theme-color("light");
+          border-bottom-color: theme-color("secondary");
+        }
+
+        &.active {
+          color: theme-color("primary");
+          font-weight: bold;
+          border-bottom-color: theme-color("primary");
+        }
+      }
+
+    }
+  }
+
+  > .tab-content > .tab-pane {
+    height: calc(100vh - #{$tab-height} - 1px/* border of tabset header */);
+  }
+}
