@@ -96,7 +96,9 @@ export class TabManagerService {
   exists(tab: Tab): boolean {
     const found = _.find(this.tabs, (value) => {
       return (
-        this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.params, tab.params)
+        this.stringUtil.isEqual(value.title, tab.title) &&
+        this.stringUtil.isEqual(value.component.name, tab.component.name) &&
+        _.isMatch(value.params, tab.params)
       );
     });
     if (found) {
@@ -240,6 +242,17 @@ export class TabManagerService {
   getTab(tabId: string): Tab | null {
     const tab = _.findWhere(this.tabs, { id: tabId });
     return tab || null;
+  }
+
+  /**
+   * Filters all tab by component name
+   * @param componentName Component name
+   */
+  getTabsByComponentName(componentName: string): Tab[] {
+    const tabs = _.filter(this.tabs, (item) => {
+      return this.stringUtil.isEqual(item.component.name, componentName);
+    });
+    return tabs;
   }
 
   /**

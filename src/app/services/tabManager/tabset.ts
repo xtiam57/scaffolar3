@@ -172,6 +172,11 @@ export class AppTabsetComponent implements AfterContentChecked {
   @Input() activeId: string;
 
   /**
+   * Autoscroll offset.
+   */
+  @Input() autoScrollOffset = 100;
+
+  /**
    * Whether the closed tabs should be hidden without destroying them
    */
   @Input() destroyOnHide = true;
@@ -249,6 +254,7 @@ export class AppTabsetComponent implements AfterContentChecked {
   scroll(sign: number = 1, amountPixels: number = 440, step: number = 4) {
     let lastPosition = -1;
     const ul = this.ulElementRef.nativeElement;
+    amountPixels += this.autoScrollOffset;
 
     const interval = setInterval(() => {
       lastPosition = ul.scrollLeft;
