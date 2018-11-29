@@ -9,7 +9,7 @@ import { MessagesService } from '../../services/messages.service';
   styleUrls: ['./example.component.scss']
 })
 export class ExampleComponent implements OnInit {
-  @Input() data: any;
+  @Input() params: any;
   @Input() message: string;
   test;
 

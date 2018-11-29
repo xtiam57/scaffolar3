@@ -54,8 +54,8 @@ export class TabManagerService {
         // NOTE: just in case (It can be removed)
         target.clear();
         tab.componentInstance = target.createComponent(tab.factory).instance;
-        // Setting data to show in the view through "@Input() data"
-        tab.componentInstance.data = tab.data;
+        // Setting params to show in the view through "@Input() params"
+        tab.componentInstance.params = tab.params;
         // Call subscribers (now the tab has the componentInstance)
         tab.notifySubscribers();
         // Select as an active tab
@@ -96,7 +96,7 @@ export class TabManagerService {
   exists(tab: Tab): boolean {
     const found = _.find(this.tabs, (value) => {
       return (
-        this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.data, tab.data)
+        this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.params, tab.params)
       );
     });
     if (found) {
@@ -112,11 +112,11 @@ export class TabManagerService {
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
    * @param icon FontAwesome icon.
-   * @param data Extra data to pass to the Component or tab.
+   * @param params Extra data to pass to the Component or tab.
    * @param id Unique ID for the tab.
    */
-  open(title: string, component: any, icon?: Array<string>, data: any = {}, id?: string): Observable<Tab> {
-    const tab = new Tab(title, component, icon, data, id);
+  open(title: string, component: any, icon?: Array<string>, params: any = {}, id?: string): Observable<Tab> {
+    const tab = new Tab(title, component, icon, params, id);
     // The tab already exists
     if (this.exists(tab)) {
       return new Observable<Tab>();

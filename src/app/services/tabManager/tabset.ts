@@ -233,36 +233,10 @@ export class AppTabsetComponent implements AfterContentChecked {
       if (!defaultPrevented) {
         this.activeId = selectedTab.id;
       }
+    }
 
-      // Scroll to focus
-      const ul = this.ulElementRef.nativeElement;
-      const children = ul.children;
-      for (let i = 0; i < children.length; i++) {
-        const anchorRef = children.item(i).children.item(0);
-
-        if (selectedTab.id === anchorRef.id) {
-          setTimeout(() => {
-            const tabWidth = children.item(i).offsetWidth;
-            const tabLeftPosition = children.item(i).offsetLeft;
-            const tabRightPosition = tabLeftPosition + tabWidth;
-            const scrollPosition = ul.scrollLeft;
-            const visibleAreaWidth = ul.offsetWidth;
-            const visibleLeftArea = ul.offsetLeft;
-            const visibleRightArea = visibleLeftArea + visibleAreaWidth;
-
-            let offset = 0;
-
-            if (tabRightPosition - scrollPosition > visibleRightArea) {
-              offset = tabRightPosition - visibleRightArea - scrollPosition;
-              this.scroll(1, offset, 10);
-            } else if (tabLeftPosition - scrollPosition < visibleLeftArea) {
-              offset = scrollPosition - tabLeftPosition + visibleLeftArea;
-              this.scroll(-1, offset, 10);
-            }
-          });
-          return;
-        }
-      }
+    if (selectedTab && !selectedTab.disabled) {
+      this._autoScroll(selectedTab.id);
     }
   }
 
@@ -340,12 +314,45 @@ export class AppTabsetComponent implements AfterContentChecked {
     return tabsWithId.length ? tabsWithId[0] : null;
   }
 
-  private _updateScrollButtons() {
+  private _updateScrollButtons(): void {
     const ul = this.ulElementRef.nativeElement;
     const maxScroll = ul.scrollWidth - ul.offsetWidth;
 
     this.leftScrollDisabled = ul.scrollLeft <= 0;
     this.rightScrollDisabled = ul.scrollLeft >= maxScroll;
+  }
+
+  private _autoScroll(tabId: string): void {
+    // Scroll to focus
+    const ul = this.ulElementRef.nativeElement;
+    const children = ul.children;
+    for (let i = 0; i < children.length; i++) {
+      const anchorRef = children.item(i).children.item(0);
+
+      if (tabId === anchorRef.id) {
+        setTimeout(() => {
+          const tabWidth = children.item(i).offsetWidth;
+          const tabLeftPosition = children.item(i).offsetLeft;
+          const tabRightPosition = tabLeftPosition + tabWidth;
+          const scrollPosition = ul.scrollLeft;
+          const maxScroll = ul.scrollWidth - ul.offsetWidth;
+          const visibleAreaWidth = ul.offsetWidth;
+          const visibleLeftArea = ul.offsetLeft;
+          const visibleRightArea = visibleLeftArea + visibleAreaWidth;
+
+          let offset = 0;
+
+          if (tabRightPosition - scrollPosition > visibleRightArea) {
+            offset = tabRightPosition - visibleRightArea - scrollPosition;
+            this.scroll(1, offset, 10);
+          } else if (tabLeftPosition - scrollPosition < visibleLeftArea) {
+            offset = scrollPosition - tabLeftPosition + visibleLeftArea;
+            this.scroll(-1, offset, 10);
+          }
+        });
+        return;
+      }
+    }
   }
 }
 
