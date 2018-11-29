@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TabManagerService } from 'src/app/services/tabManager/tab-manager.service';
+import { TabManagerService } from '../../services/tabManager/tab-manager.service';
 import { ExampleComponent } from '../example/example.component';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,11 @@ export class HomeComponent implements OnInit {
   /**
    * Sidebar is opened
    */
-  public sidebarOpened = false;
+  public asideOpened = false;
 
   next = 1;
 
-  constructor(public tabManager: TabManagerService) {}
+  constructor(public tabManager: TabManagerService, public auth: AuthService) {}
 
   ngOnInit() {
     this.tabManager.open('Aaron Wellbore X85eww', ExampleComponent, ['fas', 'home']);
@@ -23,15 +24,16 @@ export class HomeComponent implements OnInit {
   }
 
   addTab() {
-    this.tabManager.open('Title<b>@</b>' + this.next, ExampleComponent, null, { message: 'hello world!' }).subscribe((tab) => {
-      (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
-    });
+    this.tabManager.open('Title<b>@</b>' + this.next, ExampleComponent, null, { message: 'hello world!' })
+      .subscribe((tab) => {
+        (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
+      });
   }
 
   /**
    * Open/close sidebar
    */
   toggleSidebar() {
-    this.sidebarOpened = !this.sidebarOpened;
+    this.asideOpened = !this.asideOpened;
   }
 }

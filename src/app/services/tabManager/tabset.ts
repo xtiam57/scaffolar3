@@ -295,13 +295,13 @@ export class AppTabsetComponent implements AfterContentChecked {
       this._updateScrollButtons();
 
       // Add scrollable class in tabpanes
-      // this.tabPanesRef.toArray().forEach((element) => {
-      //   if (liWidths >= ulWidth) {
-      //     element.nativeElement.classList.add('scrollable');
-      //   } else {
-      //     element.nativeElement.classList.remove('scrollable');
-      //   }
-      // });
+      this.tabPanesRef.toArray().forEach((element) => {
+        if (liWidths >= ulWidth) {
+          element.nativeElement.classList.add('scrollable');
+        } else {
+          element.nativeElement.classList.remove('scrollable');
+        }
+      });
     }
   }
 

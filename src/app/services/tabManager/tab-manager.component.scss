@@ -48,7 +48,7 @@
 
       a.nav-link {
         height: $tab-height;
-        color: $body-color;
+        color: $gray-600;
         line-height: $tab-height - $tab-border-width;
         padding: 0 $tab-padding-x;
         border-radius: 0;
@@ -101,5 +101,6 @@
 
   > .tab-content > .tab-pane {
     height: calc(100vh - #{$tab-height} - 1px/* border of tabset header */);
+    overflow-y: auto;
   }
 }
