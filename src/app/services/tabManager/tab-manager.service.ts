@@ -33,7 +33,7 @@ export class TabManagerService {
   private _findViewRef(tabId: string): ViewContainerRef | null {
     // Find the right ViewContainerRef given its ID
     const target = _.filter(this.targets.toArray(), (item) => {
-      return item.element.nativeElement.id === tabId;
+      return `${item.element.nativeElement.id}` === `content-${tabId}`;
     });
     return _.first(target) || null;
   }
@@ -60,8 +60,6 @@ export class TabManagerService {
         tab.notifySubscribers();
         // Select as an active tab
         this.tabsetComponent.select(tab.id);
-        // Scroll to last tab
-        this.tabsetComponent.scroll(1, 9999, 10);
       }
     });
   }
@@ -98,9 +96,7 @@ export class TabManagerService {
   exists(tab: Tab): boolean {
     const found = _.find(this.tabs, (value) => {
       return (
-        this.stringUtil.isEqual(value.title, tab.title) &&
-        this.stringUtil.isEqual(value.component.name, tab.component.name) &&
-        _.isMatch(value.data, tab.data)
+        this.stringUtil.isEqual(value.title, tab.title) && this.stringUtil.isEqual(value.component.name, tab.component.name) && _.isMatch(value.data, tab.data)
       );
     });
     if (found) {

@@ -233,6 +233,38 @@ export class AppTabsetComponent implements AfterContentChecked {
       if (!defaultPrevented) {
         this.activeId = selectedTab.id;
       }
+
+      // Scroll to focus
+      const ul = this.ulElementRef.nativeElement;
+      const children = ul.children;
+      for (let i = 0; i < children.length; i++) {
+        const anchorRef = children.item(i).children.item(0);
+
+        if (selectedTab.id === anchorRef.id) {
+          setTimeout(() => {
+            const tabWidth = children.item(i).offsetWidth;
+            const tabLeftPosition = children.item(i).offsetLeft;
+            const tabRightPosition = tabLeftPosition + tabWidth;
+            const scrollPosition = ul.scrollLeft;
+            const maxScroll = ul.scrollWidth - ul.offsetWidth;
+            const visibleAreaWidth = ul.offsetWidth;
+            const visibleLeftArea = ul.offsetLeft;
+            const visibleRightArea = visibleLeftArea + visibleAreaWidth;
+
+            let offset = 0;
+
+            if (tabRightPosition - scrollPosition > visibleRightArea) {
+              // TODO: check this offset when click
+              offset = tabRightPosition - visibleRightArea;
+              this.scroll(1, offset, 10);
+            } else if (tabLeftPosition - scrollPosition < visibleLeftArea) {
+              offset = scrollPosition - tabLeftPosition + visibleLeftArea;
+              this.scroll(-1, offset, 10);
+            }
+          });
+          return;
+        }
+      }
     }
   }
 
@@ -312,7 +344,7 @@ export class AppTabsetComponent implements AfterContentChecked {
 
   private _updateScrollButtons() {
     const ul = this.ulElementRef.nativeElement;
-    const maxScroll = ul.scrollWidth - ul.clientWidth;
+    const maxScroll = ul.scrollWidth - ul.offsetWidth;
 
     this.leftScrollDisabled = ul.scrollLeft <= 0;
     this.rightScrollDisabled = ul.scrollLeft >= maxScroll;
