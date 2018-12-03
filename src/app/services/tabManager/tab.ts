@@ -38,10 +38,10 @@ export class Tab {
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
    * @param icon FontAwesome icon.
-   * @param data Extra data to pass to the Component or tab.
+   * @param params Extra data to pass to the Component or tab.
    * @param id Unique ID for the tab.
    */
-  constructor(public title: string, public component: any, public icon?: Array<string>, public data?: any, id?: string) {
+  constructor(public title: string, public component: any, public icon?: Array<string>, public params?: any, id?: string) {
     this.id = id || new StringUtilService().getGUID(true);
   }
 

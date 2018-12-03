@@ -33,7 +33,7 @@ export class TabManagerService {
   private _findViewRef(tabId: string): ViewContainerRef | null {
     // Find the right ViewContainerRef given its ID
     const target = _.filter(this.targets.toArray(), (item) => {
-      return item.element.nativeElement.id === tabId;
+      return `${item.element.nativeElement.id}` === `content-${tabId}`;
     });
     return _.first(target) || null;
   }
@@ -54,14 +54,12 @@ export class TabManagerService {
         // NOTE: just in case (It can be removed)
         target.clear();
         tab.componentInstance = target.createComponent(tab.factory).instance;
-        // Setting data to show in the view through "@Input() data"
-        tab.componentInstance.data = tab.data;
+        // Setting params to show in the view through "@Input() params"
+        tab.componentInstance.params = tab.params;
         // Call subscribers (now the tab has the componentInstance)
         tab.notifySubscribers();
         // Select as an active tab
         this.tabsetComponent.select(tab.id);
-        // Scroll to last tab
-        this.tabsetComponent.scroll(1, 9999, 10);
       }
     });
   }
@@ -100,7 +98,7 @@ export class TabManagerService {
       return (
         this.stringUtil.isEqual(value.title, tab.title) &&
         this.stringUtil.isEqual(value.component.name, tab.component.name) &&
-        _.isMatch(value.data, tab.data)
+        _.isMatch(value.params, tab.params)
       );
     });
     if (found) {
@@ -116,11 +114,11 @@ export class TabManagerService {
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
    * @param icon FontAwesome icon.
-   * @param data Extra data to pass to the Component or tab.
+   * @param params Extra data to pass to the Component or tab.
    * @param id Unique ID for the tab.
    */
-  open(title: string, component: any, icon?: Array<string>, data: any = {}, id?: string): Observable<Tab> {
-    const tab = new Tab(title, component, icon, data, id);
+  open(title: string, component: any, icon?: Array<string>, params: any = {}, id?: string): Observable<Tab> {
+    const tab = new Tab(title, component, icon, params, id);
     // The tab already exists
     if (this.exists(tab)) {
       return new Observable<Tab>();
@@ -244,6 +242,17 @@ export class TabManagerService {
   getTab(tabId: string): Tab | null {
     const tab = _.findWhere(this.tabs, { id: tabId });
     return tab || null;
+  }
+
+  /**
+   * Filters all tab by component name
+   * @param componentName Component name
+   */
+  getTabsByComponentName(componentName: string): Tab[] {
+    const tabs = _.filter(this.tabs, (item) => {
+      return this.stringUtil.isEqual(item.component.name, componentName);
+    });
+    return tabs;
   }
 
   /**

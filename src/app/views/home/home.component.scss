@@ -13,6 +13,7 @@ ng-sidebar-container {
 
     width: $sidebar-opened-width;
     background-color: theme-color("primary");
+    padding: 20px;
 
     &.ng-sidebar--opened {
 
@@ -20,6 +21,8 @@ ng-sidebar-container {
 
     &.ng-sidebar--closed {
       max-width: $sidebar-closed-width;
+      text-align: center;
+      padding: 20px 0;
     }
   }
 }

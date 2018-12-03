@@ -172,6 +172,11 @@ export class AppTabsetComponent implements AfterContentChecked {
   @Input() activeId: string;
 
   /**
+   * Autoscroll offset.
+   */
+  @Input() autoScrollOffset = 100;
+
+  /**
    * Whether the closed tabs should be hidden without destroying them
    */
   @Input() destroyOnHide = true;
@@ -234,6 +239,10 @@ export class AppTabsetComponent implements AfterContentChecked {
         this.activeId = selectedTab.id;
       }
     }
+
+    if (selectedTab && !selectedTab.disabled) {
+      this._autoScroll(selectedTab.id);
+    }
   }
 
   /**
@@ -245,6 +254,7 @@ export class AppTabsetComponent implements AfterContentChecked {
   scroll(sign: number = 1, amountPixels: number = 440, step: number = 4) {
     let lastPosition = -1;
     const ul = this.ulElementRef.nativeElement;
+    amountPixels += this.autoScrollOffset;
 
     const interval = setInterval(() => {
       lastPosition = ul.scrollLeft;
@@ -295,13 +305,13 @@ export class AppTabsetComponent implements AfterContentChecked {
       this._updateScrollButtons();
 
       // Add scrollable class in tabpanes
-      // this.tabPanesRef.toArray().forEach((element) => {
-      //   if (liWidths >= ulWidth) {
-      //     element.nativeElement.classList.add('scrollable');
-      //   } else {
-      //     element.nativeElement.classList.remove('scrollable');
-      //   }
-      // });
+      this.tabPanesRef.toArray().forEach((element) => {
+        if (liWidths >= ulWidth) {
+          element.nativeElement.classList.add('scrollable');
+        } else {
+          element.nativeElement.classList.remove('scrollable');
+        }
+      });
     }
   }
 
@@ -310,12 +320,45 @@ export class AppTabsetComponent implements AfterContentChecked {
     return tabsWithId.length ? tabsWithId[0] : null;
   }
 
-  private _updateScrollButtons() {
+  private _updateScrollButtons(): void {
     const ul = this.ulElementRef.nativeElement;
-    const maxScroll = ul.scrollWidth - ul.clientWidth;
+    const maxScroll = ul.scrollWidth - ul.offsetWidth;
 
     this.leftScrollDisabled = ul.scrollLeft <= 0;
     this.rightScrollDisabled = ul.scrollLeft >= maxScroll;
+  }
+
+  private _autoScroll(tabId: string): void {
+    // Scroll to focus
+    const ul = this.ulElementRef.nativeElement;
+    const children = ul.children;
+    for (let i = 0; i < children.length; i++) {
+      const anchorRef = children.item(i).children.item(0);
+
+      if (tabId === anchorRef.id) {
+        setTimeout(() => {
+          const tabWidth = children.item(i).offsetWidth;
+          const tabLeftPosition = children.item(i).offsetLeft;
+          const tabRightPosition = tabLeftPosition + tabWidth;
+          const scrollPosition = ul.scrollLeft;
+          const maxScroll = ul.scrollWidth - ul.offsetWidth;
+          const visibleAreaWidth = ul.offsetWidth;
+          const visibleLeftArea = ul.offsetLeft;
+          const visibleRightArea = visibleLeftArea + visibleAreaWidth;
+
+          let offset = 0;
+
+          if (tabRightPosition - scrollPosition > visibleRightArea) {
+            offset = tabRightPosition - visibleRightArea - scrollPosition;
+            this.scroll(1, offset, 10);
+          } else if (tabLeftPosition - scrollPosition < visibleLeftArea) {
+            offset = scrollPosition - tabLeftPosition + visibleLeftArea;
+            this.scroll(-1, offset, 10);
+          }
+        });
+        return;
+      }
+    }
   }
 }
 
