@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import { TabManagerService } from '../../services/tabManager/tab-manager.service';
 import { ExampleComponent } from '../example/example.component';
 import { AuthService } from '../../auth/auth.service';
+import { Chart } from 'angular-highcharts';
+
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +18,9 @@ export class HomeComponent implements OnInit {
    */
   public asideOpened = false;
 
+
   next = 1;
+
 
   constructor(public tabManager: TabManagerService, public auth: AuthService) {}
 
@@ -39,4 +45,8 @@ export class HomeComponent implements OnInit {
   toggleSidebar() {
     this.asideOpened = !this.asideOpened;
   }
+
+  DargS() {
+    console.log('dragg');
+    }
 }

@@ -19,6 +19,8 @@ import { ContextMenuModule } from 'ngx-contextmenu';
 import { WebStorageModule } from 'ngx-store';
 import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './app-http.interceptor';
+import { GridStackModule } from 'ng4-gridstack';
+
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvailablePipe } from './pipes/available.pipe';
@@ -54,6 +56,7 @@ library.add(fas, far, fab);
     AppRoutingModule,
     FontAwesomeModule,
     WebStorageModule,
+    GridStackModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,

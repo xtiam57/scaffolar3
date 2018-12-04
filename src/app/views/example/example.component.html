@@ -51,7 +51,7 @@
           <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
           <ng-template ngbTabContent>
             <ag-grid-angular style="height:200px" [enableSorting]="true" [enableFilter]="true" [rowData]="rows"
-                             [columnDefs]="cols" class="ag-theme-bootstrap">
+            [columnDefs]="cols" class="ag-theme-bootstrap">
             </ag-grid-angular>
           </ng-template>
         </ngb-tab>
@@ -73,5 +73,22 @@
         </ngb-tab>
       </ngb-tabset>
     </div>
+
+  </div>
+  <div class="row">
+    <div col-12>
+        <h5>GridStack</h5>
+        <!-- You can now use your library component in app.component.html -->
+        <grid-stack class="grid-stack" [options]="options" >
+            <grid-stack-item [option]="widget1"  (mouseup)="itemReize($event)" (onresize)='DargS()' class="grid-stack-item w1 chartContainer">
+              <span [chart]="chart2"></span>
+                <!-- <div [chart]="chart" ></div> -->
+            </grid-stack-item>
+            <!-- <grid-stack-item [option]="widget2"   class="grid-stack-item w2 "  >
+              estoy por aqui en 2
+            </grid-stack-item> -->
+          </grid-stack>
+    </div>
+
   </div>
 </div>

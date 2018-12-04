@@ -610,9 +610,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular-highcharts@6:
-  version "6.2.6"
-  resolved "https://registry.yarnpkg.com/angular-highcharts/-/angular-highcharts-6.2.6.tgz#06f9e21ea1f3c7d85e755b47f2c2cd54a85d6a71"
+angular-highcharts@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/angular-highcharts/-/angular-highcharts-7.0.2.tgz#b733e485f834c15f7067a0e04e639b3b1f32152b"
+  integrity sha512-1CQeKPMtLm/C1bQ9BsPUTYEOP0TkTO74Pj70mXqk38dgQgsDvYNU5XyNlCP7a8OwAgyGtQCZcnnxXiMaK39Igw==
+  dependencies:
+    tslib "^1.9.0"
 
 ansi-colors@^3.0.0:
   version "3.2.1"
@@ -2680,6 +2683,15 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
 
+gridstack@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/gridstack/-/gridstack-0.4.0.tgz#9b1fbf5bccb73cc41f26cd1dc45b248ef5b4f37d"
+  integrity sha512-N8ehAjdZWNm1lik9J34X9YrjGla9+9odm0RmrpLmUaQUit99ap+ve8TdYkJR/JlUMfI1zBgmxNcAxVWMKKpkWw==
+  dependencies:
+    jquery "^3.1.0"
+    jquery-ui "^1.12.0"
+    lodash "^4.17.10"
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "http://registry.npmjs.org/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -3426,6 +3438,21 @@ jasminewd2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
 
+jquery-ui-dist@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/jquery-ui-dist/-/jquery-ui-dist-1.12.1.tgz#5c0815d3cc6f90ff5faaf5b268a6e23b4ca904fa"
+  integrity sha1-XAgV08xvkP9fqvWyaKbiO0ypBPo=
+
+jquery-ui@^1.12.0:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
+  integrity sha1-vLQEXI3QU5wTS8FIjN0+dop6nlE=
+
+jquery@^3.1.0, jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  integrity sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==
+
 js-base64@^2.1.8:
   version "2.4.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.9.tgz#748911fb04f48a60c4771b375cac45a80df11c03"
@@ -4106,6 +4133,11 @@ ng-sidebar@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-8.0.0.tgz#c9d170aea9831116f807e557aa32f2eb063163bb"
   integrity sha512-+uCduUkcsOerb8MjecrPcP1KY8gKyd8XVBB+8jRao/JCz/qBwD9E2GPRGLL+NzwU72coYhL8L4UvhZwwIpl1rA==
+
+ng4-gridstack@^0.3.40:
+  version "0.3.40"
+  resolved "https://registry.yarnpkg.com/ng4-gridstack/-/ng4-gridstack-0.3.40.tgz#e45e74c7d2391f14befccc5a9fa8882760394b5b"
+  integrity sha1-5F50x9I5HxS+/Mxan6iIJ2A5S1s=
 
 ngx-contextmenu@^5.1.1:
   version "5.1.1"
