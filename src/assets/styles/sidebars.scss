@@ -1,0 +1,40 @@
+@import "./variables";
+
+.main-sidebar {
+  $sidebar-opened-width: 220px;
+  $sidebar-closed-width: 60px;
+
+  width: $sidebar-opened-width;
+  background-color: theme-color("primary");
+  padding: 20px;
+
+  &.ng-sidebar--opened {
+
+  }
+
+  &.ng-sidebar--closed {
+    max-width: $sidebar-closed-width;
+    text-align: center;
+    padding: 20px 0;
+  }
+}
+
+.info-sidebar {
+  $sidebar-opened-width: 400px;
+  $sidebar-closed-width: 60px;
+
+  width: $sidebar-opened-width;
+  background-color: theme-color("light");
+  padding: 20px;
+  overflow-x: hidden !important;
+
+  &.ng-sidebar--opened {
+
+  }
+
+  &.ng-sidebar--closed {
+    max-width: $sidebar-closed-width;
+    text-align: center;
+    padding: 20px 0;
+  }
+}

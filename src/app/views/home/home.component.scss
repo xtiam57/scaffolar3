@@ -1,28 +1,9 @@
 @import "../../../assets/styles/variables";
 
-ng-sidebar-container {
+:host > ng-sidebar-container {
   height: 100vh;
 
   ::ng-deep .ng-sidebar__content {
-    overflow-y: hidden;
-  }
-
-  ::ng-deep .main-sidebar {
-    $sidebar-opened-width: 250px;
-    $sidebar-closed-width: 60px;
-
-    width: $sidebar-opened-width;
-    background-color: theme-color("primary");
-    padding: 20px;
-
-    &.ng-sidebar--opened {
-
-    }
-
-    &.ng-sidebar--closed {
-      max-width: $sidebar-closed-width;
-      text-align: center;
-      padding: 20px 0;
-    }
+    // overflow-y: hidden;
   }
 }

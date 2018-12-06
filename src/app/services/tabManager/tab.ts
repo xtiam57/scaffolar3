@@ -7,27 +7,22 @@ export class Tab {
    * Unique tab id.
    */
   id: string;
-
   /**
    * Component factory.
    */
   factory: ComponentFactory<any> | null;
-
   /**
    * Component instance. With this the user can set @Input information of the component.
    */
   componentInstance: ComponentRef<any> | null | any;
-
   /**
    * Allows toggling disabled state of a given state. Disabled tabs can't be selected.
    */
   disabled = false;
-
   /**
    * Subscriber to call once the has been rendered
    */
   private observer: Subscriber<Tab> | null;
-
   /**
    * If the tab is pinned.
    */
@@ -37,11 +32,12 @@ export class Tab {
    * Creates a new tab.
    * @param title Title of the tab. Can contain HTML text.
    * @param component Component to load and add to the tab.
-   * @param icon FontAwesome icon.
    * @param params Extra data to pass to the Component or tab.
+   * @param icon FontAwesome icon.
+   * @param color Color of the tab ('blue', 'indigo', 'purple', 'pink', 'red', 'orange', 'yellow', 'green', 'teal', 'cyan').
    * @param id Unique ID for the tab.
    */
-  constructor(public title: string, public component: any, public icon?: Array<string>, public params?: any, id?: string) {
+  constructor(public title: string, public component: any, public params?: any, public icon?: Array<string>, public color?: string, id?: string) {
     this.id = id || new StringUtilService().getGUID(true);
   }
 

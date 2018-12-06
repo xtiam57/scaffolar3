@@ -63,6 +63,10 @@ export class AppTabDirective implements AfterContentChecked {
    * Allows toggling disabled state of a given state. Disabled tabs can't be selected.
    */
   @Input() disabled = false;
+  /**
+   * Color of the tab ('blue', 'indigo', 'purple', 'pink', 'red', 'orange', 'yellow', 'green', 'teal', 'cyan').
+   */
+  @Input() color: string;
 
   titleTpl: AppTabTitleDirective | null;
   contentTpl: AppTabContentDirective | null;
@@ -110,7 +114,7 @@ export interface AppTabChangeEvent {
       <li class="nav-item" *ngFor="let tab of tabs">
         <a
           [id]="tab.id"
-          class="nav-link"
+          class="nav-link nav-link-{{ tab.color }}"
           [class.active]="tab.id === activeId"
           [class.disabled]="tab.disabled"
           href
@@ -239,7 +243,6 @@ export class AppTabsetComponent implements AfterContentChecked {
         this.activeId = selectedTab.id;
       }
     }
-
     if (selectedTab && !selectedTab.disabled) {
       this._autoScroll(selectedTab.id);
     }
@@ -334,7 +337,6 @@ export class AppTabsetComponent implements AfterContentChecked {
     const children = ul.children;
     for (let i = 0; i < children.length; i++) {
       const anchorRef = children.item(i).children.item(0);
-
       if (tabId === anchorRef.id) {
         setTimeout(() => {
           const tabWidth = children.item(i).offsetWidth;

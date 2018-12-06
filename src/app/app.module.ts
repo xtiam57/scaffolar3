@@ -1,4 +1,4 @@
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, DatePipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -80,6 +80,7 @@ library.add(fas, far, fab);
   ],
   providers: [
     DecimalPipe,
+    DatePipe,
     FractionPipe,
     AvailablePipe,
     {

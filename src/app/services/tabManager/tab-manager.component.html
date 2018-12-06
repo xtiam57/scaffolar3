@@ -1,5 +1,5 @@
-<app-tabset id="tab-manager" [justify]="'left'" #tabsetComponent>
-  <div appTab id="{{tab.id}}" *ngFor="let tab of tabManager.tabs" [disabled]="tab.disabled">
+<app-tabset #tabsetComponent id="tab-manager" [justify]="'left'">
+  <div appTab id="{{tab.id}}" *ngFor="let tab of tabManager.tabs" [disabled]="tab.disabled" [color]="tab.color">
     <ng-template appTabTitle>
       <div [class.is-pinned]="tab.isPinned" class="row tab-row no-gutters" [title]="tab.title | striphtml"
            [contextMenu]="tabContextMenu" [contextMenuSubject]="tab">
@@ -20,11 +20,10 @@
     </ng-template>
     <!-- Tab content -->
     <ng-template appTabContent>
-      <div id="content-{{tab.id}}" #componentContent></div>
+      <div #componentContent id="content-{{tab.id}}"></div>
     </ng-template>
   </div>
 </app-tabset>
-
 
 <context-menu>
   <ng-template contextMenuItem (execute)="tabManager.pin($event.item, true, $event.event)" [visible]="isPinned">
@@ -33,7 +32,9 @@
   <ng-template contextMenuItem (execute)="tabManager.pin($event.item, false, $event.event)" [visible]="isUnpinned">
     Unpin tab
   </ng-template>
+
   <ng-template contextMenuItem divider="true"></ng-template>
+
   <ng-template contextMenuItem (execute)="tabManager.close($event.item, $event.event)">
     Close tab
   </ng-template>
@@ -46,7 +47,9 @@
   <ng-template contextMenuItem (execute)="tabManager.reset()">
     Close all tabs
   </ng-template>
+
   <ng-template contextMenuItem divider="true"></ng-template>
+
   <ng-template contextMenuItem (execute)="tabManager.move($event.item, -1, $event.event)">
     Move tab to the left
   </ng-template>
