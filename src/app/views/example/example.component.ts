@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { LocalStorage } from 'ngx-store';
 import { MessagesService } from '../../services/messages.service';
+import { ExporterService } from '../../services/exporter.service';
 
 @Component({
   selector: 'app-example',
@@ -12,6 +13,7 @@ export class ExampleComponent implements OnInit {
   @Input() params: any;
   @Input() message: string;
   test;
+  asideOpened = false;
 
   @LocalStorage() title = 'scaffolar';
 
@@ -49,13 +51,19 @@ export class ExampleComponent implements OnInit {
 
   next = 0;
 
-  constructor(private messageService: MessagesService) { }
+  constructor(private messageService: MessagesService, private exporter: ExporterService) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   showSuccess() {
     this.messageService.create('Hello world!', 'Title');
+  }
+
+  toggleSidebar() {
+    this.asideOpened = !this.asideOpened;
+  }
+
+  export() {
+    this.exporter.saveAs();
   }
 }
