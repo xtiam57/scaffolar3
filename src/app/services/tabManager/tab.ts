@@ -34,11 +34,12 @@ export class Tab {
    * @param component Component to load and add to the tab.
    * @param params Extra data to pass to the Component or tab.
    * @param icon FontAwesome icon.
-   * @param color Color of the tab ('blue', 'indigo', 'purple', 'pink', 'red', 'orange', 'yellow', 'green', 'teal', 'cyan').
+   * @param color Color of the tab ('blue', 'indigo', 'purple', 'pink', 'red', 'orange', 'yellow',
+   * 'green', 'teal', 'cyan').
    * @param id Unique ID for the tab.
    */
-  constructor(public title: string, public component: any, public params?: any, public icon?: Array<string>, public color?: string, id?: string) {
-    this.id = id || new StringUtilService().getGUID(true);
+  constructor(public title: string, public component: any, public params?: any, public icon?: string[], public color?: string, id?: string) {
+    this.id = id || `T${new StringUtilService().getGUID(true)}`;
   }
 
   /**

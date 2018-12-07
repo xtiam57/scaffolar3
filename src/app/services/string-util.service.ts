@@ -9,7 +9,7 @@ export class StringUtilService {
 
   /**
    * Get a random GUID
-   * @param isTrimmed Remove -
+   * @param isTrimmed Remove '-'
    */
   getGUID(isTrimmed: boolean = false): string {
     let currentDate = new Date().getTime();
@@ -23,7 +23,7 @@ export class StringUtilService {
       currentDate = Math.floor(currentDate / 16);
       return (digit === 'x' ? r : (r & 0x3) | 0x8).toString(16);
     });
-    return isTrimmed ? this.replaceAll(uuid, '-', '', true) : uuid;
+    return isTrimmed ? this.replaceAll(uuid, '-', '') : uuid;
   }
 
   /**
@@ -77,7 +77,7 @@ export class StringUtilService {
    * chars("Hello"); => ["H", "e", "l", "l", "o"]
    * @param str String to transform
    */
-  chars(str: string): Array<string> {
+  chars(str: string): string[] {
     return this._makeString(str).split('');
   }
 
@@ -87,7 +87,7 @@ export class StringUtilService {
    * @param str String to tranform
    * @param step Every step character
    */
-  chop(str: string, step: number = 3): Array<string> {
+  chop(str: string, step: number = 3): string[] {
     if (str == null) {
       return [];
     }
@@ -241,7 +241,7 @@ export class StringUtilService {
    * lines("Hello\nWorld"); => ["Hello", "World"]
    * @param str String to transform
    */
-  lines(str: string): Array<string> {
+  lines(str: string): string[] {
     if (str === null) {
       return [];
     }
@@ -323,10 +323,6 @@ export class StringUtilService {
    */
   trim(str: string, characters: any = '\\s'): string {
     str = this._makeString(str);
-    const nativeTrim = String.prototype.trim;
-    if (!characters && nativeTrim) {
-      return nativeTrim.call(str);
-    }
     characters = this._defaultToWhiteSpace(characters);
     return str.replace(new RegExp('^' + characters + '+|' + characters + '+$', 'g'), '');
   }
@@ -338,10 +334,6 @@ export class StringUtilService {
    */
   ltrim(str: string, characters: any = ' '): string {
     str = this._makeString(str);
-    const nativeTrimLeft = String.prototype.trimLeft;
-    if (!characters && nativeTrimLeft) {
-      return nativeTrimLeft.call(str);
-    }
     characters = this._defaultToWhiteSpace(characters);
     return str.replace(new RegExp('^' + characters + '+'), '');
   }
@@ -353,10 +345,6 @@ export class StringUtilService {
    */
   rtrim(str: string, characters: any = ' '): string {
     str = this._makeString(str);
-    const nativeTrimRight = String.prototype.trimRight;
-    if (!characters && nativeTrimRight) {
-      return nativeTrimRight.call(str);
-    }
     characters = this._defaultToWhiteSpace(characters);
     return str.replace(new RegExp(characters + '+$'), '');
   }
@@ -805,7 +793,7 @@ export class StringUtilService {
    * @param str String to transform
    * @param delimiter String or RegExp, /\s+/ by default.
    */
-  words(str: string, delimiter: any = /\s+/): Array<string> {
+  words(str: string, delimiter: any = /\s+/): string[] {
     if (this.isBlank(str)) {
       return [];
     }
@@ -1005,14 +993,14 @@ export class StringUtilService {
     return nextCol;
   }
 
-  private _makeString(object) {
-    if (object == null) {
+  private _makeString(object): string {
+    if (object === null) {
       return '';
     }
     return '' + object;
   }
 
-  private _strRepeat(str, qty) {
+  private _strRepeat(str, qty): string {
     if (qty < 1) {
       return '';
     }
@@ -1026,8 +1014,8 @@ export class StringUtilService {
     return result;
   }
 
-  private _defaultToWhiteSpace(characters) {
-    if (characters == null) {
+  private _defaultToWhiteSpace(characters): any {
+    if (characters === null) {
       return '\\s';
     } else if (characters.source) {
       return characters.source;
@@ -1035,7 +1023,7 @@ export class StringUtilService {
     return '[' + this._escapeRegExp(characters) + ']';
   }
 
-  private _cleanDiacritics(str) {
+  private _cleanDiacritics(str): string {
     let from: any = 'ąàáäâãåæăćčĉęèéëêĝĥìíïîĵłľńňòóöőôõðøśșşšŝťțţŭùúüűûñÿýçżźž',
       to: any = 'aaaaaaaaaccceeeeeghiiiijllnnoooooooossssstttuuuuuunyyczzz';
 
@@ -1053,11 +1041,11 @@ export class StringUtilService {
     });
   }
 
-  private _toPositive(number) {
+  private _toPositive(number): number {
     return number < 0 ? 0 : +number || 0;
   }
 
-  private _boolMatch(s, matchers) {
+  private _boolMatch(s, matchers): boolean {
     let i, matcher;
     const down = s.toLowerCase();
     matchers = [].concat(matchers);
@@ -1076,7 +1064,7 @@ export class StringUtilService {
     }
   }
 
-  private _escapeRegExp(str) {
+  private _escapeRegExp(str): string {
     return this._makeString(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
   }
 }

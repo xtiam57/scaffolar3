@@ -1,9 +1,4 @@
-@import "../../../assets/styles/variables";
-
-:host > ng-sidebar-container {
+ng-sidebar-container {
   height: 100vh;
-
-  ::ng-deep .ng-sidebar__content {
-    // overflow-y: hidden;
-  }
+  z-index: 0;
 }

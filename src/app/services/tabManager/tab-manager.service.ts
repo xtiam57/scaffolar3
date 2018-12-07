@@ -115,7 +115,7 @@ export class TabManagerService {
    * @param params Extra data to pass to the Component or tab.
    * @param id Unique ID for the tab.
    */
-  open(title: string, component: any, params: any = {}, icon?: Array<string>, color?: string, id?: string): Observable<Tab> {
+  open(title: string, component: any, params: any = {}, icon?: string[], color?: string, id?: string): Observable<Tab> {
     const tab = new Tab(title, component, params, icon, color, id);
     // The tab already exists
     if (this.exists(tab)) {
