@@ -162,7 +162,10 @@ export class ExampleComponent implements OnInit {
   open() {
     const prompt = this.prompt.open(
       'The title',
-      `Test Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.`,
+      `Test Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+      Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+       Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
+       american apparel, butcher voluptate nisi qui.`,
       {
         cancelButtonText: 'Shut up!',
         centered: true,
@@ -205,6 +208,6 @@ export class ExampleComponent implements OnInit {
     );
 
     prompt.result.then((response) => console.log(response), (cause) => console.log(cause));
->>>>>>> master
+
   }
 }
