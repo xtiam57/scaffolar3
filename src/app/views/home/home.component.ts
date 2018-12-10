@@ -25,18 +25,18 @@ export class HomeComponent implements OnInit {
   constructor(public tabManager: TabManagerService, public auth: AuthService) {}
 
   ngOnInit() {
-    this.tabManager.open('Aaron Wellbore X85eww', ExampleComponent, ['fas', 'home']);
-    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, ['fas', 'check']);
+    this.tabManager.open('Aaron Wellbore X85eww', ExampleComponent, null, ['fas', 'home'], 'teal');
+    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, null, ['fas', 'check']);
   }
 
   addTab() {
-    this.tabManager.open('Title<b>@</b>' + this.next, ExampleComponent, null, { message: 'hello world!' }).subscribe((tab) => {
+    this.tabManager.open('Title<b>@</b>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
       (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
     });
   }
 
   goto() {
-    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, ['fas', 'check']);
+    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, null, ['fas', 'check']);
   }
 
   /**

@@ -1,0 +1,101 @@
+<form #form="ngForm">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('dismiss')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="mb-0" [class.mb-3]="options.inputs?.length || options.selects?.length">{{ text }}</p>
+
+    <!-- Inputs -->
+    <div *ngFor="let item of options.inputs; let first = first; let last = last;">
+      <div class="form-group" [class.mb-0]="last && !options.selects?.length">
+        <!-- Label -->
+        <label *ngIf="item.label" [innerHTML]="item.label" class="{{ item.extraLabelClasses }}" for="{{ item.map }}"></label>
+
+        <div [ngSwitch]="item.type">
+          <!-- Text area type -->
+          <div *ngSwitchCase="'textarea'">
+            <textarea class="form-control resize-vertical" class="form-control {{ item.extraInputClasses }}"
+                      [placeholder]="item.placeholder" [name]="item.name" [id]="item.map" [minlength]="item.minlength"
+                      [maxlength]="item.maxlength" [required]="item.required" [(ngModel)]="item.value" #formControlRef="ngModel"
+                      [class.is-invalid]="formControlRef.invalid && formControlRef.touched" [class.is-valid]="formControlRef.valid && formControlRef.touched"
+                      ngbAutofocus="first"></textarea>
+
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.required">
+              This field is required.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.minlength">
+              Length must be greater than or equal to
+              {{ item.minlength }}.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.maxlength">
+              Length must be lower than or equal to
+              {{ item.maxlength }}.
+            </span>
+          </div>
+          <!-- Text/number/date/etc. -->
+          <div *ngSwitchDefault>
+            <input class="form-control {{ item.extraInputClasses }}" [type]="item.type" [placeholder]="item.placeholder"
+                   [step]="item.step" [name]="item.name" [id]="item.map" [minlength]="item.minlength" [maxlength]="item.maxlength"
+                   [min]="item.min" [max]="item.max" [pattern]="item.pattern" [required]="item.required" [(ngModel)]="item.value"
+                   #formControlRef="ngModel" [class.is-invalid]="formControlRef.invalid && formControlRef.touched"
+                   [class.is-valid]="formControlRef.valid && formControlRef.touched" ngbAutofocus="first" />
+
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.required">
+              This field is required.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.minlength">
+              Length must be greater than or equal to
+              {{ item.minlength }}.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.maxlength">
+              Length must be lower than or equal to
+              {{ item.maxlength }}.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.min">
+              Value must be greater than or equal to {{
+              item.min }}.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.max">
+              Value must be lower than or equal to {{
+              item.max }}.
+            </span>
+            <span class="invalid-feedback" *ngIf="formControlRef.errors?.pattern" [innerHTML]="item.petternErrorMessage"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selects -->
+    <div *ngFor="let item of options.selects; let first = first; let last = last;">
+      <div class="form-group" [class.mb-0]="last">
+        <!-- Label -->
+        <label *ngIf="item.label" [innerHTML]="item.label" class="{{ item.extraLabelClasses }}" for="{{ item.map }}"></label>
+
+        <!-- Selects -->
+        <select class="form-control {{ item.extraInputClasses }}" [(ngModel)]="item.value" [name]="item.name" [id]="item.map"
+                [required]="item.required" #formControlRef="ngModel" [class.is-invalid]="formControlRef.invalid && formControlRef.touched"
+                [class.is-valid]="formControlRef.valid && formControlRef.touched" ngbAutofocus="first && !options.inputs?.length">
+          <option *ngFor="let option of item.data" [ngValue]="option">
+            {{ option[item.key] || option }}
+          </option>
+        </select>
+
+        <span class="invalid-feedback" *ngIf="formControlRef.errors?.required">
+          This field is required.
+        </span>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('cancel')">
+      {{ options.cancelButtonText }}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="close()" [disabled]="form.invalid" ngbAutofocus="!options.inputs?.length && !options.selects?.length">
+      {{ options.confirmButtonText }}
+    </button>
+  </div>
+</form>

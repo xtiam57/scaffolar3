@@ -13,12 +13,10 @@ export class TabManagerService {
    * List of tabs.
    */
   tabs: Array<Tab> = [];
-
   /**
    * List of tab view references.
    */
   private targets: QueryList<ViewContainerRef>;
-
   /**
    * Tabset view reference. Used to call .select()
    */
@@ -117,8 +115,8 @@ export class TabManagerService {
    * @param params Extra data to pass to the Component or tab.
    * @param id Unique ID for the tab.
    */
-  open(title: string, component: any, icon?: Array<string>, params: any = {}, id?: string): Observable<Tab> {
-    const tab = new Tab(title, component, icon, params, id);
+  open(title: string, component: any, params: any = {}, icon?: string[], color?: string, id?: string): Observable<Tab> {
+    const tab = new Tab(title, component, params, icon, color, id);
     // The tab already exists
     if (this.exists(tab)) {
       return new Observable<Tab>();
@@ -205,6 +203,10 @@ export class TabManagerService {
     }
     tab.isPinned = value;
     this.tabs = _.sortBy(this.tabs, (item) => !item.isPinned);
+    // Trigger autoscroll only if the tab is selected
+    if (this.stringUtil.isEqual(tab.id, this.tabsetComponent.activeId)) {
+      setTimeout(() => this.tabsetComponent.select(tab.id));
+    }
   }
 
   /**

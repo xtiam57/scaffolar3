@@ -1,4 +1,4 @@
-import { DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe, JsonPipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ChartModule } from 'angular-highcharts';
 import { BusyConfig, NgBusyModule } from 'ng-busy';
 import { SidebarModule } from 'ng-sidebar';
+import { CustomFormsModule } from 'ng2-validation';
 import { ContextMenuModule } from 'ngx-contextmenu';
 import { WebStorageModule } from 'ngx-store';
 import { ToastrModule } from 'ngx-toastr';
@@ -27,13 +28,13 @@ import { AvailablePipe } from './pipes/available.pipe';
 import { ConditionalPipe } from './pipes/conditional.pipe';
 import { FractionPipe } from './pipes/fraction.pipe';
 import { StriphtmlPipe } from './pipes/striphtml.pipe';
+import { PromptComponent } from './services/prompt/prompt.component';
 import { TabManagerComponent } from './services/tabManager/tab-manager.component';
 import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
 
 library.add(fas, far, fab);
-
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ library.add(fas, far, fab);
     TabManagerComponent,
     ExampleComponent,
     TABSET_DIRECTIVES,
-    StriphtmlPipe
+    StriphtmlPipe,
+    PromptComponent
   ],
   imports: [
     BrowserModule,
@@ -79,10 +81,13 @@ library.add(fas, far, fab);
     ContextMenuModule.forRoot({
       useBootstrap4: true
     }),
-    SidebarModule.forRoot()
+    SidebarModule.forRoot(),
+    CustomFormsModule
   ],
   providers: [
     DecimalPipe,
+    JsonPipe,
+    DatePipe,
     FractionPipe,
     AvailablePipe,
     {
@@ -91,7 +96,7 @@ library.add(fas, far, fab);
       multi: true
     }
   ],
-  entryComponents: [CustomBusyComponent, ExampleComponent],
+  entryComponents: [CustomBusyComponent, ExampleComponent, PromptComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

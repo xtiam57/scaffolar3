@@ -1,1 +1,11 @@
+@import "./variables";
 @import "./scrollbars";
+@import "./sidebars";
+
+// Textarea
+textarea {
+  min-height: 38px;
+  &.resize-none { resize: none; }
+  &.resize-vertical { resize: vertical; }
+  &.resize-horizontal { resize: horizontal; }
+}
