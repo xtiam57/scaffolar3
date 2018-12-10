@@ -31,6 +31,7 @@ import { TabManagerComponent } from './services/tabManager/tab-manager.component
 import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
+import { ModalExampleComponent } from './views/modal-example/modal-example.component';
 
 library.add(fas, far, fab);
 
@@ -46,7 +47,8 @@ library.add(fas, far, fab);
     ExampleComponent,
     TABSET_DIRECTIVES,
     StriphtmlPipe,
-    PromptComponent
+    PromptComponent,
+    ModalExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,7 @@ library.add(fas, far, fab);
       multi: true
     }
   ],
-  entryComponents: [CustomBusyComponent, ExampleComponent, PromptComponent],
+  entryComponents: [CustomBusyComponent, ExampleComponent, PromptComponent, ModalExampleComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

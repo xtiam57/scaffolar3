@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../auth/auth.service';
 import { TabManagerService } from '../../services/tabManager/tab-manager.service';
 import { ExampleComponent } from '../example/example.component';
-import { AuthService } from '../../auth/auth.service';
+import { ModalExampleComponent } from '../modal-example/modal-example.component';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   next = 1;
 
-  constructor(public tabManager: TabManagerService, public auth: AuthService) {}
+  constructor(public tabManager: TabManagerService, public auth: AuthService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.tabManager.open('Aaron Wellbore X85eww', ExampleComponent, null, ['fas', 'home'], 'teal');
@@ -31,6 +33,13 @@ export class HomeComponent implements OnInit {
 
   goto() {
     this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, null, ['fas', 'check']);
+  }
+
+  openModal() {
+    const promptRef = this.modalService.open(ModalExampleComponent, {
+      backdrop: true,
+      windowClass: 'full-modal'
+    });
   }
 
   /**

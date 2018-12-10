@@ -1,0 +1,30 @@
+.full-modal {
+  > .modal-dialog {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+
+    > .modal-content {
+      border: none;
+      border-radius: 0;
+
+      .modal-body {
+        overflow-y: auto;
+        height: calc(100vh - 69px /* Header height */ - 71px /* Footer height */);
+      }
+    }
+  }
+
+  &.just-header > .modal-dialog > .modal-content .modal-body {
+    height: calc(100vh - 69px /* Header height */);
+  }
+
+  &.just-footer > .modal-dialog > .modal-content .modal-body {
+    height: calc(100vh - 71px /* Footer height */);
+  }
+
+  &.just-body > .modal-dialog > .modal-content .modal-body {
+    height: calc(100vh);
+  }
+}
