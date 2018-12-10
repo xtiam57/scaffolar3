@@ -42,8 +42,7 @@ export class PromptComponent implements OnInit {
     extraInputClasses: '',
     extraLabelClasses: '',
     compareTo: null,
-    key: 'value',
-    flattenResponse: false,
+    key: 'itemValue',
     data: []
   };
 
@@ -69,6 +68,7 @@ export class PromptComponent implements OnInit {
     }
     for (let i = 0; i < this.options.selects.length; i++) {
       this.options.selects[i] = this._getSelect(this.options.selects[i], i);
+      this.options.selects[i].value = _.first(this.options.selects[i].data);
     }
   }
 

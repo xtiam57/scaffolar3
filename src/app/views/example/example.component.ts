@@ -76,19 +76,19 @@ export class ExampleComponent implements OnInit {
         cancelButtonText: 'Shut up!',
         centered: true,
         inputs: [
-          {
-            label: 'Title',
-            placeholder: 'The title',
-            // map: 'description',
-            type: 'text',
-            maxlength: 10,
-          },
-          {
-            label: 'Description',
-            placeholder: '',
-            // map: 'description',
-            type: 'textarea'
-          },
+        //   {
+        //     label: 'Title',
+        //     placeholder: 'The title',
+        //     // map: 'description',
+        //     type: 'text',
+        //     maxlength: 10,
+        //   },
+        //   {
+        //     label: 'Description',
+        //     placeholder: '',
+        //     // map: 'description',
+        //     type: 'textarea'
+        //   },
           {
             label: 'Reference Cost',
             placeholder: '',
@@ -101,9 +101,9 @@ export class ExampleComponent implements OnInit {
         selects: [
           {
             label: 'Term Unit',
-            flattenResponse: true,
             key: 'itemValue',
             data: [
+              // 'A', 'B', 'C'
               { itemValue: 'A', id: 1 },
               { itemValue: 'B', id: 2 },
               { itemValue: 'C', id: 3 },

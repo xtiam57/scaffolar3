@@ -23,19 +23,15 @@ export class AuthService {
   }
 
   login({ username, password }) {
-    // TODO: use API service
-    if (username === 'admin' && password === '12345') {
-      this.router.navigateByUrl(this.redirectUrl);
-      this.isLoggedIn = true;
-      this.token = 'token';
-      this.user = {
-        name: 'Admin',
-        username: 'admin',
-        role: 'ADMIN'
-      };
-    } else {
-      this.messageService.show('Wrong username/password combination.', null, 'warning');
-    }
+    this.router.navigateByUrl(this.redirectUrl);
+    this.isLoggedIn = true;
+    this.token = 'token';
+    this.user = {
+      name: 'Admin',
+      username: 'admin',
+      role: 'ADMIN'
+    };
+    // this.messageService.show('Wrong username/password combination.', null, 'warning');
   }
 
   logout() {
