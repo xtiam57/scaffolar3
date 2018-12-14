@@ -33,6 +33,7 @@ import { TabManagerComponent } from './services/tabManager/tab-manager.component
 import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
+//import { DndDraggable } from 'ngx-drag-and-drop-lists';
 
 library.add(fas, far, fab);
 
