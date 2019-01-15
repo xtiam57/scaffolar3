@@ -33,7 +33,7 @@ import { TabManagerComponent } from './services/tabManager/tab-manager.component
 import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
-//import { DndDraggable } from 'ngx-drag-and-drop-lists';
+import { DndModule } from 'ngx-drag-drop';
 
 library.add(fas, far, fab);
 
@@ -60,6 +60,7 @@ library.add(fas, far, fab);
     FontAwesomeModule,
     WebStorageModule,
     GridStackModule,
+    DndModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,

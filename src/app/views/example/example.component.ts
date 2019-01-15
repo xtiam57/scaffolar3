@@ -8,6 +8,7 @@ import { GridStackItem, GridStackOptions, GridStackItemComponent, GridStackCompo
 
 import { ExporterService } from '../../services/exporter.service';
 import { PromptService } from 'src/app/services/prompt/prompt.service';
+import { DndDropEvent } from 'ngx-drag-drop';
 
 
 @Component({
@@ -28,6 +29,36 @@ export class ExampleComponent implements OnInit {
     middle: false,
     right: false
   };
+  public fruits: string[] = [
+    'apple',
+    'apple',
+    'banana',
+    'apple',
+    'banana',
+    'banana',
+    'apple',
+    'banana',
+    'apple',
+  ];
+  public apples: string[] = [
+    'apple',
+    'apple'
+  ];
+
+  // draggableListRight = [
+  //   {
+  //     content: 'I was originally right',
+  //     effectAllowed: 'move',
+  //   }
+  // ];
+
+  // public dropzoneEnabled: any = true;
+  // public lastDropEvent: DndDropEvent | null = null;
+
+  // private currentDraggableEvent: DragEvent;
+  // private currentDragEffectMsg: string;
+
+
 
   chart = new Chart({
     chart: {
@@ -210,4 +241,22 @@ export class ExampleComponent implements OnInit {
     prompt.result.then((response) => console.log(response), (cause) => console.log(cause));
 
   }
+  onDragged( item: any, list: any[] ) {
+
+    const index = list.indexOf( item );
+    list.splice( index, 1 );
+  }
+
+  onDrop( event: DndDropEvent, list: any[] ) {
+
+    let index = event.index;
+
+    if ( typeof index === 'undefined' ) {
+
+      index = list.length;
+    }
+
+    list.splice( index, 0, event.data );
+  }
+
 }
