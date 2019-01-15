@@ -1,3 +1,8 @@
+<!-- Compose windows container -->
+<div id="compose-container">
+  <div appComposeModalCounter></div>
+</div>
+
 <ng-sidebar-container>
   <!-- Sidebar -->
   <ng-sidebar [(opened)]="asideOpened" [mode]="'push'" [dock]="true" [dockedSize]="'60px'" [closeOnClickOutside]="true"
@@ -16,7 +21,10 @@
         <fa-icon [icon]="['fas', 'sign-out-alt']" [fixedWidth]="false"></fa-icon>
       </button>
       <button class="btn btn-secondary" (click)="openModal()">
-        <fa-icon [icon]="['fas', 'door-open']" [fixedWidth]="false"></fa-icon>
+        <fa-icon [icon]="['far', 'window-maximize']" [fixedWidth]="false"></fa-icon>
+      </button>
+      <button class="btn btn-secondary" (click)="openComposeModal()">
+        <fa-icon [icon]="['far', 'window-minimize']" [fixedWidth]="false"></fa-icon>
       </button>
     </div>
   </ng-sidebar>

@@ -31,11 +31,11 @@ export class ExporterService {
     downloadLink.click();
   }
 
-  saveAsExcel(fileName, content) {
+  saveAsExcel(fileName: string, content: any) {
     this.saveAs(fileName, 'xlsx', content, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   }
 
-  saveAsCSV(fileName, content) {
+  saveAsCSV(fileName: string, content: any) {
     this.saveAs(fileName, 'csv', content);
   }
 }

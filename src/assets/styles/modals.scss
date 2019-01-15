@@ -1,3 +1,7 @@
+@import "./variables";
+//
+// Full modal styles
+//
 .full-modal {
   > .modal-dialog {
     width: 100%;
@@ -9,15 +13,25 @@
       border: none;
       border-radius: 0;
 
+      .modal-header {
+        height: 71px;
+      }
+
       .modal-body {
         overflow-y: auto;
-        height: calc(100vh - 69px /* Header height */ - 71px /* Footer height */);
+        height: calc(
+          100vh - 71px /* Header height */ - 71px /* Footer height */
+        );
+      }
+
+      .modal-footer {
+        height: 71px;
       }
     }
   }
 
   &.just-header > .modal-dialog > .modal-content .modal-body {
-    height: calc(100vh - 69px /* Header height */);
+    height: calc(100vh - 71px /* Header height */);
   }
 
   &.just-footer > .modal-dialog > .modal-content .modal-body {
@@ -26,5 +40,76 @@
 
   &.just-body > .modal-dialog > .modal-content .modal-body {
     height: calc(100vh);
+  }
+}
+
+//
+// Compose modals
+//
+#compose-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 99;
+  pointer-events: none;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+  div[appcomposemodalcounter] {
+    background-color: gray("800");
+    color: white;
+    border-radius: 1000px;
+    width: 35px;
+    line-height: 35px;
+    text-align: center;
+    margin: 5px;
+    z-index: 100;
+    pointer-events: initial;
+  }
+
+  .compose-modal {
+    flex: 0 0 auto;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: 0;
+
+    &:first-child {
+      margin-left: 10px;
+    }
+
+    &:last-child {
+      margin-right: 50px;
+    }
+
+    &:nth-last-child(n + 4) {
+      display: none !important;
+      visibility: hidden;
+    }
+
+    > .modal-dialog {
+      margin: 0 4px;
+      > .modal-content {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+        min-width: 500px;
+
+        .modal-title.modal-collapsed {
+          overflow: hidden;
+          max-width: 400px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .modal-body {
+          overflow-y: auto;
+          height: 500px;
+        }
+      }
+    }
   }
 }

@@ -22,6 +22,10 @@
       <div class="row">
         <div class="col-12">
 
+          <button class="btn btn-secondary" (click)="openComposeModal()">
+            <fa-icon [icon]="['far', 'window-minimize']" [fixedWidth]="false"></fa-icon>
+          </button>
+
           example works!
           <div>
             <code>Message says: {{ params | available | json }}</code>

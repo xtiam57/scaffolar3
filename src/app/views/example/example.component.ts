@@ -4,6 +4,8 @@ import { LocalStorage } from 'ngx-store';
 import { MessagesService } from '../../services/messages.service';
 import { ExporterService } from '../../services/exporter.service';
 import { PromptService } from 'src/app/services/prompt/prompt.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalExampleComponent } from '../modal-example/modal-example.component';
 
 @Component({
   selector: 'app-example',
@@ -52,7 +54,7 @@ export class ExampleComponent implements OnInit {
 
   next = 0;
 
-  constructor(private messageService: MessagesService, private exporter: ExporterService, private prompt: PromptService) {}
+  constructor(private messageService: MessagesService, private exporter: ExporterService, private prompt: PromptService, private modalService: NgbModal) {}
 
   ngOnInit() {}
 
@@ -76,26 +78,26 @@ export class ExampleComponent implements OnInit {
         cancelButtonText: 'Shut up!',
         centered: true,
         inputs: [
-        //   {
-        //     label: 'Title',
-        //     placeholder: 'The title',
-        //     // map: 'description',
-        //     type: 'text',
-        //     maxlength: 10,
-        //   },
-        //   {
-        //     label: 'Description',
-        //     placeholder: '',
-        //     // map: 'description',
-        //     type: 'textarea'
-        //   },
+          //   {
+          //     label: 'Title',
+          //     placeholder: 'The title',
+          //     // map: 'description',
+          //     type: 'text',
+          //     maxlength: 10,
+          //   },
+          //   {
+          //     label: 'Description',
+          //     placeholder: '',
+          //     // map: 'description',
+          //     type: 'textarea'
+          //   },
           {
             label: 'Reference Cost',
             placeholder: '',
             // map: 'referenceCost',
             type: 'number',
             min: 1,
-            max: 10,
+            max: 10
           }
         ],
         selects: [
@@ -106,7 +108,7 @@ export class ExampleComponent implements OnInit {
               // 'A', 'B', 'C'
               { itemValue: 'A', id: 1 },
               { itemValue: 'B', id: 2 },
-              { itemValue: 'C', id: 3 },
+              { itemValue: 'C', id: 3 }
             ]
           }
         ]
@@ -114,5 +116,13 @@ export class ExampleComponent implements OnInit {
     );
 
     prompt.result.then((response) => console.log(response), (cause) => console.log(cause));
+  }
+
+  openComposeModal() {
+    const promptRef = this.modalService.open(ModalExampleComponent, {
+      backdrop: false,
+      container: '#compose-container',
+      windowClass: 'compose-modal'
+    });
   }
 }

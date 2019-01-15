@@ -42,6 +42,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  openComposeModal() {
+    const promptRef = this.modalService.open(ModalExampleComponent, {
+      backdrop: false,
+      container: '#compose-container',
+      windowClass: 'compose-modal'
+    });
+  }
+
   /**
    * Open/close sidebar
    */

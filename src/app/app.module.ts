@@ -32,6 +32,7 @@ import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
 import { ModalExampleComponent } from './views/modal-example/modal-example.component';
+import { ComposeModalCounterDirective } from './services/composeModalCounter/compose-modal-counter.directive';
 
 library.add(fas, far, fab);
 
@@ -48,7 +49,8 @@ library.add(fas, far, fab);
     TABSET_DIRECTIVES,
     StriphtmlPipe,
     PromptComponent,
-    ModalExampleComponent
+    ModalExampleComponent,
+    ComposeModalCounterDirective
   ],
   imports: [
     BrowserModule,
