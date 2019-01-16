@@ -85,10 +85,15 @@
       margin-right: 50px;
     }
 
-    &:nth-last-child(n + 4) {
+    &[hidden] {
       display: none !important;
       visibility: hidden;
     }
+
+    // &:nth-last-child(n + 4) {
+    //   display: none !important;
+    //   visibility: hidden;
+    // }
 
     > .modal-dialog {
       margin: 0 4px;
@@ -96,11 +101,12 @@
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         border-bottom: none;
-        min-width: 500px;
+        // min-width: 500px;
 
         .modal-title.modal-collapsed {
           overflow: hidden;
-          max-width: 400px;
+          // max-width: 400px;
+          max-width: 90px;
           white-space: nowrap;
           text-overflow: ellipsis;
         }
