@@ -36,8 +36,6 @@
           {{ test }}
 
         </div>
-      </div>
-
       <h1>Scaffolar</h1>
       <fa-icon [icon]="['fab', 'twitter']" size="1x" [spin]="false" [pulse]="false" [border]="false"></fa-icon>
       <div class="row">
@@ -108,7 +106,7 @@
               <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
               <ng-template ngbTabContent>
                 <ag-grid-angular style="height:200px" [enableSorting]="true" [enableFilter]="true" [rowData]="rows"
-                                 [columnDefs]="cols" class="ag-theme-bootstrap">
+                        [columnDefs]="cols" class="ag-theme-bootstrap">
                 </ag-grid-angular>
 
                 <hr />
@@ -144,6 +142,69 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div style="width: 100%;">
+          <h5>GridStack</h5>
+          <!-- You can now use your library component in app.component.html -->
+          <grid-stack class="grid-stack" [options]="options" >
+              <grid-stack-item [option]="widget1"  (mouseup)="itemReize($event)" (onresize)='DargS()' class="grid-stack-item w1 chartContainer">
+                <span [chart]="chart2"></span>
+                  <!-- <div [chart]="chart" ></div> -->
+              </grid-stack-item>
+              <!-- <grid-stack-item [option]="widget2"   class="grid-stack-item w2 "  >
+                estoy por aqui en 2
+              </grid-stack-item> -->
+            </grid-stack>
+      </div>
+  </div>
+  <h3>Listas Dragables</h3>
+  <div class="row" >
+    <div class="col-6">
+      <h5>Fruits</h5>
+        <ul class="list-group dndList"
+        dndDropzone
+        dndEffectAllowed="move"
+        (dndDrop)="onDrop($event, fruits)">
+
+        <li dndPlaceholderRef
+        class="dndPlaceholder list-group-item">
+        </li>
+          <li class="list-group-item" *ngFor="let fruit of fruits"
+          [dndDraggable]="fruit"
+          [dndType]="fruit"
+          dndEffectAllowed="move"
+          (dndMoved)="onDragged(fruit, fruits)">{{fruit}}
+        </li>
+        </ul>
+
+    </div>
+
+    <div class="col-6">
+        <h5>Apple</h5>
+        <ul class="list-group dndList"
+        dndDropzone
+        dndEffectAllowed="move"
+        (dndDrop)="onDrop($event, apples)">
+        <li dndPlaceholderRef
+        class="dndPlaceholder">
+        </li>
+
+
+          <li class="list-group-item list-group-item" *ngFor="let apple of apples"
+          [dndDraggable]="apple"
+          [dndType]="apple"
+          dndEffectAllowed="move"
+          (dndMoved)="onDragged(apple, apples)">{{apple}}</li>
+        </ul>
+
+    </div>
+
+
+
 
   </div>
+    </div>
+  </div>
+
+
 </ng-sidebar-container>

@@ -2,10 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { LocalStorage } from 'ngx-store';
 import { MessagesService } from '../../services/messages.service';
+
+import * as $ from 'jquery';
+import { GridStackItem, GridStackOptions, GridStackItemComponent, GridStackComponent} from 'ng4-gridstack';
+
 import { ExporterService } from '../../services/exporter.service';
 import { PromptService } from 'src/app/services/prompt/prompt.service';
+import { DndDropEvent } from 'ngx-drag-drop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalExampleComponent } from '../modal-example/modal-example.component';
+
 
 @Component({
   selector: 'app-example',
@@ -25,6 +31,36 @@ export class ExampleComponent implements OnInit {
     middle: false,
     right: false
   };
+  public fruits: string[] = [
+    'apple',
+    'apple',
+    'banana',
+    'apple',
+    'banana',
+    'banana',
+    'apple',
+    'banana',
+    'apple',
+  ];
+  public apples: string[] = [
+    'apple',
+    'apple'
+  ];
+
+  // draggableListRight = [
+  //   {
+  //     content: 'I was originally right',
+  //     effectAllowed: 'move',
+  //   }
+  // ];
+
+  // public dropzoneEnabled: any = true;
+  // public lastDropEvent: DndDropEvent | null = null;
+
+  // private currentDraggableEvent: DragEvent;
+  // private currentDragEffectMsg: string;
+
+
 
   chart = new Chart({
     chart: {
@@ -52,15 +88,101 @@ export class ExampleComponent implements OnInit {
     { make: 'Porsche', model: 'Boxter', price: 72000 }
   ];
 
+  public options: GridStackOptions = new GridStackOptions();
+  public widget1: GridStackItem = new GridStackItem();
+// public widget2: GridStackItem = new GridStackItem();
+
+  chart2 = new Chart({
+    chart: {
+      type: 'pie',
+      height: 400
+    },
+    title: {
+      text: 'Prueba'
+    },
+    credits: {
+      enabled: false
+    },
+    yAxis: {
+      title: {
+          text: 'Total percent market share'
+      }
+  },
+  plotOptions: {
+    pie: {
+        shadow: false,
+        center: ['50%', '50%']
+    }
+},
+    series: [
+      {
+        name: 'Spending',
+        data: [
+          {
+            y: 300,
+            color: '#F7464A',
+            name: 'Red'
+        },
+        {
+            y: 50,
+            color: '#46BFBD',
+            name: 'Green'
+        },
+        {
+            y: 100,
+            color: '#FDB45C',
+            name: 'Yellow'
+        }
+        ],
+      // size: '90%',
+      //  innerSize: '55%',
+      }
+    ] ,
+  responsive: {
+    rules: [{
+      condition: {
+        maxWidth: 400
+      },
+      chartOptions: {
+        series: [{
+            id: 'versions',
+          }]
+        }
+    }]
+  }
+  });
+
   next = 0;
 
   constructor(private messageService: MessagesService, private exporter: ExporterService, private prompt: PromptService, private modalService: NgbModal) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.options.alwaysShowResizeHandle = true;
+
+    this.widget1.x = 0;
+    this.widget1.y = 0;
+    this.widget1.width = 6;
+    this.widget1.height = 6;
+    this.widget1.minWidth = 6;
+    this.widget1.minHeight = 6;
+
+  }
+
 
   showSuccess() {
     this.messageService.create('Hello world!', 'Title');
   }
+
+
+  itemReize(item) {
+    console.log('este es el item:' , item);
+    const w = $('.chartContainer').width();
+    const h =  $('.chartContainer').height();
+  // this.chart.options.chart.height = h;
+  // this.chart.reflow();
+      this.chart2.ref.setSize(w, h * (3 / 4), false);
+    }
 
   toggleSidebar() {
     this.asideOpened = !this.asideOpened;
@@ -73,7 +195,10 @@ export class ExampleComponent implements OnInit {
   open() {
     const prompt = this.prompt.open(
       'The title',
-      `Test Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.`,
+      `Test Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+      Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+       Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
+       american apparel, butcher voluptate nisi qui.`,
       {
         cancelButtonText: 'Shut up!',
         centered: true,
@@ -116,7 +241,26 @@ export class ExampleComponent implements OnInit {
     );
 
     prompt.result.then((response) => console.log(response), (cause) => console.log(cause));
+
   }
+  onDragged( item: any, list: any[] ) {
+
+    const index = list.indexOf( item );
+    list.splice( index, 1 );
+  }
+
+  onDrop( event: DndDropEvent, list: any[] ) {
+
+    let index = event.index;
+
+    if ( typeof index === 'undefined' ) {
+
+      index = list.length;
+    }
+
+    list.splice( index, 0, event.data );
+  }
+
 
   openComposeModal() {
     const promptRef = this.modalService.open(ModalExampleComponent, {
@@ -125,4 +269,5 @@ export class ExampleComponent implements OnInit {
       windowClass: 'compose-modal'
     });
   }
+
 }

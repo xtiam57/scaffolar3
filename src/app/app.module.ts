@@ -20,6 +20,8 @@ import { ContextMenuModule } from 'ngx-contextmenu';
 import { WebStorageModule } from 'ngx-store';
 import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './app-http.interceptor';
+import { GridStackModule } from 'ng4-gridstack';
+
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvailablePipe } from './pipes/available.pipe';
@@ -32,6 +34,7 @@ import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
 import { ModalExampleComponent } from './views/modal-example/modal-example.component';
+import { DndModule } from 'ngx-drag-drop';
 
 library.add(fas, far, fab);
 
@@ -58,6 +61,8 @@ library.add(fas, far, fab);
     AppRoutingModule,
     FontAwesomeModule,
     WebStorageModule,
+    GridStackModule,
+    DndModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
