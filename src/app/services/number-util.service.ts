@@ -102,7 +102,7 @@ export class NumberUtilService {
    * @param round Number of decimals for rounding
    */
   division(numerator: any, denominator: any, round: any = null): number {
-    const ret = _.isNumber(denominator) && denominator !== 0 ? numerator / denominator : 0;
+    const ret = _.isNumber(numerator) && _.isNumber(denominator) && denominator !== 0 ? numerator / denominator : 0;
     return _.isNumber(round) ? this.round(ret, round) : ret;
   }
 
