@@ -29,13 +29,12 @@
             "styles": [
               "src/styles.scss",
               "src/assets/styles/main.scss",
-              "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/ng-busy/src/style/busy.css",
-              "./node_modules/ag-grid-community/dist/styles/ag-grid.css",
-              "./node_modules/ag-grid-community/dist/styles/ag-theme-bootstrap.css",
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "node_modules/gridstack/dist/gridstack.css",
-              "node_modules/gridstack/dist/gridstack-extra.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ng-busy/src/style/busy.css",
+              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-bootstrap.css",
+              "node_modules/gridstack/dist/gridstack-extra.css",
+              "node_modules/gridstack/dist/gridstack.css"
             ],
             "scripts": [
               "node_modules/lodash/lodash.js",

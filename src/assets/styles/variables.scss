@@ -1,7 +1,7 @@
 @import "node_modules/bootstrap/scss/_functions";
 @import "./functions";
 
-$white:    #fff;
+$white: #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
@@ -11,38 +11,38 @@ $gray-600: #6c757d;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
-$black:    #000;
+$black: #000;
 
-$blue:    #007bff;
-$indigo:  #6610f2;
-$purple:  #6f42c1;
-$pink:    #e83e8c;
-$red:     #dc3545;
-$orange:  #fd7e14;
-$yellow:  #ffc107;
-$green:   #28a745;
-$teal:    #20c997;
-$cyan:    #17a2b8;
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
 
-$primary:       #6f42c1; // #007bff
-$secondary:     #ffc107;
-$success:       $green;
-$info:          $cyan;
-$warning:       $yellow;
-$danger:        $red;
-$light:         $gray-100;
-$dark:          $gray-800;
+$primary: #6f42c1; // #007bff
+$secondary: #ffc107;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
 
 // Override theme colors
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
 );
 
 $grays: (
@@ -58,43 +58,43 @@ $grays: (
 );
 
 $colors: (
-  "blue":       $blue,
-  "indigo":     $indigo,
-  "purple":     $purple,
-  "pink":       $pink,
-  "red":        $red,
-  "orange":     $orange,
-  "yellow":     $yellow,
-  "green":      $green,
-  "teal":       $teal,
-  "cyan":       $cyan,
-  "white":      $white,
-  "gray":       $gray-600,
-  "gray-dark":  $gray-800
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "white": $white,
+  "gray": $gray-600,
+  "gray-dark": $gray-800
 );
 
 // Override body colors
-$body-bg:    $white;
+$body-bg: $white;
 $body-color: $gray-700;
 
-$enable-caret:              true;
-$enable-rounded:            true;
-$enable-shadows:            false;
-$enable-gradients:          false;
-$enable-transitions:        true;
-$enable-grid-classes:       true;
-$enable-print-styles:       true;
+$enable-caret: true;
+$enable-rounded: true;
+$enable-shadows: false;
+$enable-gradients: false;
+$enable-transitions: true;
+$enable-grid-classes: true;
+$enable-print-styles: true;
 
 // Tab Manager
-$tab-default-width:         220px;
-$tab-pinned-width:          65px;
-$tab-padding-x:             16px;
-$tab-height:                65px;
-$tab-border-width:          4px;
+$tab-default-width: 220px;
+$tab-pinned-width: 65px;
+$tab-padding-x: 16px;
+$tab-height: 65px;
+$tab-border-width: 4px;
 
 // Scrollbars
-$scrollbar-width:          17px;
-$scrollbar-border:         solid $gray-200;
-$scrollbar-track-bg:       $gray-200;
-$scrollbar-thumb-bg:       $gray-500;
+$scrollbar-width: 17px;
+$scrollbar-border: solid $gray-200;
+$scrollbar-track-bg: $gray-200;
+$scrollbar-thumb-bg: $gray-500;
 $scrollbar-thumb-hover-bg: $gray-600;
