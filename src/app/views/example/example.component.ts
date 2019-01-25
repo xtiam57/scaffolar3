@@ -1,17 +1,37 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { LocalStorage } from 'ngx-store';
 import { MessagesService } from '../../services/messages.service';
 
 import * as $ from 'jquery';
-import { GridStackItem, GridStackOptions, GridStackItemComponent, GridStackComponent} from 'ng4-gridstack';
+import { GridStackItem, GridStackOptions, GridStackItemComponent, GridStackComponent } from 'ng4-gridstack';
 
 import { ExporterService } from '../../services/exporter.service';
 import { PromptService } from 'src/app/services/prompt/prompt.service';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalExampleComponent } from '../modal-example/modal-example.component';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
+  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+];
 
 @Component({
   selector: 'app-example',
@@ -25,6 +45,11 @@ export class ExampleComponent implements OnInit {
   asideOpened = false;
 
   @LocalStorage() title = 'scaffolar';
+
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  @ViewChild(MatSort) sort: MatSort;
 
   model = {
     left: true,
@@ -90,7 +115,7 @@ export class ExampleComponent implements OnInit {
 
   public options: GridStackOptions = new GridStackOptions();
   public widget1: GridStackItem = new GridStackItem();
-// public widget2: GridStackItem = new GridStackItem();
+  // public widget2: GridStackItem = new GridStackItem();
 
   chart2 = new Chart({
     chart: {
@@ -105,15 +130,15 @@ export class ExampleComponent implements OnInit {
     },
     yAxis: {
       title: {
-          text: 'Total percent market share'
+        text: 'Total percent market share'
       }
-  },
-  plotOptions: {
-    pie: {
+    },
+    plotOptions: {
+      pie: {
         shadow: false,
         center: ['50%', '50%']
-    }
-},
+      }
+    },
     series: [
       {
         name: 'Spending',
@@ -122,41 +147,43 @@ export class ExampleComponent implements OnInit {
             y: 300,
             color: '#F7464A',
             name: 'Red'
-        },
-        {
+          },
+          {
             y: 50,
             color: '#46BFBD',
             name: 'Green'
-        },
-        {
+          },
+          {
             y: 100,
             color: '#FDB45C',
             name: 'Yellow'
-        }
+          }
         ],
-      // size: '90%',
-      //  innerSize: '55%',
+        // size: '90%',
+        //  innerSize: '55%',
       }
-    ] ,
-  responsive: {
-    rules: [{
-      condition: {
-        maxWidth: 400
-      },
-      chartOptions: {
-        series: [{
+    ],
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 400
+        },
+        chartOptions: {
+          series: [{
             id: 'versions',
           }]
         }
-    }]
-  }
+      }]
+    }
   });
 
   next = 0;
 
-  constructor(private messageService: MessagesService, private exporter: ExporterService, private prompt: PromptService, private modalService: NgbModal) {}
+  constructor(private messageService: MessagesService, private exporter: ExporterService, private prompt: PromptService, private modalService: NgbModal) { }
 
   ngOnInit() {
+
+    this.dataSource.sort = this.sort;
 
     this.options.alwaysShowResizeHandle = true;
 
@@ -176,13 +203,13 @@ export class ExampleComponent implements OnInit {
 
 
   itemReize(item) {
-    console.log('este es el item:' , item);
+    console.log('este es el item:', item);
     const w = $('.chartContainer').width();
-    const h =  $('.chartContainer').height();
-  // this.chart.options.chart.height = h;
-  // this.chart.reflow();
-      this.chart2.ref.setSize(w, h * (3 / 4), false);
-    }
+    const h = $('.chartContainer').height();
+    // this.chart.options.chart.height = h;
+    // this.chart.reflow();
+    this.chart2.ref.setSize(w, h * (3 / 4), false);
+  }
 
   toggleSidebar() {
     this.asideOpened = !this.asideOpened;
@@ -243,22 +270,22 @@ export class ExampleComponent implements OnInit {
     prompt.result.then((response) => console.log(response), (cause) => console.log(cause));
 
   }
-  onDragged( item: any, list: any[] ) {
+  onDragged(item: any, list: any[]) {
 
-    const index = list.indexOf( item );
-    list.splice( index, 1 );
+    const index = list.indexOf(item);
+    list.splice(index, 1);
   }
 
-  onDrop( event: DndDropEvent, list: any[] ) {
+  onDrop(event: DndDropEvent, list: any[]) {
 
     let index = event.index;
 
-    if ( typeof index === 'undefined' ) {
+    if (typeof index === 'undefined') {
 
       index = list.length;
     }
 
-    list.splice( index, 0, event.data );
+    list.splice(index, 0, event.data);
   }
 
 
