@@ -1,21 +1,13 @@
 <ng-sidebar-container>
   <!-- Sidebar -->
-  <ng-sidebar [(opened)]="asideOpened"
-              [mode]="'push'"
-              [dock]="true"
-              [dockedSize]="'60px'"
-              [closeOnClickOutside]="false"
+  <ng-sidebar [(opened)]="asideOpened" [mode]="'push'" [dock]="true" [dockedSize]="'60px'" [closeOnClickOutside]="false"
               [sidebarClass]="'info-sidebar'">
     <div class="btn-group-vertical">
-      <button class="btn btn-outline-secondary"
-              (click)="toggleSidebar()">
-        <fa-icon [icon]="['fas', 'bars']"
-                 [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-outline-secondary" (click)="toggleSidebar()">
+        <fa-icon [icon]="['fas', 'bars']" [fixedWidth]="false"></fa-icon>
       </button>
-      <button class="btn btn-outline-secondary"
-              (click)="export()">
-        <fa-icon [icon]="['fas', 'file-export']"
-                 [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-outline-secondary" (click)="export()">
+        <fa-icon [icon]="['fas', 'file-export']" [fixedWidth]="false"></fa-icon>
       </button>
     </div>
 
@@ -28,10 +20,8 @@
       <div class="row">
         <div class="col-12">
 
-          <button class="btn btn-secondary"
-                  (click)="openComposeModal()">
-            <fa-icon [icon]="['far', 'window-minimize']"
-                     [fixedWidth]="false"></fa-icon>
+          <button class="btn btn-secondary" (click)="openComposeModal()">
+            <fa-icon [icon]="['far', 'window-minimize']" [fixedWidth]="false"></fa-icon>
           </button>
 
           example works!
@@ -39,43 +29,28 @@
             <code>Message says: {{ params | available | json }}</code> <br />
             <code>Message says: {{ message | available | json }}</code>
           </div>
-          <input type="text"
-                 [(ngModel)]="test" /> {{ test }}
+          <input type="text" [(ngModel)]="test" /> {{ test }}
         </div>
         <h1>Scaffolar</h1>
-        <fa-icon [icon]="['fab', 'twitter']"
-                 size="1x"
-                 [spin]="false"
-                 [pulse]="false"
-                 [border]="false"></fa-icon>
+        <fa-icon [icon]="['fab', 'twitter']" size="1x" [spin]="false" [pulse]="false" [border]="false"></fa-icon>
         <div class="row">
           <div class="col-6">
             <div class="btn-group btn-group-toggle">
-              <label class="btn-primary"
-                     ngbButtonLabel>
-                <input type="checkbox"
-                       ngbButton
-                       [(ngModel)]="model.left" /> Left
+              <label class="btn-primary" ngbButtonLabel>
+                <input type="checkbox" ngbButton [(ngModel)]="model.left" /> Left
                 (pre-checked)
               </label>
-              <label class="btn-primary"
-                     ngbButtonLabel>
-                <input type="checkbox"
-                       ngbButton
-                       [(ngModel)]="model.middle" />
+              <label class="btn-primary" ngbButtonLabel>
+                <input type="checkbox" ngbButton [(ngModel)]="model.middle" />
                 Middle
               </label>
-              <label class="btn-primary"
-                     ngbButtonLabel>
-                <input type="checkbox"
-                       ngbButton
-                       [(ngModel)]="model.right" />
+              <label class="btn-primary" ngbButtonLabel>
+                <input type="checkbox" ngbButton [(ngModel)]="model.right" />
                 Right
               </label>
             </div>
             <div class="mt-5">
-              <button class="btn btn-lg btn-outline-primary"
-                      (click)="open()">
+              <button class="btn btn-lg btn-outline-primary" (click)="open()">
                 Launch demo prompt
               </button>
             </div>
@@ -95,64 +70,42 @@
                     apparel, butcher voluptate nisi qui.
                   </p>
 
-                  <table style="width: 100%;"
-                         mat-table
-                         [dataSource]="dataSource"
-                         matSort
-                         class="mat-elevation-z8">
+                  <table style="width: 100%;" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
                     <!-- Position Column -->
                     <ng-container matColumnDef="position">
-                      <th mat-header-cell
-                          *matHeaderCellDef
-                          mat-sort-header> No. </th>
-                      <td mat-cell
-                          *matCellDef="let element"> {{element.position}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
                     </ng-container>
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="name">
-                      <th mat-header-cell
-                          *matHeaderCellDef
-                          mat-sort-header> Name </th>
-                      <td mat-cell
-                          *matCellDef="let element"> {{element.name}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                     </ng-container>
 
                     <!-- Weight Column -->
                     <ng-container matColumnDef="weight">
-                      <th mat-header-cell
-                          *matHeaderCellDef
-                          mat-sort-header> Weight </th>
-                      <td mat-cell
-                          *matCellDef="let element"> {{element.weight}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="symbol">
-                      <th mat-header-cell
-                          *matHeaderCellDef
-                          mat-sort-header> Symbol </th>
-                      <td mat-cell
-                          *matCellDef="let element"> {{element.symbol}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
                     </ng-container>
 
-                    <tr mat-header-row
-                        *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row
-                        *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
                 </ng-template>
               </ngb-tab>
               <ngb-tab>
                 <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
                 <ng-template ngbTabContent>
-                  <ag-grid-angular style="height:200px"
-                                   [enableSorting]="true"
-                                   [enableFilter]="true"
-                                   [rowData]="rows"
-                                   [columnDefs]="cols"
-                                   class="ag-theme-bootstrap">
+                  <ag-grid-angular style="height:200px" [enableSorting]="true" [enableFilter]="true" [rowData]="rows"
+                                   [columnDefs]="cols" class="ag-theme-bootstrap">
                   </ag-grid-angular>
 
                   <hr />
@@ -161,12 +114,10 @@
                   <pre>{{ false | conditional }}</pre>
                   <pre>{{ true | conditional }}</pre>
                   <pre>{{ 'hello!' | conditional: 'Yeap':'Nah':'hello' }}</pre>
-                  <input type="text"
-                         [(ngModel)]="title" /> {{ title }}
+                  <input type="text" [(ngModel)]="title" /> {{ title }}
                 </ng-template>
               </ngb-tab>
-              <ngb-tab title="Disabled"
-                       [disabled]="true">
+              <ngb-tab title="Disabled" [disabled]="true">
                 <ng-template ngbTabContent>
                   <p>
                     Sed commodo, leo at suscipit dictum, quam est porttitor
@@ -193,12 +144,8 @@
         <div style="width: 100%;">
           <h5>GridStack</h5>
           <!-- You can now use your library component in app.component.html -->
-          <grid-stack class="grid-stack"
-                      [options]="options">
-            <grid-stack-item [option]="widget1"
-                             (mouseup)="itemReize($event)"
-                             (onresize)='DargS()'
-                             class="grid-stack-item w1 chartContainer">
+          <grid-stack class="grid-stack" [options]="options">
+            <grid-stack-item [option]="widget1" (mouseup)="itemReize($event)" (onresize)='DargS()' class="grid-stack-item w1 chartContainer">
               <span [chart]="chart2"></span>
               <!-- <div [chart]="chart" ></div> -->
             </grid-stack-item>
@@ -210,51 +157,16 @@
       </div>
       <h3>Listas Dragables</h3>
       <div class="row">
-        <div class="col-6">
-          <h5>Fruits</h5>
-          <ul class="list-group dndList"
-              dndDropzone
-              dndEffectAllowed="move"
-              (dndDrop)="onDrop($event, fruits)">
-
-            <li dndPlaceholderRef
-                class="dndPlaceholder list-group-item">
-            </li>
-            <li class="list-group-item"
-                *ngFor="let fruit of fruits"
-                [dndDraggable]="fruit"
-                [dndType]="fruit"
-                dndEffectAllowed="move"
-                (dndMoved)="onDragged(fruit, fruits)">{{fruit}}
-            </li>
-          </ul>
-
+        <div class="col-xs-6 col-6 col-md-5 col-lg-3">
+          <bs-sortable [(ngModel)]="itemStringsLeft" itemClass="sortable-item" itemActiveClass="sortable-item-active"
+                       placeholderItem="Drag here" placeholderClass="placeholderStyle" wrapperClass="sortable-wrapper"></bs-sortable>
+          <pre class="code-preview">model: {{ itemStringsLeft | json }}</pre>
         </div>
-
-        <div class="col-6">
-          <h5>Apple</h5>
-          <ul class="list-group dndList"
-              dndDropzone
-              dndEffectAllowed="move"
-              (dndDrop)="onDrop($event, apples)">
-            <li dndPlaceholderRef
-                class="dndPlaceholder">
-            </li>
-
-
-            <li class="list-group-item list-group-item"
-                *ngFor="let apple of apples"
-                [dndDraggable]="apple"
-                [dndType]="apple"
-                dndEffectAllowed="move"
-                (dndMoved)="onDragged(apple, apples)">{{apple}}</li>
-          </ul>
-
+        <div class="col-xs-6 col-6 col-md-5 col-lg-3">
+          <bs-sortable [(ngModel)]="itemStringsRight" itemClass="sortable-item" itemActiveClass="sortable-item-active"
+                       placeholderItem="Drag here" placeholderClass="sortable-item" wrapperClass="sortable-wrapper"></bs-sortable>
+          <pre class="code-preview">model: {{ itemStringsRight | json }}</pre>
         </div>
-
-
-
-
       </div>
     </div>
   </div>

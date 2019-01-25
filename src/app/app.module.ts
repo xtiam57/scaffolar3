@@ -21,7 +21,7 @@ import { WebStorageModule } from 'ngx-store';
 import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './app-http.interceptor';
 import { GridStackModule } from 'ng4-gridstack';
-
+import { SortableModule } from 'ngx-bootstrap/sortable';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvailablePipe } from './pipes/available.pipe';
@@ -34,7 +34,6 @@ import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
 import { ModalExampleComponent } from './views/modal-example/modal-example.component';
-import { DndModule } from 'ngx-drag-drop';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -70,9 +69,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule,
+  MatTreeModule
 } from '@angular/material';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -103,7 +101,6 @@ library.add(fas, far, fab);
     FontAwesomeModule,
     WebStorageModule,
     GridStackModule,
-    DndModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -166,7 +163,7 @@ library.add(fas, far, fab);
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    ScrollingModule
+    SortableModule.forRoot()
   ],
   providers: [
     DecimalPipe,
@@ -183,4 +180,4 @@ library.add(fas, far, fab);
   entryComponents: [CustomBusyComponent, ExampleComponent, PromptComponent, ModalExampleComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

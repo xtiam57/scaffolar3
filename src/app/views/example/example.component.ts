@@ -8,7 +8,6 @@ import { GridStackItem, GridStackOptions, GridStackItemComponent, GridStackCompo
 
 import { ExporterService } from '../../services/exporter.service';
 import { PromptService } from 'src/app/services/prompt/prompt.service';
-import { DndDropEvent } from 'ngx-drag-drop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalExampleComponent } from '../modal-example/modal-example.component';
 import { MatSort, MatTableDataSource } from '@angular/material';
@@ -116,6 +115,15 @@ export class ExampleComponent implements OnInit {
   public options: GridStackOptions = new GridStackOptions();
   public widget1: GridStackItem = new GridStackItem();
   // public widget2: GridStackItem = new GridStackItem();
+
+  itemStringsLeft = [
+    'Windstorm',
+    'Bombasto',
+    'Magneta',
+    'Tornado'
+  ];
+
+  itemStringsRight = ['Mr. O', 'Tomato'];
 
   chart2 = new Chart({
     chart: {
@@ -270,23 +278,7 @@ export class ExampleComponent implements OnInit {
     prompt.result.then((response) => console.log(response), (cause) => console.log(cause));
 
   }
-  onDragged(item: any, list: any[]) {
 
-    const index = list.indexOf(item);
-    list.splice(index, 1);
-  }
-
-  onDrop(event: DndDropEvent, list: any[]) {
-
-    let index = event.index;
-
-    if (typeof index === 'undefined') {
-
-      index = list.length;
-    }
-
-    list.splice(index, 0, event.data);
-  }
 
 
   openComposeModal() {

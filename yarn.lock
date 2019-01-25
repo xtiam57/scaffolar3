@@ -97,21 +97,19 @@
     "@angular-devkit/core" "0.8.7"
     rxjs "~6.2.0"
 
-"@angular/animations@^7.1.2":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-7.1.2.tgz#876598802a2722b97d7aa9ea092d3aadc05c1fa8"
-  integrity sha512-zCLzPpifD4V9C35+DG75yHiAxZrWmk7n7dudxchKXf/YpgzV1M43lTSxna6YZgMLIXRjilfjfh6jqOOP+PctoQ==
+"@angular/animations@^6.1.0":
+  version "6.1.10"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-6.1.10.tgz#4ab9b9a6c25e0cca781588700daa9efc33a722e4"
+  integrity sha512-dd/lq7kw3uwfHPICan8psu2nthuUpp7PvMLuNIm0XxObZ4oNs0ls6uxKEDPnEkRKoGdiJpvmsyzZZN9ACMPEAA==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cdk@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.1.1.tgz#6916b2303af5e0a56a9b64ff4d54642cf191c54f"
-  integrity sha512-woW9lWDBKRuxZipMzWofrAY7YpuZd4vf/J1YPjmAqV7U94MaDFyizRLyFolbTZVYo8ggh9U3SQAWRrEBvJNsjg==
+"@angular/cdk@^6.1.0":
+  version "6.4.7"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-6.4.7.tgz#1549b304dd412e82bd854cc55a7d5c6772ee0411"
+  integrity sha512-18x0U66fLD5kGQWZ9n3nb75xQouXlWs7kUDaTd8HTrHpT1s2QIAqlLd1KxfrYiVhsEC2jPQaoiae7VnBlcvkBg==
   dependencies:
     tslib "^1.7.1"
-  optionalDependencies:
-    parse5 "^5.0.0"
 
 "@angular/cli@~6.2.3":
   version "6.2.7"
@@ -172,12 +170,14 @@
   version "6.1.10"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-6.1.10.tgz#9f87b740befca8bf9a5fb499446425519389f52f"
 
-"@angular/material@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-7.1.1.tgz#147b7565262e04d504c8dab7317632967a3db02a"
-  integrity sha512-wjYAWsdWpb8/BgoIfoUomnycoljU00avJ3hRIgPNnEpZhB7zqiBA8tCitzDS4NK8dKBJjM9WRAOj6yl6x3+9wA==
+"@angular/material@6.4.7":
+  version "6.4.7"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-6.4.7.tgz#3c8f2d6a6a7904d97be29e06a84ffb62a8da6c16"
+  integrity sha512-SdNx7Xovi24Kw9eU6lkLhY/7f2M7L9F+/uh6XuPr4jbGgCUVVpeeVI5ztZhsZRbj1sN+/r1p5w8u62apWWl5Ww==
   dependencies:
     tslib "^1.7.1"
+  optionalDependencies:
+    parse5 "^5.0.0"
 
 "@angular/platform-browser-dynamic@^6.1.0":
   version "6.1.10"
@@ -4171,22 +4171,17 @@ ng4-gridstack@^0.3.40:
   resolved "https://registry.yarnpkg.com/ng4-gridstack/-/ng4-gridstack-0.3.40.tgz#e45e74c7d2391f14befccc5a9fa8882760394b5b"
   integrity sha1-5F50x9I5HxS+/Mxan6iIJ2A5S1s=
 
+ngx-bootstrap@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.2.0.tgz#ece7c48af0bc260462c3f77de14f22d4b3dde149"
+  integrity sha512-oLSLIWZgRiIfcuxyXLMZUOhX3wZtg6lpuMbdo/0UzMDg2bSOe1XPskcKZ/iuOa3FOlU9rjuYMzswHYYV5f/QCA==
+
 ngx-contextmenu@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/ngx-contextmenu/-/ngx-contextmenu-5.1.1.tgz#c21c1b702df0d0327ddf297d1ff8d2abee32ee9f"
   integrity sha512-PORVcTo9txGonSaQx8y1ZyG526Na0LY/I4NSPIquMhwziqal/WGijHtOPSJ/AjGxLooMcWsh8DyGNEzOijWrOw==
   dependencies:
     tslib "^1.9.0"
-
-ngx-drag-and-drop-lists@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/ngx-drag-and-drop-lists/-/ngx-drag-and-drop-lists-1.2.5.tgz#da0ff72b3a88b77e5d44eac9794dad81ba66ca8b"
-  integrity sha512-20VYuDdfLYbXxkw7Ddh04ZCzzuEelFpdk8lonnLBiG5d/qjEp3R9WdShfeIJif3GJK1OEyh/HvsW2FjDrVJ+6Q==
-
-ngx-drag-drop@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ngx-drag-drop/-/ngx-drag-drop-1.1.0.tgz#3918c5da6819f1ca43dc44bc31a9fd08d517a337"
-  integrity sha512-n4ZZbLsqj7vnSlX9qJ48BlI/KJwHU9YnpeFXGgY9TOxGrfGzJsPK7ZYvStBwEJ3K8NL4QGAEcBtEuMxO86nU2A==
 
 ngx-store@^2.0.0:
   version "2.0.0"
