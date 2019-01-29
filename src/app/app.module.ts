@@ -2,6 +2,7 @@ import { DatePipe, DecimalPipe, JsonPipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatSortModule, MatTableModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,12 +17,12 @@ import { ChartModule } from 'angular-highcharts';
 import { BusyConfig, NgBusyModule } from 'ng-busy';
 import { SidebarModule } from 'ng-sidebar';
 import { CustomFormsModule } from 'ng2-validation';
+import { GridStackModule } from 'ng4-gridstack';
+import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ContextMenuModule } from 'ngx-contextmenu';
 import { WebStorageModule } from 'ngx-store';
 import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from './app-http.interceptor';
-import { GridStackModule } from 'ng4-gridstack';
-import { SortableModule } from 'ngx-bootstrap/sortable';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvailablePipe } from './pipes/available.pipe';
@@ -31,49 +32,9 @@ import { StriphtmlPipe } from './pipes/striphtml.pipe';
 import { PromptComponent } from './services/prompt/prompt.component';
 import { TabManagerComponent } from './services/tabManager/tab-manager.component';
 import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
-import { CustomBusyComponent } from './templates/customBusy.component';
+import { busyConfigFactory, CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
 import { ModalExampleComponent } from './views/modal-example/modal-example.component';
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatTreeModule
-} from '@angular/material';
-import { CdkTableModule } from '@angular/cdk/table';
-import { CdkTreeModule } from '@angular/cdk/tree';
-import { A11yModule } from '@angular/cdk/a11y';
 
 library.add(fas, far, fab);
 
@@ -111,13 +72,7 @@ library.add(fas, far, fab);
       progressBar: true
     }),
     LoadingBarHttpClientModule,
-    NgBusyModule.forRoot(
-      new BusyConfig({
-        message: 'Loading',
-        minDuration: 1000,
-        template: CustomBusyComponent
-      })
-    ),
+    NgBusyModule,
     ChartModule,
     AgGridModule.withComponents([]),
     ContextMenuModule.forRoot({
@@ -125,44 +80,8 @@ library.add(fas, far, fab);
     }),
     SidebarModule.forRoot(),
     CustomFormsModule,
-    A11yModule,
-    CdkTableModule,
-    CdkTreeModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
     SortableModule.forRoot()
   ],
   providers: [
@@ -175,6 +94,10 @@ library.add(fas, far, fab);
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
+    },
+    {
+      provide: BusyConfig,
+      useFactory: busyConfigFactory
     }
   ],
   entryComponents: [CustomBusyComponent, ExampleComponent, PromptComponent, ModalExampleComponent],

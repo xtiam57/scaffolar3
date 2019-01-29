@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { InstanceConfigHolderService } from 'ng-busy';
+import { InstanceConfigHolderService, BusyConfig } from 'ng-busy';
 
 @Component({
   selector: 'app-default-busy',
@@ -33,4 +33,12 @@ export class CustomBusyComponent {
   get message() {
     return this.instanceConfigHolder.config.message;
   }
+}
+
+export function busyConfigFactory() {
+  return new BusyConfig({
+    message: 'Loading',
+    minDuration: 1000,
+    template: CustomBusyComponent
+  });
 }
