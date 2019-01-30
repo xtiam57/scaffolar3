@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { AppSettings } from '../../app.settings';
-import { RESTfulService } from 'src/app/services/restful.service';
+import { RESTfulService } from '../../services/restful.service';
 
 @Component({
   selector: 'app-login',

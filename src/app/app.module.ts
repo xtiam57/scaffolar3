@@ -35,6 +35,7 @@ import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { busyConfigFactory, CustomBusyComponent } from './templates/customBusy.component';
 import { ExampleComponent } from './views/example/example.component';
 import { ModalExampleComponent } from './views/modal-example/modal-example.component';
+import { ExampleListComponent } from './views/example/example-list.component';
 
 library.add(fas, far, fab);
 
@@ -51,7 +52,8 @@ library.add(fas, far, fab);
     TABSET_DIRECTIVES,
     StriphtmlPipe,
     PromptComponent,
-    ModalExampleComponent
+    ModalExampleComponent,
+    ExampleListComponent
   ],
   imports: [
     BrowserModule,
