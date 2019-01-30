@@ -12,7 +12,7 @@ Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-![logo](https://raw.githubusercontent.com/xtiam57/scaffolar3/master/src/assets/images/logo.png)
+![CLI](https://raw.githubusercontent.com/xtiam57/scaffolar3/master/src/assets/images/generator.jpg)
 
 ## Build
 
