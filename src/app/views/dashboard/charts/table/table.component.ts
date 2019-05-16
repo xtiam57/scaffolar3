@@ -13,7 +13,7 @@ export class TableComponent implements OnInit {
   @Input() init: Subject<number>;
   @Input() name: string;
 
-  protected height = 388;
+  height = 388;
 
   gridView: GridDataResult;
   pageSize = 20;

@@ -14,20 +14,20 @@ import { AttachmentsService } from './attachments.service';
 })
 export class AttachmentsComponent implements OnInit {
   @Input() id: string;
-  protected counter = 0;
-  protected size = 'lg';
-  protected files = [];
-  protected folders = [];
-  protected tags: Observable<any>;
-  protected count = 0;
-  protected isUploading = false;
-  protected loadingPromise;
-  protected selectValue: any;
+  counter = 0;
+  size = 'lg';
+  files = [];
+  folders = [];
+  tags: Observable<any>;
+  count = 0;
+  isUploading = false;
+  loadingPromise;
+  selectValue: any;
 
   form: FormGroup;
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  protected search = {
+  search = {
     text: undefined,
     folder: undefined
   };

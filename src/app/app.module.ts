@@ -1,7 +1,7 @@
 import { DatePipe, DecimalPipe, JsonPipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -38,6 +38,23 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { SampleComponent } from './views/dashboard/charts/sample/sample.component';
 import { TableComponent } from './views/dashboard/charts/table/table.component';
+import { DrilldownDirective } from './directives/drilldown.directive';
+import { ModalCollapsibleDirective } from './directives/modal-collapsible.directive';
+import { InputInlineComponent } from './directives/inline-editor/input/input-inline.component';
+import { SelectInlineComponent } from './directives/inline-editor/select/select-inline.component';
+import { TypeaheadInlineComponent } from './directives/inline-editor/typeahead/typeahead-inline.component';
+import { TextareaInlineComponent } from './directives/inline-editor/textarea/textarea-inline.component';
+import { PickerComponent } from './directives/picker/picker.component';
+import { DisplayFieldNamePipe, DisplayNamePipe } from './pipes/display-name.pipe';
+import { HighlightPipe } from './pipes/highlight.pipe';
+import { TimetPipe } from './pipes/time.pipe';
+import { AttachmentsComponent } from './services/attachments/attachments.component';
+import { AttachmentsButtonComponent } from './services/attachments/attachments-button.component';
+import { PrintAreaDirective } from './services/printArea/print-area.directive';
+import { TableActionsComponent } from './services/tableActions/table-actions.component';
+import { MaxTimeDirective } from './validators/max-time.directive';
+import { MinTimeDirective } from './validators/min-time.directive';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 library.add(fas, far, fab);
 
@@ -56,7 +73,24 @@ library.add(fas, far, fab);
     ModalExampleComponent,
     DashboardComponent,
     SampleComponent,
-    TableComponent
+    TableComponent,
+    DrilldownDirective,
+    ModalCollapsibleDirective,
+    InputInlineComponent,
+    SelectInlineComponent,
+    TypeaheadInlineComponent,
+    TextareaInlineComponent,
+    PickerComponent,
+    DisplayFieldNamePipe,
+    DisplayNamePipe,
+    HighlightPipe,
+    TimetPipe,
+    AttachmentsComponent,
+    AttachmentsButtonComponent,
+    PrintAreaDirective,
+    TableActionsComponent,
+    MaxTimeDirective,
+    MinTimeDirective
   ],
   imports: [
     BrowserModule,
@@ -68,6 +102,7 @@ library.add(fas, far, fab);
     WebStorageModule,
     GridsterModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       extendedTimeOut: 3000,
@@ -88,6 +123,7 @@ library.add(fas, far, fab);
     GridModule,
     SplitterModule,
     FilterPipeModule,
+    TypeaheadModule.forRoot(),
   ],
   providers: [
     DecimalPipe,
@@ -105,7 +141,7 @@ library.add(fas, far, fab);
       useFactory: busyConfigFactory
     }
   ],
-  entryComponents: [CustomBusyComponent, PromptComponent, ModalExampleComponent, DashboardComponent],
+  entryComponents: [AttachmentsComponent, CustomBusyComponent, PromptComponent, ModalExampleComponent, DashboardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

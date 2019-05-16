@@ -12,7 +12,7 @@ import * as _ from 'underscore';
 export class AttachmentsButtonComponent implements OnInit, OnChanges {
   @Input() id: string;
   @Input() buttonClass = 'btn-link btn-xs p-0';
-  protected counter = 0;
+  counter = 0;
 
   constructor(private attachmentsLauncherService: AttachmentsLauncherService, private attachmentsService: AttachmentsService) { }
 
