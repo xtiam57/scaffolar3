@@ -1,28 +1,50 @@
 <!-- Compose windows container -->
-<div id="compose-container"></div>
+<div id="compose-container"
+     appModalCollapsible></div>
 
 <ng-sidebar-container>
   <!-- Sidebar -->
-  <ng-sidebar [(opened)]="asideOpened" [mode]="'push'" [dock]="true" [dockedSize]="'60px'" [closeOnClickOutside]="true"
+  <ng-sidebar [(opened)]="asideOpened"
+              [mode]="'push'"
+              [dock]="true"
+              [dockedSize]="'60px'"
+              [closeOnClickOutside]="true"
               [sidebarClass]="'main-sidebar'">
     <div class="btn-group-vertical">
-      <button class="btn btn-secondary" (click)="toggleSidebar()">
-        <fa-icon [icon]="['fas', 'bars']" [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-secondary"
+              (click)="toggleSidebar()">
+        <fa-icon [icon]="['fas', 'bars']"
+                 [fixedWidth]="false"></fa-icon>
       </button>
-      <button class="btn btn-secondary" (click)="addTab()">
-        <fa-icon [icon]="['fas', 'plus']" [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-secondary"
+              (click)="addTab()">
+        <fa-icon [icon]="['fas', 'plus']"
+                 [fixedWidth]="false"></fa-icon>
       </button>
-      <button class="btn btn-secondary" (click)="goto()">
-        <fa-icon [icon]="['fas', 'check']" [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-secondary"
+              (click)="goto()">
+        <fa-icon [icon]="['fas', 'check']"
+                 [fixedWidth]="false"></fa-icon>
       </button>
-      <button class="btn btn-secondary" (click)="auth.logout()">
-        <fa-icon [icon]="['fas', 'sign-out-alt']" [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-secondary"
+              (click)="auth.logout()">
+        <fa-icon [icon]="['fas', 'sign-out-alt']"
+                 [fixedWidth]="false"></fa-icon>
       </button>
-      <button class="btn btn-secondary" (click)="openModal()">
-        <fa-icon [icon]="['far', 'window-maximize']" [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-secondary"
+              (click)="openModal()">
+        <fa-icon [icon]="['far', 'window-maximize']"
+                 [fixedWidth]="false"></fa-icon>
       </button>
-      <button class="btn btn-secondary" (click)="openComposeModal()">
-        <fa-icon [icon]="['far', 'window-minimize']" [fixedWidth]="false"></fa-icon>
+      <button class="btn btn-secondary"
+              (click)="openComposeModal()">
+        <fa-icon [icon]="['far', 'window-minimize']"
+                 [fixedWidth]="false"></fa-icon>
+      </button>
+      <button class="btn btn-success"
+              (click)="openUsersList()">
+        <fa-icon [icon]="['fas', 'users']"
+                 [fixedWidth]="false"></fa-icon>
       </button>
     </div>
   </ng-sidebar>
@@ -30,11 +52,5 @@
   <!-- Page content -->
   <div ng-sidebar-content>
     <app-tab-manager></app-tab-manager>
-
   </div>
-
-
-
-
-
 </ng-sidebar-container>

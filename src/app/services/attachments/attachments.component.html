@@ -1,0 +1,268 @@
+<div class="modal-header">
+  <h4 class="modal-title"
+      id="modal-basic-title">
+    Attachments
+  </h4>
+
+  <button type="button"
+          class="close ml-0"
+          aria-label="Close"
+          (click)="modal.dismiss(counter)"
+          ngbAutofocus>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body p-0">
+  <app-table-actions (refresh)="load()"
+                     [showCreateButton]="false"
+                     [showFilterButton]="false"
+                     [showSearchButton]="false">
+    <button class="btn btn-primary btn-sm w-100 radius-0"
+            [class.active]="size === 'lg'"
+            (click)="size = 'lg'">
+      <fa-icon [icon]="['fas', 'th-large']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      Grid
+    </button>
+    <button class="btn btn-primary btn-sm w-100 radius-0"
+            [class.active]="size === 'ls'"
+            (click)="size = 'ls'">
+      <fa-icon [icon]="['fas', 'th-list']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      List
+    </button>
+  </app-table-actions>
+
+  <div class="attachments-container"
+       [ngBusy]="loadingPromise">
+    <div class="row no-gutters">
+      <!-- sidebar -->
+      <div class="col-3 col-xl-2 bg-light">
+        <div class="p-3">
+          <!-- Search -->
+          <input type="text"
+                 class="form-control input-lg mb-3"
+                 name="tag"
+                 id="tag"
+                 placeholder="Search..."
+                 [(ngModel)]="search.text"
+                 [disabled]="isUploading">
+
+          <ngb-tabset justify="justified"
+                      type="pills">
+            <!-- tags -->
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <fa-icon [icon]="['fas', 'tags']"
+                         [fixedWidth]="true"
+                         size="xs"></fa-icon>
+                Tags
+              </ng-template>
+              <ng-template ngbTabContent>
+                <div class="list-group mt-2">
+                  <a href
+                     class="pointer list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                     [class.active]="search.folder === undefined"
+                     (click)="$event.preventDefault(); search.folder = undefined">
+                    <div>
+                      <fa-icon [icon]="['far', search.folder === undefined ? 'folder-open' : 'folder']"
+                               [fixedWidth]="true"></fa-icon>
+                      All
+                    </div>
+                    <span class="badge badge-secondary badge-pill">{{ files.length | number }}</span>
+                  </a>
+                  <a href
+                     class="pointer list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                     [class.active]="search.folder === item.tag"
+                     *ngFor="let item of folders"
+                     (click)="$event.preventDefault(); search.folder = item.tag">
+                    <div>
+                      <fa-icon [icon]="['far', search.folder === item.tag ? 'folder-open' : 'folder']"
+                               [fixedWidth]="true"></fa-icon>
+                      {{ item.tag | available:'Uncategorized' }}
+                    </div>
+                    <span class="badge badge-secondary badge-pill">{{ item.count | number }}</span>
+                  </a>
+                </div>
+              </ng-template>
+            </ngb-tab>
+
+            <!-- Form uploader -->
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <fa-icon [icon]="['fas', 'paperclip']"
+                         [fixedWidth]="true"
+                         size="xs"></fa-icon>
+                Attach
+              </ng-template>
+              <ng-template ngbTabContent>
+                <div class="mt-2">
+                  <form [formGroup]="form"
+                        (ngSubmit)="upload()">
+
+                    <input formControlName="tag"
+                           [typeahead]="tags"
+                           class="form-control mb-2"
+                           [typeaheadScrollable]="true"
+                           [typeaheadOptionsInScrollableView]="5"
+                           [typeaheadAsync]="true"
+                           [class.is-invalid]="form.controls['tag'].invalid && form.controls['tag'].touched"
+                           (ngModelChange)="searchTag($event)"
+                           placeholder="Select a tag...">
+
+                    <input type="file"
+                           id="fileDTO"
+                           class="form-control mb-2"
+                           (change)="onFileChange($event)"
+                           #fileInput>
+
+                    <div class="border p-3 mb-2"
+                         *ngIf="form.value.fileDTO">
+                      <div class="small text-muted">
+                        <strong>Name:</strong> {{form.value?.fileDTO.fileName}}
+                      </div>
+                      <div class="small text-muted">
+                        <strong>Extension:</strong> {{form.value?.fileDTO.fileExtension}}
+                      </div>
+                      <div class="small text-muted">
+                        <strong>Size:</strong> {{form.value?.fileDTO.fileSize}}
+                      </div>
+                      <div class="small text-muted">
+                        <strong>Type:</strong> {{form.value?.fileDTO.fileType}}
+                      </div>
+                    </div>
+
+                    <!-- <button *ngIf="form.value.fileDTO"
+                                        type="button"
+                                        class="btn btn-sm btn-link"
+                                        (click)="clearFile()">Clear file</button> -->
+
+                    <button type="submit"
+                            [disabled]="form.invalid || isUploading"
+                            class="btn btn-outline-success btn-block mt-1">
+                      <fa-icon [icon]="['fas', 'paperclip']"
+                               [fixedWidth]="true"></fa-icon>
+                      Upload
+                    </button>
+                  </form>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+
+      <!-- attachments -->
+      <div class="col-9 col-xl-10">
+        <!-- List of files -->
+        <div class="card-columns card-columns-{{ size }} p-3">
+          <!-- ng-if="(files | filter:{ tag: search.folder } | filter:search.text).length" -->
+          <div *ngFor="let file of files | filterBy:{ tag: search.folder } | filterBy: { $or: [{ tag: search.text }, { name: search.text }] }"
+               class="card">
+            <!-- lg template -->
+            <div *ngIf="size === 'lg'"
+                 class="card-body">
+              <div class="mb-3">
+                <fa-icon [icon]="file.type"
+                         size="4x"></fa-icon>
+              </div>
+              <h4 class="card-title">
+                <app-input-inline [(ngModel)]="file.name"
+                                  type="text"
+                                  placeholder="Name"
+                                  (save)="update($event, file.id, 'name')"
+                                  [required]="true"
+                                  [maxLength]="50">
+                  {{ file.name | available }}
+                </app-input-inline>
+              </h4>
+              <div class="card-text">
+                <div class="badge badge-primary p-2 mb-1">
+                  <app-typeahead-inline [(ngModel)]="file.tag"
+                                        [options]="tags"
+                                        placeholder="Tag"
+                                        (save)="update($event, file.id, 'tag')"
+                                        (afterSave)="load()"
+                                        (search)="searchTag($event)"
+                                        [required]="true"
+                                        [buttons]="false"
+                                        [openOnFocus]="false">
+                    {{ file.tag | available }}
+                  </app-typeahead-inline>
+                </div>
+                <div class="small text-muted">
+                  <strong>Size:</strong> {{ file.size }}
+                </div>
+                <div class="small text-muted">
+                  {{ file.createdAt | date:'dd/MMM/yyyy @ HH:mm:ss' | available }}
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="size === 'lg'"
+                 class="card-footer bg-transparent p-2">
+              <a [href]="file.path"
+                 class="btn btn-block btn-outline-dark btn-sm"
+                 target="_self"
+                 download>
+                Download
+              </a>
+            </div>
+
+            <!-- ls template -->
+            <div *ngIf="size === 'ls'"
+                 class="card-body">
+              <div class="row align-items-center">
+                <div class="col-2 col-lg-2 col-xl-1 text-center">
+                  <fa-icon [icon]="file.type"
+                           size="4x"></fa-icon>
+                </div>
+                <div class="col-7 col-lg-6 col-xl-8">
+                  <h5 class="card-title m-0">
+                    <app-input-inline [(ngModel)]="file.name"
+                                      type="text"
+                                      placeholder="Name"
+                                      (save)="update($event, file.id, 'name')"
+                                      [required]="true"
+                                      [maxLength]="50">
+                      {{ file.name | available }}
+                    </app-input-inline>
+                  </h5>
+                  <div class="card-text">
+                    <div class="badge badge-primary p-1 mb-1">
+                      <app-typeahead-inline [(ngModel)]="file.tag"
+                                            [options]="tags"
+                                            placeholder="Tag"
+                                            (save)="update($event, file.id, 'tag')"
+                                            (afterSave)="load()"
+                                            (search)="searchTag($event)"
+                                            [required]="true"
+                                            [buttons]="false"
+                                            [openOnFocus]="false">
+                        {{ file.tag | available }}
+                      </app-typeahead-inline>
+                    </div>
+                    <div class="small text-muted">
+                      <strong>Size:</strong> {{ file.size }} |
+                      {{ file.createdAt | date:'dd/MMM/yyyy @ HH:mm:ss' | available }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3 col-lg-4 col-xl-3">
+                  <a [href]="file.path"
+                     class="btn btn-block btn-outline-dark"
+                     target="_self"
+                     download>
+                    Download
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

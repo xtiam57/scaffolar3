@@ -1,0 +1,74 @@
+<div class="picker">
+  <!-- Icon/reload -->
+  <div class="picker-icon">
+    <fa-icon [icon]="icon"
+             [fixedWidth]="true"></fa-icon>
+  </div>
+  <!-- /Icon/reload -->
+
+  <!-- Create button -->
+  <div *ngIf="showCreateButton"
+       class="picker-button"
+       (click)="onCreate()">
+    <fa-icon [icon]="['fas', 'plus']"
+             [fixedWidth]="true"></fa-icon>
+  </div>
+  <!-- /Create button -->
+
+  <!-- List -->
+  <div class="picker-scroller">
+    <div class="picker-entry"
+         *ngFor="let item of list; let $index = index"
+         [class.active]="item?.id === picked?.id"
+         [class.with-options]="item?.id === picked?.id && (showReportButton || showCommentsButton || showAttachmentButton || showDeleteButton)">
+      <div class="picker-text">
+        <div class="picker-inner-text"
+             (click)="onSelect(item)"
+             title="{{ $index + 1 | number}} of {{ list.length | number }}">
+          <!-- Status -->
+          <span *ngIf="item.status"
+                class="picker-status"
+                [ngClass]="item.status">
+            <fa-icon [icon]="['fas', 'circle']"></fa-icon>
+          </span>
+          <!-- Main Title -->
+          <strong class="picker-title">
+            {{ item?.title | available:($index + 1) }}
+          </strong>
+          <!-- Sub-Title -->
+          <span class="picker-subtitle"
+                *ngIf="item?.subtitle">
+            {{ item?.subtitle }}
+          </span>
+        </div>
+
+        <!-- Options -->
+        <div *ngIf="item?.id === picked?.id && (showReportButton || showCommentsButton || showAttachmentButton || showDeleteButton)"
+             class="picker-options">
+          <fa-icon *ngIf="showReportButton"
+                   (click)="onReport()"
+                   [icon]="['fas', 'print']"
+                   size="sm"
+                   class="d-block"></fa-icon>
+          <fa-icon *ngIf="showCommentsButton"
+                   (click)="onComment()"
+                   [icon]="['fas', 'comment']"
+                   size="sm"
+                   class="d-block"></fa-icon>
+          <fa-icon *ngIf="showAttachmentButton"
+                   (click)="onAttach()"
+                   [icon]="['fas', 'paperclip']"
+                   size="sm"
+                   class="d-block"></fa-icon>
+          <fa-icon *ngIf="showDeleteButton"
+                   (click)="onDelete()"
+                   [icon]="['fas', 'trash']"
+                   size="sm"
+                   class="d-block"></fa-icon>
+        </div>
+        <!-- /Options -->
+      </div>
+    </div>
+  </div>
+  <!-- /List -->
+</div>

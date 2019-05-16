@@ -1,0 +1,41 @@
+@import "../../../../assets/styles/variables";
+
+:host {
+  width: 100%;
+}
+
+.invalid-feedback {
+  font-size: 11px !important;
+  text-align: left !important;
+  font-weight: normal !important;
+}
+
+.form-control {
+  border-radius: 0.2rem !important;
+  &.has-buttons {
+    min-height: 61px;
+  }
+}
+
+.inline-edit {
+  text-decoration: none;
+  border-bottom: $gray-300 dotted 1px;
+  cursor: pointer;
+  width: auto;
+  display: inline-block;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.inline-no-edit {
+  text-decoration: none;
+  width: auto;
+}
+
+.inline-edit-empty {
+  text-decoration: none;
+  border-bottom: $danger dotted 1px;
+  cursor: pointer;
+  width: auto;
+  color: $danger;
+}

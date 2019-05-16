@@ -1,4 +1,24 @@
 @import "./variables";
+
+.modal {
+  .modal-header {
+    align-items: center;
+    padding: 0.657rem 1rem;
+
+    h4 {
+      font-size: 1.3rem;
+    }
+
+    .close {
+      margin-left: 0;
+    }
+  }
+
+  .modal-footer {
+    padding: 0.657rem 1rem;
+  }
+}
+
 //
 // Full modal styles
 //
@@ -14,28 +34,26 @@
       border-radius: 0;
 
       .modal-header {
-        height: 71px;
+        height: 60px;
       }
 
       .modal-body {
         overflow-y: auto;
-        height: calc(
-          100vh - 71px /* Header height */ - 71px /* Footer height */
-        );
+        height: calc(100vh - 60px /* Header height */ - 60px /* Footer height */);
       }
 
       .modal-footer {
-        height: 71px;
+        height: 60px;
       }
     }
   }
 
   &.just-header > .modal-dialog > .modal-content .modal-body {
-    height: calc(100vh - 71px /* Header height */);
+    height: calc(100vh - 60px /* Header height */);
   }
 
   &.just-footer > .modal-dialog > .modal-content .modal-body {
-    height: calc(100vh - 71px /* Footer height */);
+    height: calc(100vh - 60px /* Footer height */);
   }
 
   &.just-body > .modal-dialog > .modal-content .modal-body {
@@ -105,7 +123,6 @@
 
         .modal-title.modal-collapsed {
           overflow: hidden;
-          // max-width: 400px;
           max-width: 90px;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -113,7 +130,9 @@
 
         .modal-body {
           overflow-y: auto;
-          height: 500px;
+          min-width: 500px;
+          min-height: 380px;
+          max-height: calc(100vh - 200px);
         }
       }
     }

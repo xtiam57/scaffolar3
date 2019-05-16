@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
 import { TabManagerService } from '../../services/tabManager/tab-manager.service';
-import { ExampleComponent } from '../example/example.component';
 import { ModalExampleComponent } from '../modal-example/modal-example.component';
-import { Chart } from 'angular-highcharts';
-
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-home',
@@ -13,30 +11,16 @@ import { Chart } from 'angular-highcharts';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  /**
-   * Sidebar is opened
-   */
   public asideOpened = false;
 
-
-  next = 1;
-
-  constructor(public tabManager: TabManagerService, public auth: AuthService, private modalService: NgbModal) {}
-
+  constructor(public tabManager: TabManagerService, public auth: AuthService, private modalService:
+    NgbModal, private authService: AuthService) {}
 
   ngOnInit() {
-    this.tabManager.open('Aaron Wellbore X85eww', ExampleComponent, null, ['fas', 'home'], 'teal');
-    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, null, ['fas', 'check']);
-  }
-
-  addTab() {
-    this.tabManager.open('Title<b>@</b>' + this.next, ExampleComponent, { message: 'hello world!' }).subscribe((tab) => {
-      (<ExampleComponent>tab.componentInstance).message = 'IT WORKS!' + this.next++;
-    });
-  }
-
-  goto() {
-    this.tabManager.open('CCCCCCCFFFFFFFFFGGGGGGGGGKKKKKKKK', ExampleComponent, null, ['fas', 'check']);
+    // this.tabManager.open('Personnel', PersonnelListComponent, null, ['far', 'address-card'], 'orange');
+    // this.tabManager.open('Users', UsersListComponent, null, ['fas', 'users'], 'teal');
+    // this.tabManager.open('Timesheet', TimesheetListComponent, null, ['fas', 'clock'], 'pink');
+    this.tabManager.open('Dashboard', DashboardComponent, null, ['fas', 'home'], 'primary');
   }
 
   openModal() {
@@ -54,14 +38,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  openUsersList() {
+
+  }
+
   /**
    * Open/close sidebar
    */
   toggleSidebar() {
     this.asideOpened = !this.asideOpened;
   }
-
-  DargS() {
-    console.log('dragg');
-    }
 }

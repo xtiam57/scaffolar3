@@ -1,0 +1,157 @@
+@import "../../../assets/styles/variables";
+
+.picker {
+  background-color: $gray-300;
+  min-height: $picker-height;
+  @include clearfix();
+
+  .picker-icon {
+    float: left;
+    text-align: center;
+    padding: 0 10px;
+    overflow: hidden;
+    line-height: $picker-height;
+    height: $picker-height;
+    background-color: $gray-200;
+  }
+
+  .picker-button {
+    float: left;
+    text-align: center;
+    padding: 0 10px;
+    line-height: $picker-height;
+    height: $picker-height;
+    overflow: hidden;
+    color: $primary;
+    // border-right: solid 1px $gray-lighter;
+    cursor: pointer;
+    background-color: $gray-200;
+
+    &:hover {
+      background-color: $gray-300;
+    }
+  }
+
+  .picker-scroller {
+    position: relative;
+    height: $picker-height;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    .picker-entry {
+      background-color: #fff;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      // border-left: solid 1px $gray-lighter;
+      height: 100%;
+      min-height: 100%;
+      min-width: 60px !important;
+
+      .picker-status {
+        // position: absolute;
+        // top: 5px;
+        // margin-left: 10px;
+        color: transparent;
+        font-size: 50%;
+        display: block;
+        margin-bottom: -5px;
+
+        &.danger {
+          color: $danger;
+        }
+        &.primary {
+          color: $primary;
+        }
+        &.warning {
+          color: $warning;
+        }
+        &.success {
+          color: $success;
+        }
+        &.info {
+          color: $info;
+        }
+      }
+
+      &:first-child {
+        border-left: none;
+      }
+
+      &:last-child {
+        margin-right: 45px;
+      }
+
+      &.active {
+        color: $primary;
+        background-color: $gray-100;
+
+        span.picker-subtitle {
+          color: $primary !important;
+        }
+        &:hover {
+          background-color: $gray-100;
+        }
+        .picker-text .picker-inner-text {
+          pointer-events: none;
+        }
+        &:after {
+          content: ""; /* Required to display content */
+          position: absolute; /* Sets the position absolute to the top div */
+          bottom: 0;
+          left: 50%;
+          margin-left: -8px; /* Set margin equal to border px */
+          width: 0;
+          z-index: 1;
+          height: 0;
+          border-bottom: solid 8px $primary; /* Creates the notch */
+          border-left: solid 8px transparent; /* Creates triangle effect */
+          border-right: solid 8px transparent; /* Creates triangle effect */
+        }
+        &.with-options:after {
+          margin-left: 0;
+          left: calc(50% - 24px + 4px);
+        }
+      }
+
+      &:hover {
+        background-color: $gray-100;
+      }
+
+      .picker-text {
+        display: table;
+        height: 100%;
+        width: 100%;
+
+        .picker-inner-text {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0 12px;
+          cursor: pointer;
+
+          strong.picker-title {
+            font-size: 1.2rem;
+          }
+
+          span.picker-subtitle {
+            font-size: 75%;
+            display: block;
+            color: $text-muted;
+            margin-top: -4px;
+          }
+        }
+      }
+
+      .picker-options {
+        background-color: $gray-200;
+        height: 100%;
+        padding: 3px 5px 0;
+
+        fa-icon {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

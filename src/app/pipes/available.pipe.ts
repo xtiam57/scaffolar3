@@ -9,6 +9,9 @@ export class AvailablePipe implements PipeTransform {
     if (_.isString(value)) {
       value = value.trim();
     }
+    if (_.isNumber(value)) {
+      return value;
+    }
     return _.isNull(value) || value === '' || _.isUndefined(value) || _.isNaN(value) || value === 'NaN' ? result : value;
   }
 }

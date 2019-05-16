@@ -24,9 +24,9 @@ $green: #28a745;
 $teal: #20c997;
 $cyan: #17a2b8;
 
-$primary: #6f42c1; // #007bff
-$secondary: #ffc107;
-$success: $green;
+$primary: #6f42c1;
+$secondary: #1d366d;
+$success: #2ed199; // $green;
 $info: $cyan;
 $warning: $yellow;
 $danger: $red;
@@ -98,3 +98,8 @@ $scrollbar-border: solid $gray-200;
 $scrollbar-track-bg: $gray-200;
 $scrollbar-thumb-bg: $gray-500;
 $scrollbar-thumb-hover-bg: $gray-600;
+
+// Picker
+$picker-height: 85px;
+
+@import "node_modules/bootstrap/scss/_variables";

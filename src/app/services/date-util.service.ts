@@ -48,7 +48,7 @@ export class DateUtilService {
    * @param date2 Second date
    * @param includeLimits Include the limits to be compared (default: false)
    */
-  isAfter(date1: any, date2: any, includeLimits: boolean = false): boolean {
+  isAfter(date1: any, date2: any, includeLimits = false): boolean {
     date1 = moment(this.datePipe.transform(date1, 'yyyy-MM-dd'));
     date2 = moment(this.datePipe.transform(date2, 'yyyy-MM-dd'));
     if (includeLimits) {
@@ -63,7 +63,7 @@ export class DateUtilService {
    * @param date2 Second date
    * @param includeLimits Include the limits to be compared (default: false)
    */
-  isBefore(date1: any, date2: any, includeLimits: boolean = false): boolean {
+  isBefore(date1: any, date2: any, includeLimits = false): boolean {
     date1 = moment(this.datePipe.transform(date1, 'yyyy-MM-dd'));
     date2 = moment(this.datePipe.transform(date2, 'yyyy-MM-dd'));
     if (includeLimits) {
@@ -79,7 +79,7 @@ export class DateUtilService {
    * @param max Max date
    * @param includeLimits Include the limits to be compared (default: false)
    */
-  isBetween(date1: any, min: any, max: any, includeLimits: boolean = false): boolean {
+  isBetween(date1: any, min: any, max: any, includeLimits = false): boolean {
     return this.isAfter(date1, min, includeLimits) && this.isBefore(date1, max, includeLimits);
   }
 

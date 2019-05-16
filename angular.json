@@ -31,18 +31,13 @@
               "src/assets/styles/main.scss",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ng-busy/src/style/busy.css",
-              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
-              "node_modules/ag-grid-community/dist/styles/ag-theme-bootstrap.css",
-              "node_modules/gridstack/dist/gridstack-extra.css",
-              "node_modules/gridstack/dist/gridstack.css"
+              "node_modules/@ng-select/ng-select/themes/default.theme.css"
+
             ],
             "scripts": [
               "node_modules/lodash/lodash.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/jquery-ui-dist/jquery-ui.min.js",
-              "node_modules/gridstack/dist/gridstack.js",
-              "node_modules/gridstack/dist/gridstack.jQueryUI.js"
-
+              "node_modules/jquery-ui-dist/jquery-ui.min.js"
             ]
           },
           "configurations": {

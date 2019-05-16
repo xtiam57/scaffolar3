@@ -50,6 +50,29 @@ export class TimeUtilService {
   }
 
   /**
+   * Convert a time string into a javascript date
+   * @param time "16:35"
+   * @param date new Date()
+   */
+  convertTimeToDate(time: any, date = new Date(2099, 0, 1, 0, 0, 0, 0)): any {
+    if (!_.isString(time) || _.isEmpty(time)) {
+      return time;
+    }
+
+    const split = time.split(':');
+    if (split.length > 0 && split.length <= 2) {
+      date.setHours(Number(split[0]));
+      date.setMinutes(Number(split[1]));
+    }
+    if (split.length > 2) {
+      date.setSeconds(Number(split[2]));
+    }
+    date.setMilliseconds(0);
+
+    return date;
+  }
+
+  /**
    *
    * @param date Destination date
    * @param duration Amount to be added (negative values are allowed)

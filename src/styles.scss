@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Color theme variables */
-@import './assets/styles/variables.scss';
+@import "./assets/styles/variables.scss";
 
 /* Importing Bootstrap styles */
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import "~node_modules/bootstrap/scss/bootstrap";
 
-/* Importing Angular Material styles */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* Importing ngx-bootstrap */
+@import "~node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss";

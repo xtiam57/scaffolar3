@@ -1,0 +1,17 @@
+.attachments-container {
+  height: calc(100% - 31px);
+
+  > .row {
+    height: 100%;
+  }
+}
+
+.card-columns {
+  &.card-columns-ls {
+    column-count: 2;
+  }
+  &.card-columns-lg {
+    text-align: center;
+    column-count: 5;
+  }
+}

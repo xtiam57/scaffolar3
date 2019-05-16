@@ -1,0 +1,67 @@
+<div>
+  <div class="btn-group d-flex">
+    <button class="btn {{ buttonClass }} btn-sm w-100"
+            *ngIf="showCreateButton"
+            (click)="onClickCreate()">
+      <fa-icon [icon]="['fas', 'plus']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      Create
+    </button>
+    <button class="btn {{ buttonClass }} btn-sm w-100"
+            *ngIf="showRefreshButton"
+            (click)="onClickRefresh()">
+      <fa-icon [icon]="['fas', 'sync']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      Refresh
+    </button>
+    <button class="btn {{ buttonClass }} btn-sm w-100"
+            *ngIf="showFilterButton"
+            (click)="onClickFilter()">
+      <fa-icon *ngIf="!filtersToggleValue"
+               [icon]="['fas', 'filter']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      <fa-icon *ngIf="filtersToggleValue"
+               [icon]="['fas', 'minus-circle']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      Filters
+    </button>
+    <button class="btn {{ buttonClass }} btn-sm w-100"
+            *ngIf="showExportButton"
+            (click)="onClickExport()">
+      <fa-icon [icon]="['fas', 'file-excel']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      Export
+    </button>
+    <button class="btn {{ buttonClass }} btn-sm w-100"
+            *ngIf="showSearchButton"
+            (click)="onSearchClick()">
+      <fa-icon *ngIf="!searchToggleValue"
+               [icon]="['fas', 'search']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      <fa-icon *ngIf="searchToggleValue"
+               [icon]="['fas', 'times']"
+               [fixedWidth]="true"
+               size="xs"></fa-icon>
+      Search
+    </button>
+
+    <ng-content></ng-content>
+  </div>
+
+
+  <div class="actions-bar transparent m-0 p-0"
+       *ngIf="searchToggleValue">
+    <input type="text"
+           autofocus
+           class="form-control search-input padding"
+           placeholder="Enter your search here..."
+           [(ngModel)]="searchText"
+           (ngModelChange)="onSearch(searchText)">
+  </div>
+</div>

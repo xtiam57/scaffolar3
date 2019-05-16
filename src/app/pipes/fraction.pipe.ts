@@ -6,6 +6,7 @@ import * as _ from 'underscore';
   name: 'fraction'
 })
 export class FractionPipe implements PipeTransform {
+
   transform(value: any): string {
     if (
       _.isNull(value) ||
@@ -16,7 +17,7 @@ export class FractionPipe implements PipeTransform {
       _.isBoolean(value) ||
       _.isString(value)
     ) {
-      return '0';
+      return value;
     }
     return Ratio.parse(value)
       .simplify()

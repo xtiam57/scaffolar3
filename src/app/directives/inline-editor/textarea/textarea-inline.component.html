@@ -1,0 +1,66 @@
+<div *ngIf="isEditing">
+  <div class="input-group">
+    <textarea #input
+              class="form-control form-control-sm"
+              [class.is-invalid]="hasError"
+              [class.has-buttons]="buttons"
+              [required]="required"
+              [id]="id"
+              [(ngModel)]="value"
+              [placeholder]="placeholder"
+              (focus)="buttonHasFocus = false"
+              (blur)="onBlur($event)"
+              (keyup.tab)="onSave()"
+              (keyup.control.enter)="onSave()"
+              (keyup.esc)="onCancel()"
+              [maxlength]="maxLength"
+              [minlength]="minLength"
+              [cols]="cols"
+              [rows]="rows"
+              wrap="hard">
+    </textarea>
+
+    <span *ngIf="buttons"
+          class="btn-group-vertical ml-1">
+      <button #buttonSave
+              class="btn btn-sm btn-primary"
+              type="button"
+              (focus)="buttonHasFocus = true"
+              (blur)="buttonHasFocus = false"
+              (click)="onSave()">
+        <fa-icon [icon]="['fas', 'check']"
+                 size="sm"
+                 [fixedWidth]="true"></fa-icon>
+      </button>
+      <button #buttonCancel
+              class="btn btn-sm btn-outline-dark"
+              type="button"
+              (focus)="buttonHasFocus = true"
+              (blur)="buttonHasFocus = false"
+              (click)="onCancel()">
+        <fa-icon [icon]="['fas', 'times']"
+                 size="sm"
+                 [fixedWidth]="true"></fa-icon>
+      </button>
+    </span>
+  </div>
+  <div class="text-right">
+
+  </div>
+  <div *ngIf="hasError"
+       class="invalid-feedback d-block">
+    {{ errorMessage }}
+  </div>
+</div>
+
+<div class="d-inline-block"
+     *ngIf="!isEditing">
+  <div class="form-group m-0 d-inline-block">
+    <div (click)="edit(value)"
+         (focus)="edit(value)"
+         [class.inline-edit-empty]="isEmpty()"
+         [ngClass]="disabled ? 'inline-no-edit' : 'inline-edit'">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,6 @@ import { DatePipe, DecimalPipe, JsonPipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatSortModule, MatTableModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -12,12 +11,10 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-import { AgGridModule } from 'ag-grid-angular';
 import { ChartModule } from 'angular-highcharts';
 import { BusyConfig, NgBusyModule } from 'ng-busy';
 import { SidebarModule } from 'ng-sidebar';
 import { CustomFormsModule } from 'ng2-validation';
-import { GridStackModule } from 'ng4-gridstack';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ContextMenuModule } from 'ngx-contextmenu';
 import { WebStorageModule } from 'ngx-store';
@@ -33,9 +30,14 @@ import { PromptComponent } from './services/prompt/prompt.component';
 import { TabManagerComponent } from './services/tabManager/tab-manager.component';
 import { TABSET_DIRECTIVES } from './services/tabManager/tabset';
 import { busyConfigFactory, CustomBusyComponent } from './templates/customBusy.component';
-import { ExampleComponent } from './views/example/example.component';
 import { ModalExampleComponent } from './views/modal-example/modal-example.component';
-import { ExampleListComponent } from './views/example/example-list.component';
+import { GridsterModule } from 'angular-gridster2';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { SplitterModule } from '@progress/kendo-angular-layout';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { SampleComponent } from './views/dashboard/charts/sample/sample.component';
+import { TableComponent } from './views/dashboard/charts/table/table.component';
 
 library.add(fas, far, fab);
 
@@ -48,12 +50,13 @@ library.add(fas, far, fab);
     ConditionalPipe,
     CustomBusyComponent,
     TabManagerComponent,
-    ExampleComponent,
     TABSET_DIRECTIVES,
     StriphtmlPipe,
     PromptComponent,
     ModalExampleComponent,
-    ExampleListComponent
+    DashboardComponent,
+    SampleComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,7 @@ library.add(fas, far, fab);
     AppRoutingModule,
     FontAwesomeModule,
     WebStorageModule,
-    GridStackModule,
+    GridsterModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -76,15 +79,15 @@ library.add(fas, far, fab);
     LoadingBarHttpClientModule,
     NgBusyModule,
     ChartModule,
-    AgGridModule.withComponents([]),
     ContextMenuModule.forRoot({
       useBootstrap4: true
     }),
     SidebarModule.forRoot(),
     CustomFormsModule,
-    MatSortModule,
-    MatTableModule,
-    SortableModule.forRoot()
+    SortableModule.forRoot(),
+    GridModule,
+    SplitterModule,
+    FilterPipeModule,
   ],
   providers: [
     DecimalPipe,
@@ -102,7 +105,7 @@ library.add(fas, far, fab);
       useFactory: busyConfigFactory
     }
   ],
-  entryComponents: [CustomBusyComponent, ExampleComponent, PromptComponent, ModalExampleComponent],
+  entryComponents: [CustomBusyComponent, PromptComponent, ModalExampleComponent, DashboardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

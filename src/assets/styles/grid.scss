@@ -1,0 +1,31 @@
+@import "./variables";
+
+.grid-main-list {
+  $padding: 0px;
+  padding: $padding;
+
+  height: calc(
+    100vh - #{$tab-height} - #{$padding * 0.075} /* Margin top and bottom */ - 31px /* Table action buttons */ - 1px
+  );
+
+  &.showing-search {
+    height: calc(
+      100vh - #{$tab-height} - #{$padding * 0.075} /* Margin top and bottom */ - 31px /* Table action buttons */ - 50px
+        /* Search input */ - 1px
+    );
+  }
+
+  &.showing-picker {
+    height: calc(
+      100vh - #{$tab-height} - #{$padding * 0.075} /* Margin top and bottom */ - 31px /* Table action buttons */ - #{$picker-height}
+        /* Picker height */ - 1px
+    );
+  }
+
+  &.showing-search.showing-picker {
+    height: calc(
+      100vh - #{$tab-height} - #{$padding * 0.075} /* Margin top and bottom */ - 31px /* Table action buttons */ - 50px
+        /* Search input */ - #{$picker-height} /* Picker height */ - 1px
+    );
+  }
+}

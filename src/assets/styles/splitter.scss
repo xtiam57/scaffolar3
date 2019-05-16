@@ -1,0 +1,39 @@
+@import "./variables";
+
+.info-pane {
+  height: calc(100vh - #{$tab-height} - 1px) !important;
+  background-color: $gray-100;
+
+  .info-pane-actions {
+    padding: 10px 15px;
+    background-color: $gray-300;
+  }
+
+  &.info-pane-striped {
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 10px 15px;
+      align-items: center;
+
+      &:nth-child(odd) {
+        background-color: #fff;
+      }
+
+      & > .col:first-child,
+      & > [class*="col-"]:first-child {
+        padding-left: 0;
+        text-align: right;
+      }
+
+      & > .col:last-child,
+      & > [class*="col-"]:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.content-pane {
+  height: calc(100vh - #{$tab-height} - 1px) !important;
+}

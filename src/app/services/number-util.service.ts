@@ -68,6 +68,24 @@ export class NumberUtilService {
   }
 
   /**
+   * Convert a number into a human-readable string
+   * @param bytes amount of bytes
+   */
+  convertToFileSize(bytes: number): string {
+    const thresh = 1024;
+    if (Math.abs(bytes) < thresh) {
+      return bytes + ' B';
+    }
+    const units = ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    let u = -1;
+    do {
+      bytes /= thresh;
+      ++u;
+    } while (Math.abs(bytes) >= thresh && u < units.length - 1);
+    return bytes.toFixed(1) + ' ' + units[u];
+  }
+
+  /**
    * Calculates the cumulative sum from acum and value
    * @param acum Cumulative value
    * @param value Value to be sum
@@ -92,7 +110,8 @@ export class NumberUtilService {
    * @param round Number of decimals for rounding
    */
   percentage(numerator: any, denominator: any, round: any = null): number {
-    return this.division(numerator, denominator, round) * 100;
+    const value = this.division(numerator, denominator) * 100;
+    return _.isNumber(round) ? this.round(value, round) : value;
   }
 
   /**
