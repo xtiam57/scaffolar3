@@ -12,7 +12,6 @@ import * as _ from 'underscore';
 export class SampleComponent implements OnInit {
   chart: Chart;
   @Input() resize: Subject<any>;
-  @Input() init: Subject<number>;
   @Input() name: string;
   @Input() type: ChartTypes = ChartTypes.Lines;
 
@@ -32,10 +31,6 @@ export class SampleComponent implements OnInit {
       if (!_.isEmpty(value) && value.item.name === this.name) {
         this.redraw(value.height);
       }
-    });
-
-    this.init.subscribe((value) => {
-      this.redraw(value);
     });
   }
 

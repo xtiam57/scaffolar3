@@ -29,8 +29,8 @@ export enum ChartTypes {
   providedIn: 'root'
 })
 export class ChartBuilderService {
-  private defaultHeight = 388;
-  private defaultWidth = 553;
+  private defaultHeight = 315;
+  private defaultWidth = 550;
   private colors = [
     '#F7464A',
     '#46BFBD',
@@ -165,6 +165,7 @@ export class ChartBuilderService {
     return {
       chart: {
         height: height,
+        width: this.defaultWidth,
         plotBackgroundColor: null,
         plotBorderWidth: 0,
         plotShadow: false,

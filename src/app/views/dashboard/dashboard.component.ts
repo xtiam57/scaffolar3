@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { GridsterComponentInterface, GridsterConfig, GridsterItem, GridsterItemComponentInterface, GridType } from 'angular-gridster2';
 import { Subject } from 'rxjs';
 import { ChartTypes } from 'src/app/services/chartBuilder/chart-builder.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +17,8 @@ export class DashboardComponent implements OnInit {
   dashboard: Array<GridsterItem>;
 
   resize: Subject<any> = new Subject();
-  init: Subject<number> = new Subject();
   gridItemDefaultHeight = 436;
-  private gridItemHeader = (24 * 2) /* TODO: mejorar. Padding superior e inferior */ + 48 /* TODO: mejorar. Title size */;
+  private gridItemHeader = (24 * 2) /* TODO: mejorar. Padding superior e inferior */ + 71 /* TODO: mejorar. Title size */;
 
   constructor() { }
 
@@ -31,10 +31,16 @@ export class DashboardComponent implements OnInit {
       minCols: 3,
       maxCols: 3,
       minRows: 2,
-      initCallback: (grid: GridsterComponentInterface) => {
+      initCallback: (gridster: GridsterComponentInterface) => {
         setTimeout(() => {
-          this.init.next(this.gridItemDefaultHeight - this.gridItemHeader);
-        }, 300);
+          _.each(gridster.grid, (itemComponent) => {
+            this.resize.next({
+              item: itemComponent.item,
+              width: itemComponent.width,
+              height: itemComponent.height - this.gridItemHeader
+            });
+          });
+        }, 350);
       },
       draggable: {
         delayStart: 0,

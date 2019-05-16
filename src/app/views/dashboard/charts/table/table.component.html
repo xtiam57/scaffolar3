@@ -1,4 +1,43 @@
-<h3>Lorem ipsum dolor sit amet</h3>
+<div class="header clearfix">
+  <div class="float-left">
+    <h3>Lorem ipsum dolor sit amet</h3>
+    <h5>Subtitle is here!</h5>
+  </div>
+
+  <div class="btn-group float-right"
+       dropdown
+       placement="bottom right">
+    <button dropdownToggle
+            type="button"
+            class="btn btn-outline-primary btn-sm dropdown-toggle">
+      <fa-icon [icon]="['fas', 'cog']"
+               [fixedWidth]="false"></fa-icon>
+    </button>
+
+    <ul *dropdownMenu
+        class="dropdown-menu dropdown-menu-right"
+        role="menu">
+      <li role="menuitem">
+        <a class="dropdown-item"
+           href="#">Action</a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item"
+           href="#">Another action</a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item"
+           href="#">Something else here</a>
+      </li>
+      <li class="divider dropdown-divider"></li>
+      <li role="menuitem">
+        <a class="dropdown-item"
+           href="#">Separated link</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <kendo-grid [data]="gridView"
             [pageSize]="pageSize"
             [skip]="skip"

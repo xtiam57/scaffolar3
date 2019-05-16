@@ -10,7 +10,6 @@ import * as _ from 'underscore';
 })
 export class TableComponent implements OnInit {
   @Input() resize: Subject<any>;
-  @Input() init: Subject<number>;
   @Input() name: string;
 
   height = 388;
@@ -997,10 +996,6 @@ export class TableComponent implements OnInit {
       if (!_.isEmpty(value) && value.item.name === this.name) {
         this.redraw(value.height);
       }
-    });
-
-    this.init.subscribe((value) => {
-      this.redraw(value);
     });
   }
 
